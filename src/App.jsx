@@ -1,10 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
+import Footer from './Components/Footer';
 
 function App() {
   return (
     <div className="App">
       <h1>MediLink</h1>
+      <Footer/>
     </div>
   );
 }
