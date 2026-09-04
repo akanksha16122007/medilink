@@ -295,9 +295,10 @@ Profile:
 
 .records-page {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 28px 35px 35px;
+  padding: 45px 5%;
+  box-sizing: border-box;
   background: #f8fbfb;
   min-height: calc(100vh - 200px);
   color: #12233f;
@@ -311,19 +312,20 @@ Profile:
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  gap: 25px;
+  margin-bottom: 30px;
 }
 
 .records-header h1 {
-  margin: 0 0 5px;
-  font-size: 20px;
+  margin: 0 0 8px;
+  font-size: clamp(30px, 3vw, 42px);
   font-weight: 700;
   color: #12233f;
 }
 
 .records-header p {
   margin: 0;
-  font-size: 11px;
+  font-size: clamp(15px, 1.2vw, 18px);
   color: #596b78;
 }
 
@@ -331,11 +333,12 @@ Profile:
   border: none;
   background: #008f7a;
   color: white;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 9px 13px;
-  border-radius: 4px;
+  padding: 13px 22px;
+  border-radius: 8px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .add-record-btn:hover {
@@ -348,33 +351,34 @@ Profile:
 
 .records-toolbar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 13px;
+  gap: 16px;
+  margin-bottom: 25px;
+  width: 100%;
 }
 
 .search-box {
   flex: 1;
-  max-width: 500px;
-  height: 34px;
+  height: 48px;
   display: flex;
   align-items: center;
   background: white;
   border: 1px solid #d9e1e5;
-  border-radius: 4px;
-  padding: 0 10px;
+  border-radius: 8px;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .search-box span {
   color: #667783;
-  font-size: 17px;
-  margin-right: 7px;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 .search-box input {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 10px;
+  font-size: 15px;
   color: #25364d;
   background: transparent;
 }
@@ -384,14 +388,14 @@ Profile:
 }
 
 .filter-select {
-  width: 100px;
-  height: 34px;
-  padding: 0 8px;
+  width: 180px;
+  height: 48px;
+  padding: 0 12px;
   border: 1px solid #d9e1e5;
-  border-radius: 4px;
+  border-radius: 8px;
   background: white;
   color: #334155;
-  font-size: 10px;
+  font-size: 15px;
   outline: none;
   cursor: pointer;
 }
@@ -403,7 +407,7 @@ Profile:
 .records-list {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 16px;
 }
 
 /* =========================================
@@ -412,41 +416,43 @@ Profile:
 
 .record-card {
   width: 100%;
-  min-height: 70px;
+  min-height: 120px;
   display: flex;
   align-items: center;
   position: relative;
 
   background: white;
   border: 1px solid #e0e7ea;
-  border-radius: 6px;
+  border-radius: 12px;
 
-  padding: 12px 13px;
+  padding: 22px 25px;
+  box-sizing: border-box;
 
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .record-card:hover {
-  box-shadow: 0 2px 8px rgba(20, 70, 70, 0.08);
+  box-shadow: 0 5px 18px rgba(20, 70, 70, 0.1);
+  transform: translateY(-1px);
 }
 
 /* Icon */
 
 .record-icon {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  margin-right: 11px;
+  margin-right: 18px;
 
-  border-radius: 6px;
+  border-radius: 10px;
   background: #eaf5ff;
 
-  font-size: 17px;
+  font-size: 25px;
 }
 
 /* Record information */
@@ -457,34 +463,34 @@ Profile:
 }
 
 .record-info h3 {
-  margin: 0 0 3px;
+  margin: 0 0 6px;
 
   color: #10233f;
-  font-size: 11px;
+  font-size: 18px;
   font-weight: 700;
 }
 
 .doctor-name {
-  margin: 0 0 3px;
+  margin: 0 0 5px;
 
   color: #4e6070;
-  font-size: 9px;
+  font-size: 14px;
 }
 
 .record-notes {
   margin: 0;
 
   color: #657581;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 /* Date */
 
 .record-date {
-  width: 90px;
+  width: 130px;
 
   color: #536574;
-  font-size: 8px;
+  font-size: 13px;
 
   text-align: center;
 }
@@ -494,18 +500,18 @@ Profile:
 .record-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 8px;
+  gap: 10px;
+  margin-left: 15px;
 }
 
 .view-btn,
 .delete-btn {
-  padding: 5px 9px;
+  padding: 8px 14px;
 
   background: white;
-  border-radius: 4px;
+  border-radius: 7px;
 
-  font-size: 8px;
+  font-size: 13px;
   cursor: pointer;
 }
 
@@ -534,26 +540,26 @@ Profile:
 .no-records {
   background: white;
   border: 1px solid #e0e7ea;
-  border-radius: 6px;
+  border-radius: 10px;
   text-align: center;
-  padding: 45px 20px;
+  padding: 70px 20px;
 }
 
 .no-records-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: 40px;
+  margin-bottom: 12px;
 }
 
 .no-records h3 {
-  margin: 0 0 5px;
+  margin: 0 0 8px;
   color: #10233f;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .no-records p {
   margin: 0;
   color: #71808a;
-  font-size: 10px;
+  font-size: 15px;
 }
 
 /* =========================================
@@ -565,13 +571,13 @@ Profile:
   justify-content: center;
   align-items: center;
 
-  gap: 4px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 25px;
 }
 
 .pagination button {
-  width: 25px;
-  height: 25px;
+  width: 38px;
+  height: 38px;
 
   display: flex;
   justify-content: center;
@@ -580,10 +586,10 @@ Profile:
   border: 1px solid #dce3e6;
   background: white;
 
-  border-radius: 4px;
+  border-radius: 7px;
 
   color: #334155;
-  font-size: 9px;
+  font-size: 14px;
 
   cursor: pointer;
 }
@@ -623,15 +629,17 @@ Profile:
 
 .add-record-modal {
   width: 100%;
-  max-width: 430px;
+  max-width: 520px;
 
   background: white;
 
-  border-radius: 7px;
+  border-radius: 12px;
 
-  padding: 19px;
+  padding: 28px;
 
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+
+  box-sizing: border-box;
 }
 
 .modal-header {
@@ -639,14 +647,14 @@ Profile:
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 .modal-header h2 {
   margin: 0;
 
   color: #10233f;
-  font-size: 15px;
+  font-size: 24px;
   font-weight: 700;
 }
 
@@ -655,7 +663,7 @@ Profile:
   background: transparent;
 
   color: #556675;
-  font-size: 21px;
+  font-size: 26px;
 
   cursor: pointer;
 }
@@ -672,21 +680,21 @@ Profile:
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  gap: 14px;
+  gap: 18px;
 }
 
 .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
 .form-group label {
   display: block;
 
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 
   color: #334155;
 
-  font-size: 9px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -695,20 +703,22 @@ Profile:
 .form-group textarea {
   width: 100%;
 
-  padding: 8px 9px;
+  padding: 12px;
 
   border: 1px solid #d6dfe3;
-  border-radius: 4px;
+  border-radius: 7px;
 
   background: white;
 
   color: #334155;
 
-  font-size: 9px;
+  font-size: 14px;
 
   outline: none;
 
   font-family: inherit;
+
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -719,6 +729,7 @@ Profile:
 
 .form-group textarea {
   resize: vertical;
+  min-height: 100px;
 }
 
 /* =========================================
@@ -728,18 +739,18 @@ Profile:
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 7px;
+  gap: 10px;
 
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .cancel-btn,
 .save-record-btn {
-  padding: 8px 13px;
+  padding: 11px 18px;
 
-  border-radius: 4px;
+  border-radius: 7px;
 
-  font-size: 9px;
+  font-size: 14px;
 
   cursor: pointer;
 }
@@ -776,53 +787,55 @@ Profile:
 
 .view-record-modal {
   width: 100%;
-  max-width: 380px;
+  max-width: 480px;
 
   background: white;
 
-  border-radius: 7px;
+  border-radius: 12px;
 
-  padding: 19px;
+  padding: 28px;
 
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+
+  box-sizing: border-box;
 }
 
 .record-detail {
   display: flex;
   align-items: center;
 
-  gap: 10px;
+  gap: 15px;
 
-  padding: 11px;
+  padding: 15px;
 
-  margin-bottom: 13px;
+  margin-bottom: 18px;
 
   background: #f2f9f7;
 
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .detail-icon {
-  width: 34px;
-  height: 34px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: 5px;
+  border-radius: 8px;
 
   background: #eaf5ff;
 
-  font-size: 16px;
+  font-size: 22px;
 }
 
 .record-detail h3 {
-  margin: 0 0 3px;
+  margin: 0 0 5px;
 
   color: #10233f;
 
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .record-detail p {
@@ -830,16 +843,16 @@ Profile:
 
   color: #71808a;
 
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .detail-item {
   display: flex;
   flex-direction: column;
 
-  gap: 3px;
+  gap: 5px;
 
-  padding: 8px 0;
+  padding: 12px 0;
 
   border-bottom: 1px solid #edf1f3;
 }
@@ -847,13 +860,13 @@ Profile:
 .detail-item span {
   color: #71808a;
 
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .detail-item strong {
   color: #25364d;
 
-  font-size: 9px;
+  font-size: 14px;
 
   font-weight: 500;
 }
@@ -861,19 +874,19 @@ Profile:
 .close-detail-btn {
   width: 100%;
 
-  margin-top: 14px;
+  margin-top: 18px;
 
-  padding: 8px;
+  padding: 11px;
 
   border: none;
 
-  border-radius: 4px;
+  border-radius: 7px;
 
   background: #008f7a;
 
   color: white;
 
-  font-size: 9px;
+  font-size: 14px;
 
   font-weight: 600;
 
@@ -881,19 +894,40 @@ Profile:
 }
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .records-page {
+    padding: 35px 4%;
+  }
+
+  .record-date {
+    width: 110px;
+  }
+
+  .record-actions {
+    gap: 7px;
+  }
+}
+
+/* =========================================
+   RESPONSIVE - MOBILE
 ========================================= */
 
 @media (max-width: 768px) {
-
   .records-page {
-    padding: 20px 15px;
+    padding: 25px 18px;
   }
 
   .records-header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
+  }
+
+  .add-record-btn {
+    width: 100%;
   }
 
   .records-toolbar {
@@ -910,6 +944,7 @@ Profile:
 
   .record-card {
     flex-wrap: wrap;
+    padding: 18px;
   }
 
   .record-date {
@@ -919,8 +954,8 @@ Profile:
 
   .record-actions {
     width: 100%;
-    margin-left: 45px;
-    margin-top: 8px;
+    margin-left: 70px;
+    margin-top: 12px;
   }
 
   .form-row {
@@ -929,7 +964,14 @@ Profile:
   }
 }
 
+/* =========================================
+   RESPONSIVE - SMALL MOBILE
+========================================= */
+
 @media (max-width: 480px) {
+  .records-header h1 {
+    font-size: 28px;
+  }
 
   .record-date {
     display: none;
@@ -941,6 +983,6 @@ Profile:
 
   .add-record-modal,
   .view-record-modal {
-    padding: 15px;
+    padding: 20px;
   }
 }
