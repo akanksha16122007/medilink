@@ -288,3 +288,659 @@ Profile:
     font-size: 22px;
   }
 }
+
+/* =========================================
+   MEDILINK - RECORDS PAGE
+========================================= */
+
+.records-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 35px 35px;
+  background: #f8fbfb;
+  min-height: calc(100vh - 200px);
+  color: #12233f;
+}
+
+/* =========================================
+   RECORDS HEADER
+========================================= */
+
+.records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.records-header h1 {
+  margin: 0 0 5px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #12233f;
+}
+
+.records-header p {
+  margin: 0;
+  font-size: 11px;
+  color: #596b78;
+}
+
+.add-record-btn {
+  border: none;
+  background: #008f7a;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 9px 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-record-btn:hover {
+  background: #007765;
+}
+
+/* =========================================
+   SEARCH + FILTER
+========================================= */
+
+.records-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 500px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #d9e1e5;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+.search-box span {
+  color: #667783;
+  font-size: 17px;
+  margin-right: 7px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 10px;
+  color: #25364d;
+  background: transparent;
+}
+
+.search-box input::placeholder {
+  color: #87949d;
+}
+
+.filter-select {
+  width: 100px;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid #d9e1e5;
+  border-radius: 4px;
+  background: white;
+  color: #334155;
+  font-size: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* =========================================
+   RECORDS LIST
+========================================= */
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* =========================================
+   RECORD CARD
+========================================= */
+
+.record-card {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  background: white;
+  border: 1px solid #e0e7ea;
+  border-radius: 6px;
+
+  padding: 12px 13px;
+
+  transition: box-shadow 0.2s ease;
+}
+
+.record-card:hover {
+  box-shadow: 0 2px 8px rgba(20, 70, 70, 0.08);
+}
+
+/* Icon */
+
+.record-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 11px;
+
+  border-radius: 6px;
+  background: #eaf5ff;
+
+  font-size: 17px;
+}
+
+/* Record information */
+
+.record-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-info h3 {
+  margin: 0 0 3px;
+
+  color: #10233f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.doctor-name {
+  margin: 0 0 3px;
+
+  color: #4e6070;
+  font-size: 9px;
+}
+
+.record-notes {
+  margin: 0;
+
+  color: #657581;
+  font-size: 9px;
+}
+
+/* Date */
+
+.record-date {
+  width: 90px;
+
+  color: #536574;
+  font-size: 8px;
+
+  text-align: center;
+}
+
+/* Buttons */
+
+.record-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.view-btn,
+.delete-btn {
+  padding: 5px 9px;
+
+  background: white;
+  border-radius: 4px;
+
+  font-size: 8px;
+  cursor: pointer;
+}
+
+.view-btn {
+  border: 1px solid #d7dfe3;
+  color: #334155;
+}
+
+.view-btn:hover {
+  background: #f5f8f8;
+}
+
+.delete-btn {
+  border: 1px solid #efb6b6;
+  color: #e04d4d;
+}
+
+.delete-btn:hover {
+  background: #fff3f3;
+}
+
+/* =========================================
+   NO RECORDS
+========================================= */
+
+.no-records {
+  background: white;
+  border: 1px solid #e0e7ea;
+  border-radius: 6px;
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.no-records-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.no-records h3 {
+  margin: 0 0 5px;
+  color: #10233f;
+  font-size: 14px;
+}
+
+.no-records p {
+  margin: 0;
+  color: #71808a;
+  font-size: 10px;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.pagination button {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #dce3e6;
+  background: white;
+
+  border-radius: 4px;
+
+  color: #334155;
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background: #f3f8f7;
+}
+
+.pagination-number.active {
+  background: #008f7a;
+  border-color: #008f7a;
+  color: white;
+}
+
+/* =========================================
+   MODAL OVERLAY
+========================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(10, 35, 45, 0.45);
+
+  z-index: 1000;
+}
+
+/* =========================================
+   ADD RECORD MODAL
+========================================= */
+
+.add-record-modal {
+  width: 100%;
+  max-width: 430px;
+
+  background: white;
+
+  border-radius: 7px;
+
+  padding: 19px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #10233f;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+
+  color: #556675;
+  font-size: 21px;
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #111827;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #334155;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  padding: 8px 9px;
+
+  border: 1px solid #d6dfe3;
+  border-radius: 4px;
+
+  background: white;
+
+  color: #334155;
+
+  font-size: 9px;
+
+  outline: none;
+
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #008f7a;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* =========================================
+   MODAL BUTTONS
+========================================= */
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+
+  margin-top: 5px;
+}
+
+.cancel-btn,
+.save-record-btn {
+  padding: 8px 13px;
+
+  border-radius: 4px;
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: white;
+
+  border: 1px solid #d5dde1;
+
+  color: #475569;
+}
+
+.cancel-btn:hover {
+  background: #f7f9fa;
+}
+
+.save-record-btn {
+  background: #008f7a;
+
+  border: 1px solid #008f7a;
+
+  color: white;
+
+  font-weight: 600;
+}
+
+.save-record-btn:hover {
+  background: #007765;
+}
+
+/* =========================================
+   VIEW RECORD MODAL
+========================================= */
+
+.view-record-modal {
+  width: 100%;
+  max-width: 380px;
+
+  background: white;
+
+  border-radius: 7px;
+
+  padding: 19px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+}
+
+.record-detail {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px;
+
+  margin-bottom: 13px;
+
+  background: #f2f9f7;
+
+  border-radius: 5px;
+}
+
+.detail-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+
+  background: #eaf5ff;
+
+  font-size: 16px;
+}
+
+.record-detail h3 {
+  margin: 0 0 3px;
+
+  color: #10233f;
+
+  font-size: 12px;
+}
+
+.record-detail p {
+  margin: 0;
+
+  color: #71808a;
+
+  font-size: 8px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #edf1f3;
+}
+
+.detail-item span {
+  color: #71808a;
+
+  font-size: 8px;
+}
+
+.detail-item strong {
+  color: #25364d;
+
+  font-size: 9px;
+
+  font-weight: 500;
+}
+
+.close-detail-btn {
+  width: 100%;
+
+  margin-top: 14px;
+
+  padding: 8px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  background: #008f7a;
+
+  color: white;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .records-page {
+    padding: 20px 15px;
+  }
+
+  .records-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .records-toolbar {
+    flex-direction: column;
+  }
+
+  .search-box {
+    max-width: none;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .record-card {
+    flex-wrap: wrap;
+  }
+
+  .record-date {
+    width: auto;
+    margin-left: auto;
+  }
+
+  .record-actions {
+    width: 100%;
+    margin-left: 45px;
+    margin-top: 8px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .record-date {
+    display: none;
+  }
+
+  .record-actions {
+    margin-left: 0;
+  }
+
+  .add-record-modal,
+  .view-record-modal {
+    padding: 15px;
+  }
+}
