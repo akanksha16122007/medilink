@@ -231,28 +231,7 @@ const Records = () => {
 
       </div>
 
-      {/* Pagination UI */}
-      {filteredRecords.length > 0 && (
-        <div className="pagination">
-
-          <button className="pagination-arrow">
-            ‹
-          </button>
-
-          <button className="pagination-number active">
-            1
-          </button>
-
-          <button className="pagination-number">
-            2
-          </button>
-
-          <button className="pagination-arrow">
-            ›
-          </button>
-
-        </div>
-      )}
+     
 
       {/* ================= ADD RECORD MODAL ================= */}
 
