@@ -36,11 +36,185 @@
     transform: rotate(360deg);
   }
 }
+/*
+Profile:
+*/
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.profile-content {
+  width: 620px;
+}
+
+.profile-content h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.profile-content p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+.profile-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-content label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin: 16px 0 8px;
+}
+
+.name,
+.phoneno,
+.allergies,
+.medical,
+.age,
+.blood-group {
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.name,
+.phoneno,
+.allergies,
+.medical {
+  width: 100%;
+}
+
+.age {
+  width: 120px;
+}
+
+.blood-group {
+  width: 200px;
+}
+
+.submit {
+  margin-top: 28px;
+  height: 52px;
+  width: 100%;
+  background: #009688;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #00897b;
+}
+/*Login*/
+.login-page {
+  min-height: 100vh;
+  background: #eef8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 40px 20px;
+}
+
+.login-box {
+  width: 420px;
+  background: #fff;
+  padding: 40px 34px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 36px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.login-box > p {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 28px;
+  font-size: 17px;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-box label {
+  font-weight: 600;
+  margin: 14px 0 8px;
+  color: #111827;
+}
+
+.email,
+.pass {
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.email:focus,
+.pass:focus {
+  border-color: #009688;
+}
+
+.login {
+  margin-top: 24px;
+  height: 50px;
+  background: #009688;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login:hover {
+  background: #00897b;
+}
+
+.signup-text {
+  text-align: center !important;
+  margin-top: 26px;
+  color: #374151;
+  font-size: 15px;
+}
+
+.signup-text a {
+  color: #009688;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
 /* ================= FOOTER ================= */
 
 .footer {
-  background-color: #006D73;
+  background-color: #006d73;
   color: white;
   margin-top: 60px;
 }
@@ -66,7 +240,7 @@
 }
 
 .footer-section p {
-  color: #DDF7F3;
+  color: #ddf7f3;
   font-size: 14px;
   line-height: 1.7;
   margin: 0 0 8px;
@@ -75,7 +249,7 @@
 .footer-section a {
   display: block;
 
-  color: #DDF7F3;
+  color: #ddf7f3;
   text-decoration: none;
 
   font-size: 14px;
@@ -85,7 +259,7 @@
 }
 
 .footer-section a:hover {
-  color: #20D6C7;
+  color: #20d6c7;
 }
 
 .copyright {
@@ -98,13 +272,11 @@
 
 .copyright p {
   margin: 0;
-  color: #DDF7F3;
+  color: #ddf7f3;
   font-size: 13px;
 }
 
-
 @media (max-width: 768px) {
-
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -115,5 +287,4 @@
   .footer-section h2 {
     font-size: 22px;
   }
-
 }
