@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const SignUp = () => {
   return (
-    <div>
+    <div className="signup-page">
       <form>
         <label>Full Name</label>
         <input type="text" className="name" />
@@ -21,7 +21,6 @@ const SignUp = () => {
         <input type="password" className="pass" />
         <label>Confirm Password</label>
         <input type="password" className="pass" />
-        <label>Terms</label>
         <input type="checkbox" className="check" />I agree to the Terms &
         Conditions.
         <button className="submit" type="button">
