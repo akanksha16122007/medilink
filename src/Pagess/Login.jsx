@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const VALID_EMAILS = [
-  "jiteshkhurana59@gmail.com",
-  "akankshakhurana01@gmail.com",
-];
+const VALID_EMAILS = ["testing@gmail.com"];
 const VALID_PASSWORD = "12345678";
 
 const Login = () => {
