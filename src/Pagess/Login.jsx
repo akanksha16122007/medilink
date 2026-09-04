@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const VALID_EMAILS = ["testing@gmail.com"];
-const VALID_PASSWORD = "12345678";
+const VALID_PASSWORD = "test11@@";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,14 +15,14 @@ const Login = () => {
     setError("");
 
     if (VALID_EMAILS.includes(email) && password === VALID_PASSWORD) {
-      // const user = {
-      //   name: "Ananya Malhotra",
-      //   email: email,
-      //   password: password,
-      //   profilePic:
-      //     "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg",
-      // };
-      // localStorage.setItem("user", JSON.stringify(user));
+      const user = {
+        name: "Ananya Malhotra",
+        email: email,
+        password: password,
+        profilePic:
+          "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg",
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/profile");
       return;
     }

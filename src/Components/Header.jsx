@@ -20,9 +20,9 @@ const Header = () => {
       <Link to="/profile">
         <button className="profile">Profile</button>
       </Link>
-      {/* {user ? ( */}
-      {/* <div className="user-info"> */}
-      {/* <img
+      {user ? (
+        <div className="user-info">
+          <img
             src={
               user?.profilePic ||
               "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg"
@@ -32,11 +32,11 @@ const Header = () => {
           />
           <span>{user.name}</span>
         </div>
-      ) : ( */}
-      <Link to="/login">
-        <button className="login">Login</button>
-      </Link>
-      {/* )} */}
+      ) : (
+        <Link to="/login">
+          <button className="login">Login</button>
+        </Link>
+      )}
     </div>
   );
 };
