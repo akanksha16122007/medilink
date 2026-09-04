@@ -6,7 +6,7 @@ const Header = () => {
       <button>Home</button>
       <button>Dashboard</button>
       <button>Records</button>
-      <button>Profile</button>
+      <button class="profile">Profile</button>
       <button>Login</button>
     </div>
   );

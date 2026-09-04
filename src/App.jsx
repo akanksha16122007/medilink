@@ -7,8 +7,6 @@ function App() {
     <div className="App">
       <Header />
 
-      <h1>MediLink</h1>
-
       <Footer />
     </div>
   );
