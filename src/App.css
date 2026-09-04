@@ -36,6 +36,20 @@
     transform: rotate(360deg);
   }
 }
+/*Profile pic */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.Profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 /*
 Profile:
 */
@@ -428,7 +442,9 @@ Profile:
   padding: 22px 25px;
   box-sizing: border-box;
 
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .record-card:hover {

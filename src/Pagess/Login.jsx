@@ -15,6 +15,14 @@ const Login = () => {
     setError("");
 
     if (VALID_EMAILS.includes(email) && password === VALID_PASSWORD) {
+      const user = {
+        name: "Ananya Malhotra",
+        email: email,
+        password: password,
+        profilePic:
+          "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg",
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/profile");
       return;
     }
