@@ -82,7 +82,7 @@ Profile:
 .allergies,
 .medical,
 .age,
-.blood-group {
+.bloodGroup {
   height: 50px;
   padding: 0 14px;
   border: 1px solid #d1d5db;
@@ -103,7 +103,7 @@ Profile:
   width: 120px;
 }
 
-.blood-group {
+.bloodGroup {
   width: 200px;
 }
 
