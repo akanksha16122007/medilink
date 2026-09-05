@@ -50,9 +50,43 @@
   border-radius: 50%;
   object-fit: cover;
 }
+/*LogOut button*/
+.user-info {
+  position: relative;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.logout-menu {
+  position: absolute;
+  top: 100%; /* profile ke bilkul neeche */
+  right: 0; /* right edge align */
+  margin-top: 8px;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.logout-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 8px 20px;
+}
+
 /*
 Profile:
-*//* =================================
+*/ /* =================================
    PROFILE PAGE
 ================================= */
 
@@ -61,25 +95,23 @@ Profile:
   display: flex;
   justify-content: center;
   padding: 55px 20px;
-  background: #F8FCFC;
+  background: #f8fcfc;
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
-
 
 /* =================================
    PROFILE CARD
 ================================= */
 .profile-content {
   width: 750px;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 40px 50px;
-  border: 1px solid #DDE8E8;
+  border: 1px solid #dde8e8;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 109, 115, 0.07);
   box-sizing: border-box;
 }
-
 
 /* =================================
    HEADING
@@ -88,18 +120,17 @@ Profile:
 .profile-content h1 {
   font-size: 44px;
   font-weight: 700;
-  color: #102A43;
+  color: #102a43;
   margin: 0 0 10px;
   line-height: 1.2;
 }
 
 .profile-content p {
   font-size: 18px;
-  color: #64748B;
+  color: #64748b;
   margin: 0 0 30px;
   line-height: 1.5;
 }
-
 
 /* =================================
    FORM
@@ -113,10 +144,9 @@ Profile:
 .profile-content label {
   font-size: 15px;
   font-weight: 600;
-  color: #102A43;
+  color: #102a43;
   margin: 16px 0 8px;
 }
-
 
 /* =================================
    INPUTS
@@ -130,10 +160,10 @@ Profile:
 .bloodGroup {
   height: 50px;
   padding: 0 14px;
-  border: 1px solid #CDE5E3;
+  border: 1px solid #cde5e3;
   border-radius: 8px;
-  background: #FFFFFF;
-  color: #102A43;
+  background: #ffffff;
+  color: #102a43;
   font-size: 16px;
   outline: none;
   box-sizing: border-box;
@@ -155,7 +185,6 @@ Profile:
   width: 200px;
 }
 
-
 /* =================================
    PLACEHOLDER
 ================================= */
@@ -165,9 +194,8 @@ Profile:
 .allergies::placeholder,
 .medical::placeholder,
 .age::placeholder {
-  color: #9AAAB5;
+  color: #9aaab5;
 }
-
 
 /* =================================
    INPUT FOCUS
@@ -179,10 +207,9 @@ Profile:
 .medical:focus,
 .age:focus,
 .bloodGroup:focus {
-  border-color: #00A6A6;
-  box-shadow: 0 0 0 3px rgba(0, 166, 166, 0.10);
+  border-color: #00a6a6;
+  box-shadow: 0 0 0 3px rgba(0, 166, 166, 0.1);
 }
-
 
 /* =================================
    SAVE BUTTON
@@ -192,8 +219,8 @@ Profile:
   margin-top: 30px;
   height: 52px;
   width: 100%;
-  background: #006D73;
-  color: #FFFFFF;
+  background: #006d73;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -203,18 +230,16 @@ Profile:
 }
 
 .submit:hover {
-  background: #00A6A6;
+  background: #00a6a6;
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 109, 115, 0.15);
 }
-
 
 /* =================================
    MOBILE
 ================================= */
 
 @media (max-width: 700px) {
-
   .profile-page {
     padding: 35px 15px;
   }
@@ -1373,7 +1398,6 @@ body,
   z-index: 1000;
 }
 
-
 /* ================= LOGO ================= */
 
 .logo {
@@ -1381,7 +1405,7 @@ body,
   align-items: center;
   gap: 10px;
 
-  color: #102A43;
+  color: #102a43;
   text-decoration: none;
 
   font-size: 22px;
@@ -1392,7 +1416,7 @@ body,
   width: 34px;
   height: 34px;
 
-  background-color: #006D73;
+  background-color: #006d73;
   color: white;
 
   border-radius: 10px;
@@ -1404,7 +1428,6 @@ body,
   font-size: 19px;
 }
 
-
 /* ================= NAVIGATION ================= */
 
 .nav {
@@ -1414,7 +1437,7 @@ body,
 }
 
 .nav a {
-  color: #102A43;
+  color: #102a43;
 
   text-decoration: none;
 
@@ -1425,14 +1448,13 @@ body,
 }
 
 .nav a:hover {
-  color: #00A6A6;
+  color: #00a6a6;
 }
-
 
 /* ================= LOGIN BUTTON ================= */
 
 .login-btn {
-  background-color: #006D73 !important;
+  background-color: #006d73 !important;
   color: white !important;
 
   padding: 10px 20px;
@@ -1445,9 +1467,8 @@ body,
 }
 
 .login-btn:hover {
-  background-color: #00A6A6 !important;
+  background-color: #00a6a6 !important;
 }
-
 
 /* ================= USER INFO ================= */
 
@@ -1456,7 +1477,7 @@ body,
   align-items: center;
   gap: 8px;
 
-  color: #102A43;
+  color: #102a43;
 
   font-size: 14px;
   font-weight: 600;
@@ -1470,9 +1491,8 @@ body,
 
   object-fit: cover;
 
-  border: 2px solid #DDF7F3;
+  border: 2px solid #ddf7f3;
 }
-
 
 /* ================= HAMBURGER ================= */
 
@@ -1484,16 +1504,14 @@ body,
 
   font-size: 26px;
 
-  color: #006D73;
+  color: #006d73;
 
   cursor: pointer;
 }
 
-
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
-
   .header {
     height: 65px;
     padding: 0 20px;
@@ -1567,7 +1585,7 @@ body,
 }
 
 body {
-  background-color: #F8FCFC;
+  background-color: #f8fcfc;
 }
 
 .App {
@@ -1589,12 +1607,11 @@ body {
   width: 100%;
   overflow-x: hidden;
 
-  background-color: #F8FCFC;
-  color: #102A43;
+  background-color: #f8fcfc;
+  color: #102a43;
 
   font-family: Arial, Helvetica, sans-serif;
 }
-
 
 /* =========================================================
    HERO SECTION
@@ -1614,9 +1631,9 @@ body {
 
   gap: 40px;
 
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
-  border: 1px solid #DDEBE9;
+  border: 1px solid #ddebe9;
   border-radius: 30px;
 
   box-shadow: 0 20px 55px rgba(0, 109, 115, 0.12);
@@ -1626,7 +1643,6 @@ body {
 
   animation: heroAppear 0.8s ease forwards;
 }
-
 
 /* Decorative mint circles */
 
@@ -1641,7 +1657,7 @@ body {
   top: -180px;
   left: -120px;
 
-  background-color: #DDF7F3;
+  background-color: #ddf7f3;
 
   border-radius: 50%;
 
@@ -1659,13 +1675,12 @@ body {
   right: -100px;
   bottom: -160px;
 
-  background-color: #EAF7F5;
+  background-color: #eaf7f5;
 
   border-radius: 50%;
 
   opacity: 0.8;
 }
-
 
 /* =========================================================
    HERO TEXT
@@ -1682,7 +1697,6 @@ body {
   animation: textSlide 0.9s ease forwards;
 }
 
-
 /* Welcome text */
 
 .welcome-badge {
@@ -1692,11 +1706,11 @@ body {
 
   margin-bottom: 20px;
 
-  background-color: #DDF7F3;
+  background-color: #ddf7f3;
 
-  color: #006D73;
+  color: #006d73;
 
-  border: 1px solid #BFE8E3;
+  border: 1px solid #bfe8e3;
 
   border-radius: 30px;
 
@@ -1706,7 +1720,6 @@ body {
 
   letter-spacing: 1.5px;
 }
-
 
 /* Main heading */
 
@@ -1719,13 +1732,12 @@ body {
 
   font-weight: 700;
 
-  color: #102A43;
+  color: #102a43;
 }
 
 .hero h1 span {
-  color: #006D73;
+  color: #006d73;
 }
-
 
 /* Description */
 
@@ -1738,9 +1750,8 @@ body {
 
   line-height: 1.8;
 
-  color: #5B6B7A;
+  color: #5b6b7a;
 }
-
 
 /* =========================================================
    HERO BUTTONS
@@ -1759,7 +1770,6 @@ body {
   width: 100%;
 }
 
-
 /* Primary button */
 
 .hero-btn-primary {
@@ -1772,11 +1782,11 @@ body {
 
   padding: 13px 23px;
 
-  background-color: #006D73;
+  background-color: #006d73;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
-  border: 1px solid #006D73;
+  border: 1px solid #006d73;
   border-radius: 10px;
 
   text-decoration: none;
@@ -1785,21 +1795,20 @@ body {
 
   font-weight: 600;
 
-  box-shadow: 0 8px 20px rgba(0, 109, 115, 0.20);
+  box-shadow: 0 8px 20px rgba(0, 109, 115, 0.2);
 
   transition: 0.25s ease;
 }
 
 .hero-btn-primary:hover {
-  background-color: #00A6A6;
+  background-color: #00a6a6;
 
-  border-color: #00A6A6;
+  border-color: #00a6a6;
 
   transform: translateY(-4px);
 
   box-shadow: 0 12px 25px rgba(0, 109, 115, 0.25);
 }
-
 
 /* Secondary button */
 
@@ -1813,11 +1822,11 @@ body {
 
   padding: 12px 23px;
 
-  background-color: #DDF7F3;
+  background-color: #ddf7f3;
 
-  color: #006D73;
+  color: #006d73;
 
-  border: 1.5px solid #BFE8E3;
+  border: 1.5px solid #bfe8e3;
   border-radius: 10px;
 
   text-decoration: none;
@@ -1830,13 +1839,12 @@ body {
 }
 
 .hero-btn-secondary:hover {
-  background-color: #C8EAE6;
+  background-color: #c8eae6;
 
   transform: translateY(-4px);
 
   box-shadow: 0 8px 18px rgba(0, 109, 115, 0.12);
 }
-
 
 /* =========================================================
    HERO IMAGE
@@ -1857,7 +1865,6 @@ body {
   animation: imageSlide 1s ease forwards;
 }
 
-
 /* Circle behind illustration */
 
 .image-circle {
@@ -1866,7 +1873,7 @@ body {
   width: 330px;
   height: 330px;
 
-  background-color: #DDF7F3;
+  background-color: #ddf7f3;
 
   border-radius: 50%;
 
@@ -1876,7 +1883,6 @@ body {
 
   animation: circleFloat 5s ease-in-out infinite;
 }
-
 
 /* Hero illustration */
 
@@ -1894,7 +1900,6 @@ body {
   animation: girlFloat 4s ease-in-out infinite;
 }
 
-
 /* =========================================================
    FEATURES SECTION
 ========================================================= */
@@ -1905,7 +1910,6 @@ body {
 
   margin: 0 auto 90px;
 }
-
 
 /* Section heading */
 
@@ -1922,7 +1926,7 @@ body {
 
   margin-bottom: 12px;
 
-  color: #00A6A6;
+  color: #00a6a6;
 
   font-size: 12px;
 
@@ -1936,7 +1940,7 @@ body {
 .cta-text h2 {
   margin: 0;
 
-  color: #102A43;
+  color: #102a43;
 
   font-size: clamp(30px, 4vw, 42px);
 
@@ -1946,9 +1950,8 @@ body {
 .section-heading h2 span,
 .why-text h2 span,
 .cta-text h2 span {
-  color: #006D73;
+  color: #006d73;
 }
-
 
 /* =========================================================
    FEATURE CARDS
@@ -1965,9 +1968,9 @@ body {
 .feature-card {
   padding: 32px 28px;
 
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
-  border: 1px solid #DDEBE9;
+  border: 1px solid #ddebe9;
 
   border-radius: 18px;
 
@@ -1983,11 +1986,10 @@ body {
 .feature-card:hover {
   transform: translateY(-8px);
 
-  border-color: #B7E4DF;
+  border-color: #b7e4df;
 
   box-shadow: 0 18px 35px rgba(0, 109, 115, 0.13);
 }
-
 
 /* Feature icon */
 
@@ -2002,7 +2004,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  background-color: #DDF7F3;
+  background-color: #ddf7f3;
 
   border-radius: 15px;
 
@@ -2017,17 +2019,15 @@ body {
   transform: scale(1.1) rotate(3deg);
 }
 
-
 /* Feature heading */
 
 .feature-card h3 {
   margin: 0 0 12px;
 
-  color: #102A43;
+  color: #102a43;
 
   font-size: 19px;
 }
-
 
 /* Feature description */
 
@@ -2036,18 +2036,17 @@ body {
 
   margin: 0 auto 20px;
 
-  color: #5B6B7A;
+  color: #5b6b7a;
 
   font-size: 14px;
 
   line-height: 1.7;
 }
 
-
 /* Feature link */
 
 .card-link {
-  color: #006D73;
+  color: #006d73;
 
   text-decoration: none;
 
@@ -2059,9 +2058,8 @@ body {
 }
 
 .card-link:hover {
-  color: #00A6A6;
+  color: #00a6a6;
 }
-
 
 /* =========================================================
    WHY MEDILINK
@@ -2083,13 +2081,12 @@ body {
 
   align-items: center;
 
-  background-color: #EAF7F5;
+  background-color: #eaf7f5;
 
   border-radius: 25px;
 
-  border: 1px solid #CFEAE7;
+  border: 1px solid #cfeae7;
 }
-
 
 /* Why text */
 
@@ -2100,13 +2097,12 @@ body {
 .why-text > p {
   max-width: 530px;
 
-  color: #5B6B7A;
+  color: #5b6b7a;
 
   font-size: 15px;
 
   line-height: 1.8;
 }
-
 
 /* Why cards */
 
@@ -2127,11 +2123,11 @@ body {
 
   padding: 20px 22px;
 
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   border-radius: 14px;
 
-  border: 1px solid #DDEBE9;
+  border: 1px solid #ddebe9;
 
   box-shadow: 0 6px 18px rgba(0, 109, 115, 0.06);
 
@@ -2149,19 +2145,18 @@ body {
 
   font-weight: 700;
 
-  color: #00A6A6;
+  color: #00a6a6;
 }
 
 .why-card p {
   margin: 0;
 
-  color: #4F6875;
+  color: #4f6875;
 
   font-size: 14px;
 
   line-height: 1.5;
 }
-
 
 /* =========================================================
    FINAL CTA
@@ -2184,21 +2179,16 @@ body {
 
   padding: 45px 65px;
 
-  background: linear-gradient(
-    135deg,
-    #DDF7F3,
-    #F8FCFC
-  );
+  background: linear-gradient(135deg, #ddf7f3, #f8fcfc);
 
   border-radius: 25px;
 
-  border: 1px solid #C8EAE6;
+  border: 1px solid #c8eae6;
 
   overflow: hidden;
 
   position: relative;
 }
-
 
 /* CTA text */
 
@@ -2218,13 +2208,12 @@ body {
 
   margin-bottom: 25px;
 
-  color: #5B6B7A;
+  color: #5b6b7a;
 
   font-size: 15px;
 
   line-height: 1.7;
 }
-
 
 /* CTA button */
 
@@ -2236,9 +2225,9 @@ body {
 
   padding: 13px 24px;
 
-  background-color: #006D73;
+  background-color: #006d73;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
   border-radius: 10px;
 
@@ -2248,19 +2237,18 @@ body {
 
   font-weight: 600;
 
-  box-shadow: 0 8px 20px rgba(0, 109, 115, 0.20);
+  box-shadow: 0 8px 20px rgba(0, 109, 115, 0.2);
 
   transition: 0.25s ease;
 }
 
 .cta-btn:hover {
-  background-color: #00A6A6;
+  background-color: #00a6a6;
 
   transform: translateY(-4px);
 
   box-shadow: 0 12px 25px rgba(0, 109, 115, 0.25);
 }
-
 
 /* CTA image */
 
@@ -2287,13 +2275,11 @@ body {
   animation: girlFloat 4s ease-in-out infinite;
 }
 
-
 /* =========================================================
    ANIMATIONS
 ========================================================= */
 
 @keyframes heroAppear {
-
   from {
     opacity: 0;
 
@@ -2305,12 +2291,9 @@ body {
 
     transform: translateY(0);
   }
-
 }
 
-
 @keyframes textSlide {
-
   from {
     opacity: 0;
 
@@ -2322,12 +2305,9 @@ body {
 
     transform: translateX(0);
   }
-
 }
 
-
 @keyframes imageSlide {
-
   from {
     opacity: 0;
 
@@ -2339,12 +2319,9 @@ body {
 
     transform: translateX(0);
   }
-
 }
 
-
 @keyframes cardAppear {
-
   from {
     opacity: 0;
 
@@ -2356,12 +2333,9 @@ body {
 
     transform: translateY(0);
   }
-
 }
 
-
 @keyframes girlFloat {
-
   0%,
   100% {
     transform: translateY(0);
@@ -2370,12 +2344,9 @@ body {
   50% {
     transform: translateY(-10px);
   }
-
 }
 
-
 @keyframes circleFloat {
-
   0%,
   100% {
     transform: scale(1);
@@ -2384,16 +2355,13 @@ body {
   50% {
     transform: scale(1.03);
   }
-
 }
-
 
 /* =========================================================
    TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
-
   .hero {
     flex-direction: column;
 
@@ -2461,16 +2429,13 @@ body {
   .cta-img {
     height: 270px;
   }
-
 }
-
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 600px) {
-
   .hero {
     width: 94%;
 
@@ -2524,5 +2489,4 @@ body {
   .cta-text h2 {
     font-size: 30px;
   }
-
 }
