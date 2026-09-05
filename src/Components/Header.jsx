@@ -32,6 +32,7 @@ const Header = () => {
         ☰
       </button>
 
+
       {/* Navigation */}
       <nav className={menuOpen ? "nav active" : "nav"}>
         <Link to="/" onClick={() => setMenuOpen(false)}>

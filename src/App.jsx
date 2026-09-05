@@ -8,6 +8,7 @@ import Login from "./Pagess/Login";
 import Profile from "./Pagess/Profile";
 import Records from "./Pagess/Records";
 import SignUp from "./Pagess/SignUp";
+import Dashboard from "./Pagess/Dashboard";
 
 import {
   BrowserRouter,
@@ -24,6 +25,7 @@ function App() {
         <Header />
 
         <Routes>
+
 
           <Route
             path="/"
@@ -50,6 +52,12 @@ function App() {
             element={<Records />}
           />
 
+=======
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/records" element={<Records />} />
         </Routes>
 
         <Footer />
