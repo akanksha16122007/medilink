@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background Rounded Square -->
+  <rect x="0" y="0" width="100" height="100" rx="24" fill="#025955" />
+  
+  <!-- Centered White Plus Symbol -->
+  <path d="M 41 22 H 59 V 41 H 78 V 59 H 59 V 78 H 41 V 59 H 22 V 41 H 41 Z" fill="#FFFFFF" />
+</svg>
