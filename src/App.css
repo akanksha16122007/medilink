@@ -241,14 +241,19 @@ Profile:
   }
 }
 /*Login*/
+/* =========================================
+   LOGIN PAGE
+========================================= */
+
 .login-page {
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   background: #eef8f8;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .login-box {
@@ -257,19 +262,20 @@ Profile:
   padding: 40px 34px;
   border-radius: 18px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .login-box h2 {
   text-align: center;
   font-size: 36px;
   color: #0f172a;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 
 .login-box > p {
   text-align: center;
   color: #64748b;
-  margin-bottom: 28px;
+  margin: 0 0 28px;
   font-size: 17px;
 }
 
@@ -292,6 +298,7 @@ Profile:
   border-radius: 8px;
   font-size: 15px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .email:focus,
@@ -315,25 +322,266 @@ Profile:
   background: #00897b;
 }
 
+.login-error {
+  color: #d32f2f !important;
+  font-size: 14px !important;
+  margin: 10px 0 0 !important;
+  text-align: left !important;
+}
+
 .signup-text {
-  text-align: center !important;
-  margin-top: 26px;
-  color: #374151;
-  font-size: 15px;
+  text-align: center;
+  margin-top: 20px !important;
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
 }
 
 .signup-text a {
   color: #009688;
-  text-decoration: none;
   font-weight: 600;
-  margin-left: 4px;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   SIGN UP PAGE
+========================================= */
+
+.signup-page {
+  min-height: calc(100vh - 72px);
+  background: #eef8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.signup-box {
+  width: 520px;
+  background: #fff;
+  padding: 40px 34px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.signup-box h2 {
+  text-align: center;
+  font-size: 36px;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.signup-box > p {
+  text-align: center;
+  color: #64748b;
+  margin: 0 0 28px;
+  font-size: 17px;
+}
+
+.signup-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-box form > label {
+  font-weight: 600;
+  margin: 10px 0 8px;
+  color: #111827;
+}
+
+
+/* =========================================
+   SIGN UP INPUTS
+========================================= */
+
+.signup-box input[type="text"],
+.signup-box input[type="date"],
+.signup-box input[type="tel"],
+.signup-box input[type="email"],
+.signup-box input[type="password"] {
+  height: 48px;
+  width: 100%;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.signup-box input[type="text"]:focus,
+.signup-box input[type="date"]:focus,
+.signup-box input[type="tel"]:focus,
+.signup-box input[type="email"]:focus,
+.signup-box input[type="password"]:focus {
+  border-color: #009688;
+}
+
+
+/* =========================================
+   SIGN UP GENDER
+========================================= */
+
+.gender-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  margin: 5px 0 10px;
+}
+
+.gender-options label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: #475569;
+  cursor: pointer;
+}
+
+.gender-options input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #009688;
+}
+
+
+/* =========================================
+   SIGN UP TERMS
+========================================= */
+
+.signup-box .terms {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 16px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.signup-box .terms input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: #009688;
+}
+
+
+/* =========================================
+   SIGN UP BUTTON
+========================================= */
+
+.signup-btn {
+  margin-top: 8px;
+  height: 50px;
+  width: 100%;
+  background: #009688;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: #00897b;
+}
+
+
+/* =========================================
+   SIGN UP → LOGIN LINK
+========================================= */
+
+.login-text {
+  text-align: center;
+  color: #64748b;
+  margin: 20px 0 0 !important;
+  font-size: 14px !important;
+}
+
+.login-text a {
+  color: #009688;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   FOOTER / PAGE LAYOUT
+========================================= */
+
+/*
+   Keeps the footer at the bottom of the page
+   without creating extra space above it.
+*/
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .login-page,
+  .signup-page {
+    min-height: calc(100vh - 65px);
+    padding: 30px 15px;
+    align-items: flex-start;
+  }
+
+  .login-box,
+  .signup-box {
+    width: 100%;
+    margin-top: 20px;
+    padding: 30px 25px;
+  }
+
+  .login-box h2,
+  .signup-box h2 {
+    font-size: 30px;
+  }
+
+  .gender-options {
+    gap: 25px;
+  }
 }
 /* ================= FOOTER ================= */
 
 .footer {
   background-color: #006d73;
   color: white;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 .footer-content {
