@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const Profile = () => {
-  const [Profile, setProfile] = useState({
+
+  const [profile, setProfile] = useState({
     name: "",
     age: "",
     bloodGroup: "",
@@ -9,91 +10,171 @@ const Profile = () => {
     allergies: "",
     medical: "",
   });
+
+
+  // Load saved profile
   useEffect(() => {
     const savedProfile = localStorage.getItem("profile");
+
     if (savedProfile) {
       setProfile(JSON.parse(savedProfile));
     }
   }, []);
+
+
+  // Handle input changes
   const handleChange = (e) => {
     setProfile({
-      ...Profile,
+      ...profile,
       [e.target.name]: e.target.value,
     });
   };
 
+
+  // Save profile
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("profile", JSON.stringify(Profile));
+
+    localStorage.setItem(
+      "profile",
+      JSON.stringify(profile)
+    );
+
     alert("Profile saved successfully!");
   };
+
+
   return (
     <div className="profile-page">
+
       <div className="profile-content">
-        <h1>My Health Profile</h1>
-        <p>Update your personal and health information.</p>
+
+        {/* Heading */}
+
+        <div className="profile-heading">
+
+          <p className="profile-label">
+            STAY HEALTH READY
+          </p>
+
+          <h1>
+            My <span>Health Profile</span>
+          </h1>
+
+          <p className="profile-description">
+            Keep your personal and health information
+            organized in one place.
+          </p>
+
+        </div>
+
+
+        {/* Form */}
+
         <form onSubmit={handleSubmit}>
-          <label>Full Name</label>
-          <input
-            type="text"
-            className="name"
-            name="name"
-            value={Profile.name}
-            onChange={handleChange}
-          />
-          <label>Age</label>
-          <input
-            type="number"
-            className="age"
-            name="age"
-            value={Profile.age}
-            onChange={handleChange}
-          />
-          <label>Blood Group</label>
-          <select
-            className="bloodGroup"
-            value={Profile.bloodGroup}
-            name="bloodGroup"
-            onChange={handleChange}
+
+          <div className="form-group full-width">
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your full name"
+              value={profile.name}
+              onChange={handleChange}
+            />
+          </div>
+
+
+          <div className="form-group">
+            <label>Age</label>
+
+            <input
+              type="number"
+              name="age"
+              placeholder="Enter your age"
+              value={profile.age}
+              onChange={handleChange}
+            />
+          </div>
+
+
+          <div className="form-group">
+            <label>Blood Group</label>
+
+            <select
+              name="bloodGroup"
+              value={profile.bloodGroup}
+              onChange={handleChange}
+            >
+              <option value="">
+                Select blood group
+              </option>
+
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+
+          <div className="form-group full-width">
+            <label>Emergency Contact</label>
+
+            <input
+              type="tel"
+              name="phoneno"
+              placeholder="e.g. +91 XXXXX XXXXX"
+              value={profile.phoneno}
+              onChange={handleChange}
+            />
+          </div>
+
+
+          <div className="form-group full-width">
+            <label>Allergies</label>
+
+            <input
+              type="text"
+              name="allergies"
+              placeholder="e.g. Dust, pollen or None"
+              value={profile.allergies}
+              onChange={handleChange}
+            />
+          </div>
+
+
+          <div className="form-group full-width">
+            <label>Medical Conditions</label>
+
+            <input
+              type="text"
+              name="medical"
+              placeholder="e.g. Asthma or None"
+              value={profile.medical}
+              onChange={handleChange}
+            />
+          </div>
+
+
+          <button
+            type="submit"
+            className="submit"
           >
-            <option value="">Select Blood Group</option>
-            <option value="o+">O+</option>
-            <option value="o-">O-</option>
-            <option value="a-">A-</option>
-            <option value="a+">A+</option>
-            <option value="B-">B-</option>
-            <option value="B+">B+</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-          </select>
-          <label>Emergency Contact</label>
-          <input
-            type="tel"
-            className="phoneno"
-            value={Profile.phoneno}
-            onChange={handleChange}
-            name="phoneno"
-          />
-          <label>Allergies</label>
-          <input
-            type="text"
-            className="allergies"
-            value={Profile.allergies}
-            name="allergies"
-            onChange={handleChange}
-          />
-          <label>Medical Conditions</label>
-          <input
-            type="text"
-            className="medical"
-            name="medical"
-            value={Profile.medical}
-            onChange={handleChange}
-          />
-          <button className="submit">Save Profile</button>
+            Save Profile →
+          </button>
+
         </form>
+
       </div>
+
     </div>
   );
 };
+
 export default Profile;
