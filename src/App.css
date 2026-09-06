@@ -592,56 +592,138 @@ body,
     gap: 25px;
   }
 }
-/* ================= FOOTER ================= */
+/* ==============================
+   FOOTER
+   ============================== */
 
 .footer {
-  background-color: #006d73;
+  background-color: #006D73;
   color: white;
-  margin-top: 0px;
+  margin-top: 0;
 }
+
+
+/* MAIN FOOTER CONTENT */
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 950px;
   margin: 0 auto;
-  padding: 45px 40px 30px;
+  padding: 45px 30px 35px;
 
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 100px;
+  text-align: center;
 }
 
-.footer-section h2 {
-  font-size: 24px;
-  margin: 0 0 12px;
+
+/* ==============================
+   BRAND
+   ============================== */
+
+.footer-brand {
+  min-width: 230px;
 }
 
-.footer-section h3 {
-  font-size: 16px;
-  margin: 0 0 15px;
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 9px;
+
+  font-size: 23px;
+  font-weight: 700;
+
+  margin-bottom: 12px;
 }
 
-.footer-section p {
-  color: #ddf7f3;
+.footer-logo-icon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  color: #006D73;
+
+  border-radius: 9px;
+
+  font-size: 18px;
+}
+
+.footer-brand p {
+  margin: 0;
+
+  color: #DDF7F3;
+
   font-size: 14px;
   line-height: 1.7;
-  margin: 0 0 8px;
 }
 
-.footer-section a {
-  display: block;
 
-  color: #ddf7f3;
+/* ==============================
+   QUICK LINKS
+   ============================== */
+
+.footer-links {
+  min-width: 150px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  margin: 0 0 15px;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.footer-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.footer-link-list a {
+  color: #DDF7F3;
+
   text-decoration: none;
 
   font-size: 14px;
-  margin-bottom: 10px;
 
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
-.footer-section a:hover {
-  color: #20d6c7;
+.footer-link-list a:hover {
+  color: white;
+  transform: translateX(3px);
 }
+
+
+/* ==============================
+   CONTACT
+   ============================== */
+
+.footer-contact {
+  min-width: 220px;
+}
+
+.footer-contact p {
+  margin: 0 0 10px;
+
+  color: #DDF7F3;
+
+  font-size: 14px;
+}
+
+
+/* ==============================
+   COPYRIGHT
+   ============================== */
 
 .copyright {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -653,23 +735,36 @@ body,
 
 .copyright p {
   margin: 0;
-  color: #ddf7f3;
+
+  color: #DDF7F3;
+
   font-size: 13px;
 }
 
+
+/* ==============================
+   MOBILE
+   ============================== */
+
 @media (max-width: 768px) {
+
   .footer-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+
+    align-items: center;
+
     gap: 30px;
 
-    padding: 35px 25px;
+    padding: 40px 20px 30px;
   }
 
-  .footer-section h2 {
-    font-size: 22px;
+  .footer-brand,
+  .footer-links,
+  .footer-contact {
+    min-width: auto;
   }
+
 }
-
 /* =========================================
    MEDILINK - RECORDS PAGE
 ========================================= */

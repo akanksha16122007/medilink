@@ -1,11 +1,19 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="footer">
 
       <div className="footer-content">
 
-        <div className="footer-section">
-          <h2>MediLink</h2>
+        {/* BRAND */}
+        <div className="footer-brand">
+          <div className="footer-logo">
+            <span className="footer-logo-icon">✚</span>
+            <span>MediLink</span>
+          </div>
+
           <p>
             Your health information,
             <br />
@@ -13,16 +21,22 @@ function Footer() {
           </p>
         </div>
 
-        <div className="footer-section">
+
+        {/* QUICK LINKS */}
+        <div className="footer-links">
           <h3>Quick Links</h3>
 
-          <a href="/">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/records">Medical Records</a>
-          <a href="/profile">Profile</a>
+          <div className="footer-link-list">
+            <Link to="/">Home</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/records">Medical Records</Link>
+            <Link to="/profile">Profile</Link>
+          </div>
         </div>
 
-        <div className="footer-section">
+
+        {/* CONTACT */}
+        <div className="footer-contact">
           <h3>Contact</h3>
 
           <p>✉ support@medilink.com</p>
@@ -31,6 +45,8 @@ function Footer() {
 
       </div>
 
+
+      {/* COPYRIGHT */}
       <div className="copyright">
         <p>© 2026 MediLink. All rights reserved.</p>
       </div>
