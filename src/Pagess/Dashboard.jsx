@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import StatCard from "../Components/StatCard";
 import PrescriptionCard from "../Components/PrescriptionCard";
@@ -10,9 +10,23 @@ const Dashboard = () => {
   const records = savedRecords ? JSON.parse(savedRecords) : [];
 
   const savedPrescriptions = localStorage.getItem("medilinkPrescriptions");
+
+  // Demo prescription: API feature ko presentation mein test karne ke liye.
   const prescriptions = savedPrescriptions
     ? JSON.parse(savedPrescriptions)
-    : [];
+    : [
+        {
+          id: 1,
+          medicine: "Acetaminophen",
+          dosage: "500mg • 5 Days",
+          date: "Today",
+        },
+      ];
+
+  const [selectedMedicine, setSelectedMedicine] = useState("");
+  const [medicineInfo, setMedicineInfo] = useState(null);
+  const [isLoadingMedicine, setIsLoadingMedicine] = useState(false);
+  const [medicineError, setMedicineError] = useState("");
 
   const uniqueDoctors = new Set(
     records.map((record) => record.doctor)
@@ -20,6 +34,49 @@ const Dashboard = () => {
 
   const recentRecords = records.slice(0, 3);
   const recentPrescriptions = prescriptions.slice(0, 3);
+
+  const handleMedicineInfo = async (medicine) => {
+    setSelectedMedicine(medicine);
+    setMedicineInfo(null);
+    setMedicineError("");
+    setIsLoadingMedicine(true);
+
+    try {
+      const query = `openfda.generic_name:"${medicine}"`;
+
+      const response = await fetch(
+        `https://api.fda.gov/drug/label.json?search=${encodeURIComponent(
+          query
+        )}&limit=1`
+      );
+
+      if (!response.ok) {
+        throw new Error("Medicine information not found.");
+      }
+
+      const data = await response.json();
+      const label = data.results[0];
+
+      setMedicineInfo({
+        name: label.openfda?.generic_name?.[0] || medicine,
+        brand: label.openfda?.brand_name?.[0] || "Not available",
+        purpose:
+          label.purpose?.[0] ||
+          label.indications_and_usage?.[0] ||
+          "Not available",
+        warnings:
+          label.warnings?.[0] ||
+          label.warnings_and_cautions?.[0] ||
+          "No warning information available.",
+      });
+    } catch (error) {
+      setMedicineError(
+        "We could not find official information for this medicine."
+      );
+    } finally {
+      setIsLoadingMedicine(false);
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -118,25 +175,19 @@ const Dashboard = () => {
             <h3>Recent Prescriptions</h3>
 
             <span className="section-link section-link-muted">
-              Recent medicines
+              Medicine details
             </span>
           </div>
 
-          {recentPrescriptions.length > 0 ? (
-            recentPrescriptions.map((prescription) => (
-              <PrescriptionCard
-                key={prescription.id}
-                medicine={prescription.medicine}
-                dosage={prescription.dosage}
-                date={prescription.date}
-              />
-            ))
-          ) : (
-            <div className="dashboard-empty">
-              <span aria-hidden="true">💊</span>
-              <p>No prescriptions added yet.</p>
-            </div>
-          )}
+          {recentPrescriptions.map((prescription) => (
+            <PrescriptionCard
+              key={prescription.id}
+              medicine={prescription.medicine}
+              dosage={prescription.dosage}
+              date={prescription.date}
+              onMedicineInfo={handleMedicineInfo}
+            />
+          ))}
         </section>
       </div>
 
@@ -175,6 +226,70 @@ const Dashboard = () => {
           View Full Profile
         </Link>
       </section>
+
+      {selectedMedicine && (
+        <div
+          className="medicine-modal-overlay"
+          onClick={() => setSelectedMedicine("")}
+        >
+          <div
+            className="medicine-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="medicine-modal-close"
+              onClick={() => setSelectedMedicine("")}
+            >
+              ×
+            </button>
+
+            <p className="medicine-modal-label">
+              OPENFDA MEDICINE INFORMATION
+            </p>
+
+            <h3>{selectedMedicine}</h3>
+
+            {isLoadingMedicine && (
+              <p className="medicine-loading">
+                Fetching official medicine information...
+              </p>
+            )}
+
+            {medicineError && (
+              <p className="medicine-error">{medicineError}</p>
+            )}
+
+            {medicineInfo && (
+              <>
+                <div className="medicine-detail">
+                  <span>Generic Name</span>
+                  <strong>{medicineInfo.name}</strong>
+                </div>
+
+                <div className="medicine-detail">
+                  <span>Brand Name</span>
+                  <strong>{medicineInfo.brand}</strong>
+                </div>
+
+                <div className="medicine-detail">
+                  <span>Purpose / Uses</span>
+                  <p>{medicineInfo.purpose}</p>
+                </div>
+
+                <div className="medicine-detail">
+                  <span>Warnings</span>
+                  <p>{medicineInfo.warnings}</p>
+                </div>
+
+                <p className="medicine-disclaimer">
+                  Information is sourced from public FDA drug-label data.
+                  Please consult a healthcare professional for medical advice.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
