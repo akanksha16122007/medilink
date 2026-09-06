@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const Profile = () => {
-
   const [profile, setProfile] = useState({
     name: "",
     age: "",
@@ -10,7 +9,6 @@ const Profile = () => {
     allergies: "",
     medical: "",
   });
-
 
   // Load saved profile
   useEffect(() => {
@@ -21,7 +19,6 @@ const Profile = () => {
     }
   }, []);
 
-
   // Handle input changes
   const handleChange = (e) => {
     setProfile({
@@ -30,49 +27,35 @@ const Profile = () => {
     });
   };
 
-
   // Save profile
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    localStorage.setItem(
-      "profile",
-      JSON.stringify(profile)
-    );
+    localStorage.setItem("profile", JSON.stringify(profile));
 
     alert("Profile saved successfully!");
   };
 
-
   return (
     <div className="profile-page">
-
       <div className="profile-content">
-
         {/* Heading */}
 
         <div className="profile-heading">
-
-          <p className="profile-label">
-            STAY HEALTH READY
-          </p>
+          <p className="profile-label">STAY HEALTH READY</p>
 
           <h1>
             My <span>Health Profile</span>
           </h1>
 
           <p className="profile-description">
-            Keep your personal and health information
-            organized in one place.
+            Keep your personal and health information organized in one place.
           </p>
-
         </div>
-
 
         {/* Form */}
 
         <form onSubmit={handleSubmit}>
-
           <div className="form-group full-width">
             <label>Full Name</label>
 
@@ -84,7 +67,6 @@ const Profile = () => {
               onChange={handleChange}
             />
           </div>
-
 
           <div className="form-group">
             <label>Age</label>
@@ -98,7 +80,6 @@ const Profile = () => {
             />
           </div>
 
-
           <div className="form-group">
             <label>Blood Group</label>
 
@@ -107,9 +88,7 @@ const Profile = () => {
               value={profile.bloodGroup}
               onChange={handleChange}
             >
-              <option value="">
-                Select blood group
-              </option>
+              <option value="">Select blood group</option>
 
               <option value="O+">O+</option>
               <option value="O-">O-</option>
@@ -121,7 +100,6 @@ const Profile = () => {
               <option value="AB-">AB-</option>
             </select>
           </div>
-
 
           <div className="form-group full-width">
             <label>Emergency Contact</label>
@@ -135,7 +113,6 @@ const Profile = () => {
             />
           </div>
 
-
           <div className="form-group full-width">
             <label>Allergies</label>
 
@@ -147,7 +124,6 @@ const Profile = () => {
               onChange={handleChange}
             />
           </div>
-
 
           <div className="form-group full-width">
             <label>Medical Conditions</label>
@@ -161,18 +137,11 @@ const Profile = () => {
             />
           </div>
 
-
-          <button
-            type="submit"
-            className="submit"
-          >
+          <button type="submit" className="submit">
             Save Profile →
           </button>
-
         </form>
-
       </div>
-
     </div>
   );
 };

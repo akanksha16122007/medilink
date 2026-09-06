@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const VALID_EMAILS = ["testing@gmail.com"];
 const VALID_PASSWORD = "test11@@";
-
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

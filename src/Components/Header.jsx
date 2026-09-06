@@ -6,9 +6,6 @@ const Header = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // const [LoggedIn, setLoggedIn] = useState(
-  //   localStorage.getItem("isLoggedIn") === "true",
-  // );
   const navigate = useNavigate();
   const [showLogOut, setshowLogOut] = useState(false);
   const handleLogout = () => {

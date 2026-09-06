@@ -15,7 +15,6 @@ const SignUp = () => {
 
   useEffect(() => {
     const savedSignUp = localStorage.getItem("signup");
-
     if (savedSignUp) {
       setSignup(JSON.parse(savedSignUp));
     }
@@ -51,12 +50,10 @@ const SignUp = () => {
   return (
     <div className="signup-page">
       <div className="signup-box">
-
         <h2>Sign Up</h2>
         <p>Create an Account to get started with your MediLink journey</p>
 
         <form onSubmit={handleSubmit}>
-
           <label>Full Name</label>
           <input
             type="text"
@@ -155,14 +152,12 @@ const SignUp = () => {
           <button type="submit" className="signup-btn">
             Create Account
           </button>
-
         </form>
 
         <p className="login-text">
           Already have an account?
           <Link to="/login"> Login</Link>
         </p>
-
       </div>
     </div>
   );
