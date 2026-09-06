@@ -1,18 +1,14 @@
 import React from "react";
 
-const StatCard = ({ icon, number, title }) => {
+const StatCard = ({ icon, number, title, variant = "records" }) => {
   return (
-    <div className="stat-card">
-
-      <div className="stat-icon">
-        {icon}
-      </div>
+    <div className={`stat-card stat-card--${variant}`}>
+      <div className="stat-icon">{icon}</div>
 
       <div className="stat-info">
-        <h2>{number}</h2>
         <p>{title}</p>
+        <h2>{number}</h2>
       </div>
-
     </div>
   );
 };

@@ -23,15 +23,29 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-intro">
-        <p className="dashboard-eyebrow">YOUR HEALTH AT A GLANCE</p>
+      <div className="dashboard-intro dashboard-hero">
+        <div className="dashboard-hero-content">
+          <p className="dashboard-eyebrow">MEDILINK HEALTH DASHBOARD</p>
 
-        <h2>
-          Hello, {profile.name || "User"}!{" "}
-          <span aria-hidden="true">👋</span>
-        </h2>
+          <h2>
+            Hello, {profile.name || "User"}!{" "}
+            <span aria-hidden="true">👋</span>
+          </h2>
 
-        <p>Here’s your health overview. Stay informed and prepared.</p>
+          <p>
+            Your medical information, prescriptions, and emergency details —
+            organized in one secure place.
+          </p>
+
+          <div className="dashboard-health-status">
+            <span></span>
+            Your health workspace is ready
+          </div>
+        </div>
+
+        <div className="dashboard-hero-symbol" aria-hidden="true">
+          ✚
+        </div>
       </div>
 
       <div className="stats-container">
@@ -39,18 +53,21 @@ const Dashboard = () => {
           icon="📄"
           number={records.length}
           title="Medical Records"
+          variant="records"
         />
 
         <StatCard
           icon="💊"
           number={prescriptions.length}
           title="Prescriptions"
+          variant="prescriptions"
         />
 
         <StatCard
           icon="👤"
           number={uniqueDoctors}
           title="Doctors"
+          variant="doctors"
         />
       </div>
 
@@ -99,6 +116,7 @@ const Dashboard = () => {
         <section className="section-box">
           <div className="section-header">
             <h3>Recent Prescriptions</h3>
+
             <span className="section-link section-link-muted">
               Recent medicines
             </span>
@@ -134,6 +152,7 @@ const Dashboard = () => {
           <div>
             <p className="emergency-label">IMPORTANT FOR URGENT CARE</p>
             <h3 id="emergency-heading">Emergency Information</h3>
+
             <p>
               Keep these details current so they are available when needed.
             </p>
