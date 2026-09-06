@@ -46,7 +46,7 @@ const Records = () => {
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 3;
+  const recordsPerPage = 4;
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
@@ -165,9 +165,7 @@ const Records = () => {
 
   // ================= PAGINATION =================
 
-  const totalPages = Math.ceil(
-    filteredRecords.length / recordsPerPage
-  );
+ const totalPages = Math.max(2, Math.ceil(filteredRecords.length / recordsPerPage));
 
   const startIndex =
     (currentPage - 1) * recordsPerPage;
