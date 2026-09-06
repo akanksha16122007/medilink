@@ -1048,40 +1048,62 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 8px;
   margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .pagination button {
   width: 38px;
   height: 38px;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
   border: 1px solid #dce3e6;
   background: white;
-
   border-radius: 7px;
 
   color: #334155;
   font-size: 14px;
 
   cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.pagination button:hover {
+.pagination button:hover:not(:disabled) {
   background: #f3f8f7;
+  border-color: #008f7a;
 }
 
-.pagination-number.active {
+.pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Page number */
+.page-number.active {
   background: #008f7a;
   border-color: #008f7a;
   color: white;
 }
 
+.page-number.active:hover {
+  background: #007765;
+  border-color: #007765;
+}
+
+/* Previous / Next arrows */
+.pagination-arrow {
+  font-size: 18px;
+  font-weight: 600;
+}
 /* =========================================
    MODAL OVERLAY
 ========================================= */

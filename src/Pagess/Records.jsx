@@ -44,6 +44,10 @@ const Records = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All Types");
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 3;
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
 
@@ -63,6 +67,11 @@ const Records = () => {
       JSON.stringify(records)
     );
   }, [records]);
+
+  // Reset pagination when search/filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterType]);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -114,6 +123,9 @@ const Records = () => {
     });
 
     setShowAddModal(false);
+
+    // Go back to first page after adding a record
+    setCurrentPage(1);
   };
 
   // Delete record
@@ -151,13 +163,44 @@ const Records = () => {
     return matchesSearch && matchesFilter;
   });
 
+  // ================= PAGINATION =================
+
+  const totalPages = Math.ceil(
+    filteredRecords.length / recordsPerPage
+  );
+
+  const startIndex =
+    (currentPage - 1) * recordsPerPage;
+
+  const endIndex =
+    startIndex + recordsPerPage;
+
+  const paginatedRecords =
+    filteredRecords.slice(startIndex, endIndex);
+
+  // Move to previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  // Move to next page
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
   return (
     <div className="records-page">
 
-      {/* Page Header */}
+      {/* ================= PAGE HEADER ================= */}
+
       <div className="records-header">
         <div>
           <h1>Medical Records</h1>
+
           <p>
             View and manage all your medical reports.
           </p>
@@ -171,7 +214,8 @@ const Records = () => {
         </button>
       </div>
 
-      {/* Search and Filter */}
+      {/* ================= SEARCH AND FILTER ================= */}
+
       <div className="records-toolbar">
 
         <div className="search-box">
@@ -203,11 +247,13 @@ const Records = () => {
 
       </div>
 
-      {/* Records */}
+      {/* ================= RECORDS ================= */}
+
       <div className="records-list">
 
-        {filteredRecords.length > 0 ? (
-          filteredRecords.map((record) => (
+        {paginatedRecords.length > 0 ? (
+
+          paginatedRecords.map((record) => (
             <RecordCard
               key={record.id}
               record={record}
@@ -215,27 +261,91 @@ const Records = () => {
               onDelete={handleDelete}
             />
           ))
+
         ) : (
+
           <div className="no-records">
+
             <div className="no-records-icon">
               📄
             </div>
 
-            <h3>No records found</h3>
+            <h3>No records available</h3>
 
             <p>
-              Try changing your search or filter.
+              There are no records available on this page.
             </p>
+
           </div>
+
         )}
 
       </div>
 
-     
+      {/* ================= PAGINATION ================= */}
+
+      <div className="pagination">
+
+        {/* Previous Arrow */}
+
+        <button
+          className="pagination-arrow"
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+        >
+          ←
+        </button>
+
+        {/* Page Numbers */}
+
+        <div className="pagination-pages">
+
+          {Array.from(
+            {
+              length: Math.max(totalPages, 1),
+            },
+            (_, index) => index + 1
+          ).map((page) => (
+
+            <button
+              key={page}
+              className={`page-number ${
+                currentPage === page
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() =>
+                setCurrentPage(page)
+              }
+            >
+              {page}
+            </button>
+
+          ))}
+
+        </div>
+
+        {/* Next Arrow */}
+
+        <button
+          className="pagination-arrow"
+          onClick={handleNextPage}
+          disabled={
+            totalPages === 0 ||
+            currentPage >= totalPages
+          }
+          aria-label="Next page"
+        >
+          →
+        </button>
+
+      </div>
 
       {/* ================= ADD RECORD MODAL ================= */}
 
       {showAddModal && (
+
         <div
           className="modal-overlay"
           onClick={() => setShowAddModal(false)}
@@ -243,7 +353,9 @@ const Records = () => {
 
           <div
             className="add-record-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             <div className="modal-header">
@@ -266,6 +378,7 @@ const Records = () => {
               <div className="form-row">
 
                 <div className="form-group">
+
                   <label>Record Type</label>
 
                   <select
@@ -278,9 +391,11 @@ const Records = () => {
                     <option>ECG Report</option>
                     <option>MRI Brain</option>
                   </select>
+
                 </div>
 
                 <div className="form-group">
+
                   <label>Doctor Name</label>
 
                   <input
@@ -290,11 +405,13 @@ const Records = () => {
                     value={newRecord.doctor}
                     onChange={handleInputChange}
                   />
+
                 </div>
 
               </div>
 
               <div className="form-group">
+
                 <label>Date</label>
 
                 <input
@@ -303,9 +420,11 @@ const Records = () => {
                   value={newRecord.date}
                   onChange={handleInputChange}
                 />
+
               </div>
 
               <div className="form-group">
+
                 <label>Notes</label>
 
                 <textarea
@@ -315,6 +434,7 @@ const Records = () => {
                   onChange={handleInputChange}
                   rows="4"
                 ></textarea>
+
               </div>
 
               <div className="modal-buttons">
@@ -343,19 +463,25 @@ const Records = () => {
           </div>
 
         </div>
+
       )}
 
       {/* ================= VIEW RECORD MODAL ================= */}
 
       {showViewModal && selectedRecord && (
+
         <div
           className="modal-overlay"
-          onClick={() => setShowViewModal(false)}
+          onClick={() =>
+            setShowViewModal(false)
+          }
         >
 
           <div
             className="view-record-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             <div className="modal-header">
@@ -380,33 +506,47 @@ const Records = () => {
               </div>
 
               <div>
-                <h3>{selectedRecord.type}</h3>
+
+                <h3>
+                  {selectedRecord.type}
+                </h3>
+
                 <p>
                   Medical report information
                 </p>
+
               </div>
 
             </div>
 
             <div className="detail-item">
+
               <span>Doctor</span>
+
               <strong>
                 Dr. {selectedRecord.doctor}
               </strong>
+
             </div>
 
             <div className="detail-item">
+
               <span>Date</span>
+
               <strong>
                 {selectedRecord.date}
               </strong>
+
             </div>
 
             <div className="detail-item">
+
               <span>Notes</span>
+
               <strong>
                 {selectedRecord.notes}
               </strong>
+
             </div>
 
             <button
@@ -421,6 +561,7 @@ const Records = () => {
           </div>
 
         </div>
+
       )}
 
     </div>
