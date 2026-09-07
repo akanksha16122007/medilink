@@ -3,7 +3,28 @@ import { Link } from "react-router-dom";
 import StatCard from "../Components/StatCard";
 
 const Dashboard = () => {
-  const profile = JSON.parse(localStorage.getItem("profile")) || {};
+  const [profile, setProfile] = useState(() => {
+  return JSON.parse(localStorage.getItem("profile")) || {};
+});
+useEffect(() => {
+  const updateProfile = () => {
+    const savedProfile =
+      JSON.parse(localStorage.getItem("profile")) || {};
+
+    setProfile(savedProfile);
+  };
+
+  updateProfile();
+
+  window.addEventListener("profileUpdated", updateProfile);
+
+  return () => {
+    window.removeEventListener(
+      "profileUpdated",
+      updateProfile
+    );
+  };
+}, []);
 
   const savedRecords = localStorage.getItem("medilinkRecords");
   const records = savedRecords ? JSON.parse(savedRecords) : [];
@@ -18,13 +39,14 @@ const Dashboard = () => {
      PROFILE COMPLETION
   ========================================= */
 
-  const profileFields = [
-    profile.name,
-    profile.age,
-    profile.bloodGroup,
-    profile.phoneno,
-    profile.allergies,
-  ];
+ const profileFields = [
+  profile.name,
+  profile.age,
+  profile.bloodGroup,
+  profile.phoneno,
+  profile.allergies,
+  profile.medical,
+];
 
   const completedFields = profileFields.filter(
     (field) => field && field.toString().trim() !== ""
@@ -941,7 +963,7 @@ const Dashboard = () => {
             <span>
               {completedFields} of{" "}
               {profileFields.length}{" "}
-              details completed
+              details completed - 
             </span>
 
             <strong>

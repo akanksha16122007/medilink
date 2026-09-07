@@ -28,13 +28,15 @@ const Profile = () => {
   };
 
   // Save profile
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    localStorage.setItem("profile", JSON.stringify(profile));
+  localStorage.setItem("profile", JSON.stringify(profile));
 
-    alert("Profile saved successfully!");
-  };
+  window.dispatchEvent(new Event("profileUpdated"));
+
+  alert("Profile saved successfully!");
+};
 
   return (
     <div className="profile-page">
