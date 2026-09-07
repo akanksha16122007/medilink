@@ -3,16 +3,20 @@ import React from "react";
 const RecordCard = ({ record, onView, onDelete }) => {
   const getIcon = (type) => {
     switch (type) {
-      case "Blood Test":
-        return "📄";
-      case "X-Ray Chest":
-        return "🩻";
-      case "ECG Report":
-        return "👤";
-      case "MRI Brain":
-        return "📄";
-      default:
-        return "📄";
+    case "Blood Test":
+  return "🩸";
+
+case "X-Ray Chest":
+  return "🩻";
+
+case "ECG Report":
+  return "💓";
+
+case "MRI Brain":
+  return "🧠";
+
+default:
+  return "🏥";
     }
   };
 
