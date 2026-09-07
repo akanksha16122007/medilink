@@ -1,5 +1,5 @@
 import "./App.css";
-
+import React, { useState } from "react";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
@@ -13,13 +13,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Pagess/Dashboard";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   return (
-    <div className="App">
+    <div className={darkMode ? "App dark" : "App"}>
       <BrowserRouter>
-        <Header />
+        <Header
+          darkMode={darkMode}
+          toggleTheme={toggleTheme}
+        />
+
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+
           <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

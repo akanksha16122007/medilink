@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ darkMode, toggleTheme }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLogOut, setshowLogOut] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
-  const [showLogOut, setshowLogOut] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem("user");
 
@@ -25,10 +26,12 @@ const Header = () => {
       </Link>
 
       {/* Hamburger button */}
-      <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+      <button
+        className="menu-btn"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         ☰
       </button>
-
 
       {/* Navigation */}
       <nav className={menuOpen ? "nav active" : "nav"}>
@@ -66,11 +69,25 @@ const Header = () => {
 
               <span>{user.name}</span>
             </div>
+
+            {/* Dropdown */}
             {showLogOut && (
               <div className="logout-menu">
+
+                {/* Logout */}
                 <button onClick={handleLogout}>
-                  <i className="fa-solid fa-arrow-right-from-bracket"></i>Logout
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                  Logout
                 </button>
+
+                {/* Theme */}
+                <button
+                  className="theme-menu-btn"
+                  onClick={toggleTheme}
+                >
+                  {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                </button>
+
               </div>
             )}
           </div>
