@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StatCard from "../Components/StatCard";
-import PrescriptionCard from "../Components/PrescriptionCard";
 
 const Dashboard = () => {
   const profile = JSON.parse(localStorage.getItem("profile")) || {};
@@ -9,103 +8,382 @@ const Dashboard = () => {
   const savedRecords = localStorage.getItem("medilinkRecords");
   const records = savedRecords ? JSON.parse(savedRecords) : [];
 
-  const savedPrescriptions = localStorage.getItem("medilinkPrescriptions");
-
-  // Demo prescription: API feature ko presentation mein test karne ke liye.
-  const prescriptions = savedPrescriptions
-    ? JSON.parse(savedPrescriptions)
-    : [
-        {
-          id: 1,
-          medicine: "Acetaminophen",
-          dosage: "500mg • 5 Days",
-          date: "Today",
-        },
-      ];
-
-  const [selectedMedicine, setSelectedMedicine] = useState("");
-  const [medicineInfo, setMedicineInfo] = useState(null);
-  const [isLoadingMedicine, setIsLoadingMedicine] = useState(false);
-  const [medicineError, setMedicineError] = useState("");
-
   const uniqueDoctors = new Set(
-    records.map((record) => record.doctor)
+    records.map((record) => record.doctor).filter(Boolean)
   ).size;
 
   const recentRecords = records.slice(0, 3);
-  const recentPrescriptions = prescriptions.slice(0, 3);
 
-  const handleMedicineInfo = async (medicine) => {
-    setSelectedMedicine(medicine);
-    setMedicineInfo(null);
-    setMedicineError("");
-    setIsLoadingMedicine(true);
+  /* =========================================
+     PROFILE COMPLETION
+  ========================================= */
 
-    try {
-      const query = `openfda.generic_name:"${medicine}"`;
+  const profileFields = [
+    profile.name,
+    profile.age,
+    profile.bloodGroup,
+    profile.phoneno,
+    profile.allergies,
+  ];
 
-      const response = await fetch(
-        `https://api.fda.gov/drug/label.json?search=${encodeURIComponent(
-          query
-        )}&limit=1`
+  const completedFields = profileFields.filter(
+    (field) => field && field.toString().trim() !== ""
+  ).length;
+
+  const profileCompletion = Math.round(
+    (completedFields / profileFields.length) * 100
+  );
+
+  /* =========================================
+     SHARED LOCATION
+  ========================================= */
+
+  const [location, setLocation] = useState({
+    latitude: 30.7333,
+    longitude: 76.7794,
+    name: "Chandigarh",
+    isUserLocation: false,
+  });
+
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationMessage, setLocationMessage] = useState("");
+
+  /* =========================================
+     HEALTH ENVIRONMENT
+  ========================================= */
+
+  const [environment, setEnvironment] = useState(null);
+  const [environmentLoading, setEnvironmentLoading] = useState(true);
+  const [environmentError, setEnvironmentError] = useState("");
+
+  /* =========================================
+     NEARBY HEALTHCARE
+  ========================================= */
+
+  const [nearbyPlaces, setNearbyPlaces] = useState([]);
+  const [nearbyLoading, setNearbyLoading] = useState(true);
+  const [nearbyError, setNearbyError] = useState("");
+
+  /* =========================================
+     USE MY LOCATION
+  ========================================= */
+
+  const handleUseMyLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationMessage(
+        "Location is not supported by this browser."
       );
-
-      if (!response.ok) {
-        throw new Error("Medicine information not found.");
-      }
-
-      const data = await response.json();
-      const label = data.results[0];
-
-      setMedicineInfo({
-        name: label.openfda?.generic_name?.[0] || medicine,
-        brand: label.openfda?.brand_name?.[0] || "Not available",
-        purpose:
-          label.purpose?.[0] ||
-          label.indications_and_usage?.[0] ||
-          "Not available",
-        warnings:
-          label.warnings?.[0] ||
-          label.warnings_and_cautions?.[0] ||
-          "No warning information available.",
-      });
-    } catch (error) {
-      setMedicineError(
-        "We could not find official information for this medicine."
-      );
-    } finally {
-      setIsLoadingMedicine(false);
+      return;
     }
+
+    setLocationLoading(true);
+    setLocationMessage("");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          name: "Your location",
+          isUserLocation: true,
+        });
+
+        setLocationLoading(false);
+      },
+
+      () => {
+        setLocationLoading(false);
+
+        setLocationMessage(
+          "Unable to access your location. Showing Chandigarh data."
+        );
+      }
+    );
+  };
+
+  /* =========================================
+     HEALTH ENVIRONMENT API
+     OPEN-METEO
+  ========================================= */
+
+  useEffect(() => {
+    const fetchEnvironmentData = async () => {
+      try {
+        setEnvironmentLoading(true);
+        setEnvironmentError("");
+
+        const response = await fetch(
+          `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.latitude}&longitude=${location.longitude}&current=us_aqi,pm2_5,uv_index&timezone=auto`
+        );
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch environment data.");
+        }
+
+        const data = await response.json();
+
+        setEnvironment({
+          aqi: data.current?.us_aqi ?? "—",
+          pm25: data.current?.pm2_5 ?? "—",
+          uv: data.current?.uv_index ?? "—",
+        });
+      } catch (error) {
+        setEnvironmentError(
+          "Environment data is currently unavailable."
+        );
+      } finally {
+        setEnvironmentLoading(false);
+      }
+    };
+
+    fetchEnvironmentData();
+  }, [location]);
+
+  /* =========================================
+     AQI STATUS
+  ========================================= */
+
+  const getAqiStatus = (aqi) => {
+    if (aqi === "—") return "Unavailable";
+
+    if (aqi <= 50) return "Good";
+
+    if (aqi <= 100) return "Moderate";
+
+    if (aqi <= 150)
+      return "Unhealthy for sensitive groups";
+
+    if (aqi <= 200) return "Unhealthy";
+
+    if (aqi <= 300) return "Very unhealthy";
+
+    return "Hazardous";
+  };
+
+  /* =========================================
+     HAVERSINE DISTANCE
+  ========================================= */
+
+  const calculateDistance = (
+    lat1,
+    lon1,
+    lat2,
+    lon2
+  ) => {
+    const earthRadius = 6371;
+
+    const dLat =
+      ((lat2 - lat1) * Math.PI) / 180;
+
+    const dLon =
+      ((lon2 - lon1) * Math.PI) / 180;
+
+    const a =
+      Math.sin(dLat / 2) *
+        Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c =
+      2 *
+      Math.atan2(
+        Math.sqrt(a),
+        Math.sqrt(1 - a)
+      );
+
+    return earthRadius * c;
+  };
+
+  /* =========================================
+     OPENSTREETMAP + OVERPASS
+  ========================================= */
+
+  useEffect(() => {
+    const fetchNearbyHealthcare = async () => {
+      try {
+        setNearbyLoading(true);
+        setNearbyError("");
+
+        const query = `
+          [out:json];
+          (
+            nwr["amenity"="hospital"](around:5000,${location.latitude},${location.longitude});
+            nwr["amenity"="pharmacy"](around:5000,${location.latitude},${location.longitude});
+          );
+          out center tags;
+        `;
+
+        const response = await fetch(
+          `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(
+            query
+          )}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Unable to fetch nearby healthcare facilities."
+          );
+        }
+
+        const data = await response.json();
+
+        const places = data.elements
+          .map((place) => {
+            const latitude =
+              place.lat ?? place.center?.lat;
+
+            const longitude =
+              place.lon ?? place.center?.lon;
+
+            if (!latitude || !longitude) {
+              return null;
+            }
+
+            const type =
+              place.tags?.amenity === "pharmacy"
+                ? "Pharmacy"
+                : "Hospital";
+
+            const name =
+              place.tags?.name ||
+              (type === "Pharmacy"
+                ? "Nearby Pharmacy"
+                : "Nearby Hospital");
+
+            const distance =
+              calculateDistance(
+                location.latitude,
+                location.longitude,
+                latitude,
+                longitude
+              );
+
+            return {
+              id: place.id,
+              name,
+              type,
+              latitude,
+              longitude,
+              distance,
+            };
+          })
+          .filter(Boolean)
+          .sort(
+            (a, b) =>
+              a.distance - b.distance
+          );
+
+        const hospitals = places
+          .filter(
+            (place) =>
+              place.type === "Hospital"
+          )
+          .slice(0, 2);
+
+        const pharmacies = places
+          .filter(
+            (place) =>
+              place.type === "Pharmacy"
+          )
+          .slice(0, 2);
+
+        const selectedPlaces = [
+          ...hospitals,
+          ...pharmacies,
+        ]
+          .sort(
+            (a, b) =>
+              a.distance - b.distance
+          )
+          .slice(0, 4);
+
+        setNearbyPlaces(selectedPlaces);
+      } catch (error) {
+        setNearbyError(
+          "Nearby healthcare information is currently unavailable."
+        );
+      } finally {
+        setNearbyLoading(false);
+      }
+    };
+
+    fetchNearbyHealthcare();
+  }, [location]);
+
+  /* =========================================
+     DIRECTIONS
+  ========================================= */
+
+  const openDirections = (place) => {
+    const url =
+      `https://www.openstreetmap.org/directions?` +
+      `engine=fossgis_osrm_car&route=` +
+      `${location.latitude}%2C${location.longitude}%3B` +
+      `${place.latitude}%2C${place.longitude}`;
+
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  /* =========================================
+     FORMAT DISTANCE
+  ========================================= */
+
+  const formatDistance = (distance) => {
+    if (distance < 1) {
+      return `${Math.round(
+        distance * 1000
+      )} m`;
+    }
+
+    return `${distance.toFixed(1)} km`;
   };
 
   return (
     <div className="dashboard">
-      <div className="dashboard-intro dashboard-hero">
-        <div className="dashboard-hero-content">
-          <p className="dashboard-eyebrow">MEDILINK HEALTH DASHBOARD</p>
+
+      {/* HEALTH OVERVIEW */}
+
+      <section className="dashboard-overview">
+
+        <div className="overview-heading">
+
+          <p className="dashboard-eyebrow">
+            HEALTH OVERVIEW
+          </p>
 
           <h2>
-            Hello, {profile.name || "User"}!{" "}
-            <span aria-hidden="true">👋</span>
+            Good to see you,{" "}
+            {profile.name || "User"}{" "}
+            <span aria-hidden="true">
+              👋
+            </span>
           </h2>
 
           <p>
-            Your medical information, prescriptions, and emergency details —
-            organized in one secure place.
+            Your important health information
+            at a glance.
           </p>
 
-          <div className="dashboard-health-status">
-            <span></span>
-            Your health workspace is ready
-          </div>
         </div>
 
-        <div className="dashboard-hero-symbol" aria-hidden="true">
-          ✚
+        <div className="overview-status">
+          <span></span>
+          Profile active
         </div>
-      </div>
+
+      </section>
+
+
+      {/* STATISTICS */}
 
       <div className="stats-container">
+
         <StatCard
           icon="📄"
           number={records.length}
@@ -114,182 +392,589 @@ const Dashboard = () => {
         />
 
         <StatCard
-          icon="💊"
-          number={prescriptions.length}
-          title="Prescriptions"
-          variant="prescriptions"
-        />
-
-        <StatCard
-          icon="👤"
+          icon="👨‍⚕️"
           number={uniqueDoctors}
           title="Doctors"
           variant="doctors"
         />
+
+        <StatCard
+          icon="✓"
+          number={`${profileCompletion}%`}
+          title="Profile Complete"
+          variant="blood"
+        />
+
       </div>
 
-      <div className="dashboard-sections">
-        <section className="section-box">
-          <div className="section-header">
-            <h3>Recent Medical Records</h3>
 
-            <Link className="section-link" to="/records">
-              View All <span>→</span>
+      {/* ACTIVITY + ENVIRONMENT */}
+
+      <div className="dashboard-main-grid">
+
+        {/* HEALTH ACTIVITY */}
+
+        <section className="activity-section">
+
+          <div className="section-heading">
+
+            <div>
+
+              <p className="section-eyebrow">
+                YOUR RECORDS
+              </p>
+
+              <h3>
+                Health Activity
+              </h3>
+
+            </div>
+
+            <Link
+              to="/records"
+              className="section-link"
+            >
+              All Records →
             </Link>
+
           </div>
+
 
           {recentRecords.length > 0 ? (
-            recentRecords.map((record) => (
-              <div className="dashboard-record" key={record.id}>
-                <div className="dashboard-item-main">
-                  <span className="dashboard-item-icon" aria-hidden="true">
-                    📄
-                  </span>
 
-                  <div>
-                    <h4>{record.type}</h4>
-                    <p>Dr. {record.doctor}</p>
+            <div className="activity-list">
+
+              {recentRecords.map(
+                (record) => (
+
+                  <div
+                    className="activity-item"
+                    key={record.id}
+                  >
+
+                    <div className="activity-marker">
+                      <span></span>
+                    </div>
+
+                    <div className="activity-content">
+
+                      <div className="activity-top">
+
+                        <h4>
+                          {record.type}
+                        </h4>
+
+                        <span>
+                          {record.date}
+                        </span>
+
+                      </div>
+
+                      <p>
+                        Dr.{" "}
+                        {record.doctor ||
+                          "Not specified"}
+                      </p>
+
+                      {record.notes && (
+                        <small>
+                          {record.notes}
+                        </small>
+                      )}
+
+                    </div>
+
+                    <Link
+                      to={`/records?view=${record.id}`}
+                      className="activity-view"
+                    >
+                      View
+                    </Link>
+
                   </div>
-                </div>
 
-                <div>
-                  <span>{record.date}</span>
+                )
+              )}
 
-                  <Link to="/records">
-                    <button>View</button>
-                  </Link>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="dashboard-empty">
-              <span aria-hidden="true">📄</span>
-              <p>No medical records yet.</p>
-              <Link to="/records">Add your first record</Link>
             </div>
+
+          ) : (
+
+            <div className="activity-empty">
+
+              <span aria-hidden="true">
+                📄
+              </span>
+
+              <div>
+
+                <h4>
+                  No health activity yet
+                </h4>
+
+                <p>
+                  Your recent medical
+                  records will appear here.
+                </p>
+
+              </div>
+
+              <Link to="/records">
+                Add Record →
+              </Link>
+
+            </div>
+
           )}
+
         </section>
 
-        <section className="section-box">
-          <div className="section-header">
-            <h3>Recent Prescriptions</h3>
 
-            <span className="section-link section-link-muted">
-              Medicine details
+        {/* HEALTH ENVIRONMENT */}
+
+        <section className="environment-section">
+
+          <div className="environment-header">
+
+            <div>
+
+              <p className="section-eyebrow">
+                LIVE DATA
+              </p>
+
+              <h3>
+                Health Environment
+              </h3>
+
+            </div>
+
+            <span className="live-indicator">
+
+              <span></span>
+
+              Live
+
             </span>
+
           </div>
 
-          {recentPrescriptions.map((prescription) => (
-            <PrescriptionCard
-              key={prescription.id}
-              medicine={prescription.medicine}
-              dosage={prescription.dosage}
-              date={prescription.date}
-              onMedicineInfo={handleMedicineInfo}
-            />
-          ))}
+
+          {/* SHARED LOCATION */}
+
+          <div className="environment-location-row">
+
+            <div className="environment-location">
+
+              <span>
+                📍
+              </span>
+
+              {location.name}
+
+            </div>
+
+            <button
+              className="environment-location-button"
+              onClick={
+                handleUseMyLocation
+              }
+              disabled={locationLoading}
+            >
+              {locationLoading
+                ? "Detecting..."
+                : "Use my location"}
+            </button>
+
+          </div>
+
+
+          {locationMessage && (
+
+            <p className="location-message">
+              {locationMessage}
+            </p>
+
+          )}
+
+
+          {environmentLoading ? (
+
+            <div className="environment-loading">
+
+              <div className="loading-line"></div>
+
+              <div className="loading-line short"></div>
+
+              <p>
+                Fetching environmental data...
+              </p>
+
+            </div>
+
+          ) : environmentError ? (
+
+            <div className="environment-error">
+              {environmentError}
+            </div>
+
+          ) : (
+
+            <>
+
+              <div className="environment-metrics">
+
+                <div className="environment-metric">
+
+                  <span>
+                    AQI
+                  </span>
+
+                  <strong>
+                    {environment.aqi}
+                  </strong>
+
+                  <small>
+                    {getAqiStatus(
+                      environment.aqi
+                    )}
+                  </small>
+
+                </div>
+
+
+                <div className="environment-metric">
+
+                  <span>
+                    UV Index
+                  </span>
+
+                  <strong>
+                    {environment.uv}
+                  </strong>
+
+                  <small>
+                    Current level
+                  </small>
+
+                </div>
+
+
+                <div className="environment-metric">
+
+                  <span>
+                    PM2.5
+                  </span>
+
+                  <strong>
+                    {environment.pm25}
+                  </strong>
+
+                  <small>
+                    μg/m³
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div className="environment-footer">
+                Environmental data powered by
+                Open-Meteo
+              </div>
+
+            </>
+
+          )}
+
         </section>
+
       </div>
+
+
+      {/* EMERGENCY INFORMATION */}
 
       <section
         className="emergency-card"
         aria-labelledby="emergency-heading"
       >
+
         <div className="emergency-copy">
-          <span className="emergency-icon" aria-hidden="true">
+
+          <span
+            className="emergency-icon"
+            aria-hidden="true"
+          >
             ✚
           </span>
 
           <div>
-            <p className="emergency-label">IMPORTANT FOR URGENT CARE</p>
-            <h3 id="emergency-heading">Emergency Information</h3>
+
+            <p className="emergency-label">
+              IMPORTANT FOR URGENT CARE
+            </p>
+
+            <h3 id="emergency-heading">
+              Emergency Information
+            </h3>
 
             <p>
-              Keep these details current so they are available when needed.
+              Important details available
+              when they are needed.
             </p>
+
           </div>
+
         </div>
+
+
+        {/* EMERGENCY DETAILS */}
 
         <div className="emergency-details">
-          <div>
-            <span>Blood Group</span>
-            <strong>{profile.bloodGroup || "Not added"}</strong>
-          </div>
 
           <div>
-            <span>Emergency Contact</span>
-            <strong>{profile.phoneno || "Not added"}</strong>
+
+            <span>
+              Blood Group
+            </span>
+
+            <strong>
+              {profile.bloodGroup ||
+                "Not added"}
+            </strong>
+
           </div>
+
+
+          <div>
+
+            <span>
+              Emergency Contact
+            </span>
+
+            <strong>
+              {profile.phoneno ||
+                "Not added"}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Allergies
+            </span>
+
+            <strong>
+              {profile.allergies ||
+                "None"}
+            </strong>
+
+          </div>
+
         </div>
 
-        <Link className="emergency-button" to="/profile">
-          View Full Profile
-        </Link>
-      </section>
 
-      {selectedMedicine && (
-        <div
-          className="medicine-modal-overlay"
-          onClick={() => setSelectedMedicine("")}
-        >
-          <div
-            className="medicine-modal"
-            onClick={(event) => event.stopPropagation()}
-          >
+        {/* NEARBY HEALTHCARE */}
+
+        <div className="nearby-healthcare">
+
+          <div className="nearby-header">
+
+            <div>
+
+              <p className="section-eyebrow">
+                LOCATION BASED
+              </p>
+
+              <h4>
+                Nearby Healthcare
+              </h4>
+
+              <span>
+                Hospitals and pharmacies
+                near{" "}
+                {location.name.toLowerCase()}
+              </span>
+
+            </div>
+
             <button
-              className="medicine-modal-close"
-              onClick={() => setSelectedMedicine("")}
+              className="location-button"
+              onClick={
+                handleUseMyLocation
+              }
+              disabled={locationLoading}
             >
-              ×
+              {locationLoading
+                ? "Detecting..."
+                : "Use my location"}
             </button>
 
-            <p className="medicine-modal-label">
-              OPENFDA MEDICINE INFORMATION
+          </div>
+
+
+          {nearbyLoading ? (
+
+            <div className="nearby-loading">
+              Finding nearby healthcare
+              facilities...
+            </div>
+
+          ) : nearbyError ? (
+
+            <div className="nearby-error">
+              {nearbyError}
+            </div>
+
+          ) : nearbyPlaces.length > 0 ? (
+
+            <div className="nearby-list">
+
+              {nearbyPlaces.map(
+                (place) => (
+
+                  <div
+                    className="nearby-item"
+                    key={`${place.type}-${place.id}`}
+                  >
+
+                    <div className="nearby-place-icon">
+                      {place.type ===
+                      "Hospital"
+                        ? "🏥"
+                        : "💊"}
+                    </div>
+
+
+                    <div className="nearby-place-info">
+
+                      <h5>
+                        {place.name}
+                      </h5>
+
+                      <span>
+                        {place.type}
+                      </span>
+
+                    </div>
+
+
+                    <span className="nearby-distance">
+                      {formatDistance(
+                        place.distance
+                      )}
+                    </span>
+
+
+                    <button
+                      className="directions-button"
+                      onClick={() =>
+                        openDirections(place)
+                      }
+                    >
+                      Get Directions
+                    </button>
+
+                  </div>
+
+                )
+              )}
+
+            </div>
+
+          ) : (
+
+            <div className="nearby-error">
+              No nearby healthcare
+              facilities were found.
+            </div>
+
+          )}
+
+
+          <p className="nearby-footer">
+            Healthcare locations powered by
+            OpenStreetMap.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      {/* PROFILE HEALTH CHECK */}
+
+      <section className="profile-check">
+
+        <div className="profile-check-info">
+
+          <div className="profile-check-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <p className="section-eyebrow">
+              PROFILE STATUS
             </p>
 
-            <h3>{selectedMedicine}</h3>
+            <h3>
+              Health Profile
+            </h3>
 
-            {isLoadingMedicine && (
-              <p className="medicine-loading">
-                Fetching official medicine information...
-              </p>
-            )}
+            <p>
+              Keep your information complete
+              and up to date.
+            </p>
 
-            {medicineError && (
-              <p className="medicine-error">{medicineError}</p>
-            )}
-
-            {medicineInfo && (
-              <>
-                <div className="medicine-detail">
-                  <span>Generic Name</span>
-                  <strong>{medicineInfo.name}</strong>
-                </div>
-
-                <div className="medicine-detail">
-                  <span>Brand Name</span>
-                  <strong>{medicineInfo.brand}</strong>
-                </div>
-
-                <div className="medicine-detail">
-                  <span>Purpose / Uses</span>
-                  <p>{medicineInfo.purpose}</p>
-                </div>
-
-                <div className="medicine-detail">
-                  <span>Warnings</span>
-                  <p>{medicineInfo.warnings}</p>
-                </div>
-
-                <p className="medicine-disclaimer">
-                  Information is sourced from public FDA drug-label data.
-                  Please consult a healthcare professional for medical advice.
-                </p>
-              </>
-            )}
           </div>
+
         </div>
-      )}
+
+
+        <div className="profile-progress-area">
+
+          <div className="profile-progress-top">
+
+            <span>
+              {completedFields} of{" "}
+              {profileFields.length}{" "}
+              details completed
+            </span>
+
+            <strong>
+              {profileCompletion}%
+            </strong>
+
+          </div>
+
+          <div className="profile-progress">
+
+            <div
+              className="profile-progress-fill"
+              style={{
+                width: `${profileCompletion}%`,
+              }}
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        {/* DIRECT PROFILE BUTTON */}
+
+        <Link
+          to="/profile"
+          className="profile-check-button"
+        >
+          Open Profile →
+        </Link>
+
+      </section>
+
     </div>
   );
 };

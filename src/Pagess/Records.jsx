@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import RecordCard from "../Components/RecordCard";
 
 const initialRecords = [
@@ -33,6 +34,7 @@ const initialRecords = [
 ];
 
 const Records = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [records, setRecords] = useState(() => {
     const savedRecords = localStorage.getItem("medilinkRecords");
 
@@ -56,13 +58,32 @@ const Records = () => {
     notes: "",
   });
 
-  // Save records whenever they change
-  useEffect(() => {
-    localStorage.setItem(
-      "medilinkRecords",
-      JSON.stringify(records)
-    );
-  }, [records]);
+
+// Save records whenever they change
+useEffect(() => {
+  localStorage.setItem(
+    "medilinkRecords",
+    JSON.stringify(records)
+  );
+}, [records]);
+
+// Open the exact record sent from Dashboard
+useEffect(() => {
+  const recordId = searchParams.get("view");
+
+  if (!recordId) return;
+
+  const recordToView = records.find(
+    (record) => String(record.id) === recordId
+  );
+
+  if (recordToView) {
+    setSelectedRecord(recordToView);
+    setShowViewModal(true);
+
+    setSearchParams({}, { replace: true });
+  }
+}, [records, searchParams, setSearchParams]);
 
   // Handle input changes
   const handleInputChange = (e) => {
