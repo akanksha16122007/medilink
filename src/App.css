@@ -5198,3 +5198,55 @@ body {
   cursor: not-allowed;
   opacity: 0.6;
 }
+
+
+/* =========================================
+   MEDICAL PRECAUTIONS
+========================================= */
+
+.precautions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.precaution-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+
+.precaution-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.precaution-item h4 {
+  margin: 0 0 3px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.precaution-item p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.environment-footer {
+  margin-top: 10px;
+  font-size: 10px;
+}
