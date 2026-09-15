@@ -4531,8 +4531,8 @@ body {
    SECTION HEADINGS
 ========================================================= */
 
-.section-heading,
-.environment-header {
+.dashboard .section-heading,
+.dashboard .environment-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
