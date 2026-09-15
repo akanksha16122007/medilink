@@ -114,9 +114,6 @@ Medical Conditions: ${profile.medical || "None"}
           <p>Your important health information at a glance.</p>
         </div>
 
-        <div className="overview-status">
-          <span></span> Profile active
-        </div>
       </section>
 
 
