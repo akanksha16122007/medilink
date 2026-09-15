@@ -1,24 +1,26 @@
 import React from "react";
 
 const RecordCard = ({ record, onView, onDelete }) => {
-  const getIcon = (type) => {
-    switch (type) {
+const getIcon = (type) => {
+  const cleanType = type.replace(/^[^\w\s]+\s*/, "");
+
+  switch (cleanType) {
     case "Blood Test":
-  return "🩸";
+      return "🩸";
 
-case "X-Ray Chest":
-  return "🩻";
+    case "X-Ray Chest":
+      return "🩻";
 
-case "ECG Report":
-  return "💓";
+    case "ECG Report":
+      return "❤️";
 
-case "MRI Brain":
-  return "🧠";
+    case "MRI Brain":
+      return "🧠";
 
-default:
-  return "🏥";
-    }
-  };
+    default:
+      return "🏥";
+  }
+};
 
   return (
     <div className="record-card">
