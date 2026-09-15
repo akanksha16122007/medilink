@@ -39,6 +39,14 @@ const Records = () => {
 
   return savedRecords ? JSON.parse(savedRecords) : initialRecords;
 });
+const [showAddModal, setShowAddModal] = useState(false);
+
+const [newRecord, setNewRecord] = useState({
+  type: "",
+  doctor: "",
+  date: "",
+  notes: "",
+});
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All Types");
@@ -52,7 +60,12 @@ const Records = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, filterType]);
-
+useEffect(() => {
+  localStorage.setItem(
+    "medilinkRecords",
+    JSON.stringify(records)
+  );
+}, [records]);
   // ================= SEARCH + FILTER =================
 
   const filteredRecords = records.filter((record) => {
@@ -110,6 +123,28 @@ const handleDelete = (id) => {
     prevRecords.filter((record) => record.id !== id)
   );
 };
+const handleAddRecord = (e) => {
+  e.preventDefault();
+
+  const record = {
+    id: Date.now(),
+    type: newRecord.type,
+    doctor: newRecord.doctor,
+    date: newRecord.date,
+    notes: newRecord.notes,
+  };
+
+  setRecords((prevRecords) => [record, ...prevRecords]);
+
+  setNewRecord({
+    type: "",
+    doctor: "",
+    date: "",
+    notes: "",
+  });
+
+  setShowAddModal(false);
+};
   const closeModal = () => {
     setSelectedRecord(null);
   };
@@ -128,13 +163,14 @@ const handleDelete = (id) => {
           </p>
         </div>
 
-        {/* Add Record button - intentionally does nothing */}
+        {/* Add Record button */}
         <button
-          className="add-record-btn"
-          type="button"
-        >
-          + Add Record
-        </button>
+  className="add-record-btn"
+  type="button"
+  onClick={() => setShowAddModal(true)}
+>
+  + Add Record
+</button>
       </div>
 
       {/* ================= SEARCH + FILTER ================= */}
@@ -180,7 +216,7 @@ const handleDelete = (id) => {
               // Opens modal for this particular record
               onView={() => handleView(record)}
 
-              // Delete button stays visible but does nothing
+              
               onDelete={() => handleDelete(record.id)}
             />
           ))
@@ -248,6 +284,177 @@ const handleDelete = (id) => {
         </button>
 
       </div>
+      {/* ================= ADD RECORD MODAL ================= */}
+
+{showAddModal && (
+
+  <div
+    className="record-modal-overlay"
+    onClick={() => setShowAddModal(false)}
+  >
+
+    <div
+      className="record-modal add-record-form-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+      {/* Modal Header */}
+
+      <div className="record-modal-header">
+
+        <h2>Add Medical Record</h2>
+
+        <button
+          className="modal-close-btn"
+          type="button"
+          onClick={() => setShowAddModal(false)}
+          aria-label="Close modal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      {/* Add Record Form */}
+
+      <form onSubmit={handleAddRecord}>
+
+        {/* Record Type */}
+
+        <div className="form-group">
+
+          <label>Record Type</label>
+
+          <select
+            value={newRecord.type}
+            onChange={(e) =>
+              setNewRecord({
+                ...newRecord,
+                type: e.target.value,
+              })
+            }
+            required
+          >
+
+            <option value="">
+              Select record type
+            </option>
+
+            <option value="🩸 Blood Test">
+              🩸 Blood Test
+            </option>
+
+            <option value="🩻 X-Ray Chest">
+              🩻 X-Ray Chest
+            </option>
+
+            <option value="❤️ ECG Report">
+              ❤️ ECG Report
+            </option>
+
+            <option value="🧠 MRI Brain">
+              🧠 MRI Brain
+            </option>
+
+          </select>
+
+        </div>
+
+
+        {/* Doctor */}
+
+        <div className="form-group">
+
+          <label>Doctor Name</label>
+
+          <input
+            type="text"
+            placeholder="Enter doctor name"
+            value={newRecord.doctor}
+            onChange={(e) =>
+              setNewRecord({
+                ...newRecord,
+                doctor: e.target.value,
+              })
+            }
+            required
+          />
+
+        </div>
+
+
+        {/* Date */}
+
+        <div className="form-group">
+
+          <label>Date</label>
+
+          <input
+            type="date"
+            value={newRecord.date}
+            onChange={(e) =>
+              setNewRecord({
+                ...newRecord,
+                date: e.target.value,
+              })
+            }
+            required
+          />
+
+        </div>
+
+
+        {/* Notes */}
+
+        <div className="form-group">
+
+          <label>Notes</label>
+
+          <textarea
+            placeholder="Enter notes about this medical record"
+            value={newRecord.notes}
+            onChange={(e) =>
+              setNewRecord({
+                ...newRecord,
+                notes: e.target.value,
+              })
+            }
+            rows="4"
+            required
+          />
+
+        </div>
+
+
+        {/* Buttons */}
+
+        <div className="modal-buttons">
+
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={() => setShowAddModal(false)}
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="save-record-btn"
+          >
+            Save Record
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+)}
 
       {/* ================= VIEW RECORD MODAL ================= */}
 
