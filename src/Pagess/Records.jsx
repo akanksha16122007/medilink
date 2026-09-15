@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import RecordCard from "../Components/RecordCard";
 
@@ -44,6 +45,9 @@ const Records = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 4;
+
+  // Stores the record currently being viewed
+  const [selectedRecord, setSelectedRecord] = useState(null);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -94,6 +98,16 @@ const Records = () => {
     if (currentPage < totalPages) {
       setCurrentPage((prev) => prev + 1);
     }
+  };
+
+  // ================= VIEW RECORD =================
+
+  const handleView = (record) => {
+    setSelectedRecord(record);
+  };
+
+  const closeModal = () => {
+    setSelectedRecord(null);
   };
 
   return (
@@ -159,8 +173,8 @@ const Records = () => {
               key={record.id}
               record={record}
 
-              // View button stays visible but does nothing
-              onView={() => {}}
+              // Opens modal for this particular record
+              onView={() => handleView(record)}
 
               // Delete button stays visible but does nothing
               onDelete={() => {}}
@@ -182,7 +196,6 @@ const Records = () => {
             </p>
 
           </div>
-
         )}
 
       </div>
@@ -231,6 +244,78 @@ const Records = () => {
         </button>
 
       </div>
+
+      {/* ================= VIEW RECORD MODAL ================= */}
+
+      {selectedRecord && (
+
+        <div
+          className="record-modal-overlay"
+          onClick={closeModal}
+        >
+
+          <div
+            className="record-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            {/* Modal Header */}
+            <div className="record-modal-header">
+
+              <h2>Medical Record</h2>
+
+              <button
+                className="modal-close-btn"
+                onClick={closeModal}
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+
+            </div>
+
+            {/* Record Details */}
+            <div className="record-modal-body">
+
+              <div className="record-detail">
+                <span>Record Type</span>
+                <strong>{selectedRecord.type}</strong>
+              </div>
+
+              <div className="record-detail">
+                <span>Doctor</span>
+                <strong>{selectedRecord.doctor}</strong>
+              </div>
+
+              <div className="record-detail">
+                <span>Date</span>
+                <strong>{selectedRecord.date}</strong>
+              </div>
+
+              <div className="record-detail">
+                <span>Notes</span>
+                <strong>{selectedRecord.notes}</strong>
+              </div>
+
+            </div>
+
+            {/* Modal Footer */}
+            <div className="record-modal-footer">
+
+              <button
+                className="modal-close-button"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
   );
