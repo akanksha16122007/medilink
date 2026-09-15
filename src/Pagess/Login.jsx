@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,8 +33,15 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="login-box">
+        <div className="login-image">
+          <img src="/favicon.svg" />
+        </div>
+
         <h2>Welcome Back!</h2>
         <p>Login to your account</p>
+        <p className="login-tagline">
+          Your health. Your records. Always accessible.
+        </p>
         <form onSubmit={handleSubmit}>
           <label>Email</label>
           <input
@@ -44,15 +52,30 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
           <label>Password</label>
-          <input
-            type="password"
-            className="pass"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="pass"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <button
+              type="button"
+              className="show-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+              ) : (
+                <i class="fa-solid fa-eye"></i>
+              )}
+            </button>
+          </div>
           {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login">
             Login

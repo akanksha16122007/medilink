@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: "",
     age: "",
@@ -28,15 +30,16 @@ const Profile = () => {
   };
 
   // Save profile
-const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  localStorage.setItem("profile", JSON.stringify(profile));
+    localStorage.setItem("profile", JSON.stringify(profile));
 
-  window.dispatchEvent(new Event("profileUpdated"));
+    window.dispatchEvent(new Event("profileUpdated"));
 
-  alert("Profile saved successfully!");
-};
+    alert("Profile saved successfully!");
+    navigate("/dashboard");
+  };
 
   return (
     <div className="profile-page">

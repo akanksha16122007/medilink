@@ -3,7 +3,6 @@
 ========================================================= */
 
 :root {
-
   /* Main backgrounds */
 
   --bg: #f8fcfc;
@@ -11,7 +10,6 @@
   --surface: #ffffff;
 
   --surface-alt: #eef8f8;
-
 
   /* Text */
 
@@ -21,7 +19,6 @@
 
   --text-muted: #71808a;
 
-
   /* Borders */
 
   --border: #ddebe9;
@@ -29,7 +26,6 @@
   --border-light: #e7f1f0;
 
   --border-input: #d1d5db;
-
 
   /* Primary */
 
@@ -39,7 +35,6 @@
 
   --primary-dark: #007765;
 
-
   /* Teal backgrounds */
 
   --teal-light: #ddf7f3;
@@ -48,18 +43,15 @@
 
   --teal-border: #bfe8e3;
 
-
   /* Input */
 
   --input-bg: #ffffff;
-
 
   /* Shadows */
 
   --shadow: rgba(0, 109, 115, 0.08);
 
   --shadow-dark: rgba(0, 0, 0, 0.16);
-
 
   /* Emergency */
 
@@ -70,16 +62,13 @@
   --danger-bg: #fff5f5;
 
   --danger-border: #f3cdcd;
-
 }
-
 
 /* =========================================================
    DARK THEME
 ========================================================= */
 
 .App.dark {
-
   --bg: #0f171d;
 
   --surface: #18242c;
@@ -123,9 +112,7 @@
   --danger-bg: #351f22;
 
   --danger-border: #66383b;
-
 }
-
 
 /* =========================================================
    GLOBAL
@@ -134,16 +121,13 @@
 html,
 body,
 #root {
-
   min-height: 100%;
 
   margin: 0;
-
 }
 
 html,
 body {
-
   background: var(--bg);
 
   color: var(--text);
@@ -151,17 +135,13 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-
 }
 
 body {
-
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .App {
-
   min-height: 100vh;
 
   display: flex;
@@ -175,34 +155,25 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-
 }
-
 
 /* =========================================================
    CREATE REACT DEFAULT
 ========================================================= */
 
 .App-logo {
-
   height: 40vmin;
 
   pointer-events: none;
-
 }
 
 @media (prefers-reduced-motion: no-preference) {
-
   .App-logo {
-
     animation: App-logo-spin infinite 20s linear;
-
   }
-
 }
 
 .App-header {
-
   background-color: #282c34;
 
   min-height: 100vh;
@@ -218,38 +189,27 @@ body {
   font-size: calc(10px + 2vmin);
 
   color: white;
-
 }
 
 .App-link {
-
   color: #61dafb;
-
 }
 
 @keyframes App-logo-spin {
-
   from {
-
     transform: rotate(0deg);
-
   }
 
   to {
-
     transform: rotate(360deg);
-
   }
-
 }
-
 
 /* =========================================================
    THEME TOGGLE
 ========================================================= */
 
 .theme-toggle {
-
   position: fixed;
 
   top: 20px;
@@ -274,22 +234,17 @@ body {
     background-color 0.3s ease,
     color 0.3s ease,
     transform 0.2s ease;
-
 }
 
 .theme-toggle:hover {
-
   transform: translateY(-2px);
-
 }
-
 
 /* =========================================================
    HEADER
 ========================================================= */
 
 .header {
-
   height: 72px;
 
   padding: 0 50px;
@@ -309,11 +264,9 @@ body {
   top: 0;
 
   z-index: 1000;
-
 }
 
 .logo {
-
   display: flex;
 
   align-items: center;
@@ -327,11 +280,9 @@ body {
   font-size: 22px;
 
   font-weight: 700;
-
 }
 
 .logo-icon {
-
   width: 34px;
 
   height: 34px;
@@ -349,21 +300,17 @@ body {
   justify-content: center;
 
   font-size: 19px;
-
 }
 
 .nav {
-
   display: flex;
 
   align-items: center;
 
   gap: 30px;
-
 }
 
 .nav a {
-
   color: var(--text);
 
   text-decoration: none;
@@ -373,17 +320,13 @@ body {
   font-weight: 500;
 
   transition: 0.2s;
-
 }
 
 .nav a:hover {
-
   color: var(--primary-hover);
-
 }
 
 .login-btn {
-
   background-color: var(--primary) !important;
 
   color: white !important;
@@ -395,17 +338,13 @@ body {
   font-weight: 600 !important;
 
   transition: 0.2s;
-
 }
 
 .login-btn:hover {
-
   background-color: var(--primary-hover) !important;
-
 }
 
 .user-info {
-
   display: flex;
 
   align-items: center;
@@ -417,12 +356,10 @@ body {
   font-size: 14px;
 
   font-weight: 600;
-
 }
 
 .profile-pic,
 .Profile-pic {
-
   width: 34px;
 
   height: 34px;
@@ -432,11 +369,9 @@ body {
   object-fit: cover;
 
   border: 2px solid var(--teal-light);
-
 }
 
 .profile-section {
-
   display: flex;
 
   align-items: center;
@@ -444,11 +379,9 @@ body {
   gap: 8px;
 
   cursor: pointer;
-
 }
 
 .logout-menu {
-
   position: absolute;
 
   top: 100%;
@@ -470,11 +403,9 @@ body {
   box-shadow: 0 6px 18px var(--shadow-dark);
 
   z-index: 1000;
-
 }
 
 .logout-menu button {
-
   width: 100%;
 
   display: flex;
@@ -498,27 +429,21 @@ body {
   text-align: left;
 
   font-size: 14px;
-
 }
 
 .logout-menu button:hover {
-
   background: var(--surface-alt);
-
 }
 
 .theme-menu-btn {
-
   border-top: 1px solid var(--border) !important;
 
   margin-top: 4px;
 
   padding-top: 12px !important;
-
 }
 
 .menu-btn {
-
   display: none;
 
   background: none;
@@ -530,16 +455,13 @@ body {
   color: var(--primary);
 
   cursor: pointer;
-
 }
-
 
 /* =========================================================
    PROFILE
 ========================================================= */
 
 .profile-page {
-
   min-height: 100vh;
 
   display: flex;
@@ -551,11 +473,9 @@ body {
   background: var(--bg);
 
   box-sizing: border-box;
-
 }
 
 .profile-content {
-
   width: 750px;
 
   background: var(--surface);
@@ -569,11 +489,9 @@ body {
   box-shadow: 0 6px 20px var(--shadow);
 
   box-sizing: border-box;
-
 }
 
 .profile-content h1 {
-
   font-size: 44px;
 
   font-weight: 700;
@@ -583,11 +501,9 @@ body {
   margin: 0 0 10px;
 
   line-height: 1.2;
-
 }
 
 .profile-content p {
-
   font-size: 18px;
 
   color: var(--text-secondary);
@@ -595,19 +511,15 @@ body {
   margin: 0 0 30px;
 
   line-height: 1.5;
-
 }
 
 .profile-content form {
-
   display: flex;
 
   flex-direction: column;
-
 }
 
 .profile-content label {
-
   font-size: 15px;
 
   font-weight: 600;
@@ -615,7 +527,6 @@ body {
   color: var(--text);
 
   margin: 16px 0 8px;
-
 }
 
 .name,
@@ -624,7 +535,6 @@ body {
 .medical,
 .age,
 .bloodGroup {
-
   height: 50px;
 
   padding: 0 14px;
@@ -644,28 +554,21 @@ body {
   box-sizing: border-box;
 
   transition: 0.2s ease;
-
 }
 
 .name,
 .phoneno,
 .allergies,
 .medical {
-
   width: 100%;
-
 }
 
 .age {
-
   width: 120px;
-
 }
 
 .bloodGroup {
-
   width: 200px;
-
 }
 
 .name::placeholder,
@@ -673,9 +576,7 @@ body {
 .allergies::placeholder,
 .medical::placeholder,
 .age::placeholder {
-
   color: var(--text-muted);
-
 }
 
 .name:focus,
@@ -684,15 +585,12 @@ body {
 .medical:focus,
 .age:focus,
 .bloodGroup:focus {
-
   border-color: var(--primary-hover);
 
   box-shadow: 0 0 0 3px rgba(0, 166, 166, 0.15);
-
 }
 
 .submit {
-
   margin-top: 30px;
 
   height: 52px;
@@ -714,27 +612,21 @@ body {
   cursor: pointer;
 
   transition: 0.2s ease;
-
 }
 
 .submit:hover {
-
   background: var(--primary-hover);
 
   transform: translateY(-2px);
 
   box-shadow: 0 6px 14px var(--shadow);
-
 }
-
 
 /* =========================================================
    LOGIN
 ========================================================= */
-
 .login-page,
 .signup-page {
-
   min-height: calc(100vh - 72px);
 
   background: var(--bg);
@@ -750,12 +642,33 @@ body {
   padding: 40px 20px;
 
   box-sizing: border-box;
+}
+.login-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
 
+.login-image img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+.login-box h2 {
+  margin-bottom: 4px;
+}
+
+.login-box > p {
+  margin: 0;
+}
+
+.login-tagline {
+  margin-top: 2px !important;
+  margin-bottom: 18px !important;
 }
 
 .login-box,
 .signup-box {
-
   background: var(--surface);
 
   border-radius: 18px;
@@ -763,28 +676,22 @@ body {
   box-shadow: 0 8px 24px var(--shadow-dark);
 
   box-sizing: border-box;
-
 }
 
 .login-box {
-
   width: 420px;
 
   padding: 40px 34px;
-
 }
 
 .signup-box {
-
   width: 520px;
 
   padding: 40px 34px;
-
 }
 
 .login-box h2,
 .signup-box h2 {
-
   text-align: center;
 
   font-size: 36px;
@@ -792,12 +699,10 @@ body {
   color: var(--text);
 
   margin: 0 0 8px;
-
 }
 
 .login-box > p,
 .signup-box > p {
-
   text-align: center;
 
   color: var(--text-secondary);
@@ -805,27 +710,22 @@ body {
   margin: 0 0 28px;
 
   font-size: 17px;
-
 }
 
 .login-box form,
 .signup-box form {
-
   display: flex;
 
   flex-direction: column;
-
 }
 
 .login-box label,
 .signup-box form > label {
-
   font-weight: 600;
 
   margin: 14px 0 8px;
 
   color: var(--text);
-
 }
 
 .email,
@@ -835,7 +735,6 @@ body {
 .signup-box input[type="tel"],
 .signup-box input[type="email"],
 .signup-box input[type="password"] {
-
   height: 48px;
 
   width: 100%;
@@ -855,28 +754,22 @@ body {
   outline: none;
 
   box-sizing: border-box;
-
 }
 
 .email:focus,
 .pass:focus,
 .signup-box input:focus {
-
   border-color: var(--primary);
-
 }
 
 .email::placeholder,
 .pass::placeholder,
 .signup-box input::placeholder {
-
   color: var(--text-muted);
-
 }
 
 .login,
 .signup-btn {
-
   height: 50px;
 
   background: var(--primary);
@@ -892,30 +785,22 @@ body {
   font-weight: 600;
 
   cursor: pointer;
-
 }
 
 .login {
-
   margin-top: 24px;
-
 }
 
 .signup-btn {
-
   margin-top: 8px;
-
 }
 
 .login:hover,
 .signup-btn:hover {
-
   background: var(--primary-dark);
-
 }
 
 .login-error {
-
   color: #d32f2f !important;
 
   font-size: 14px !important;
@@ -923,37 +808,29 @@ body {
   margin: 10px 0 0 !important;
 
   text-align: left !important;
-
 }
 
 .signup-text,
 .login-text {
-
   text-align: center;
 
   color: var(--text-secondary);
 
   font-size: 14px !important;
-
 }
 
 .signup-text {
-
   margin-top: 20px !important;
 
   margin-bottom: 0 !important;
-
 }
 
 .login-text {
-
   margin: 20px 0 0 !important;
-
 }
 
 .signup-text a,
 .login-text a {
-
   color: var(--primary);
 
   font-weight: 600;
@@ -961,23 +838,41 @@ body {
   text-decoration: none;
 
   margin-left: 5px;
-
 }
 
 .signup-text a:hover,
 .login-text a:hover {
-
   text-decoration: underline;
-
+}
+.password-field {
+  position: relative;
+  width: 100%;
 }
 
+.show-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.show-password:hover {
+  color: var(--primary);
+}
 /* =========================================================
    SIGNUP
 ========================================================= */
 
 .gender-options {
-
   display: flex;
 
   justify-content: center;
@@ -987,11 +882,9 @@ body {
   gap: 35px;
 
   margin: 5px 0 10px;
-
 }
 
 .gender-options label {
-
   display: flex;
 
   align-items: center;
@@ -1009,28 +902,22 @@ body {
   color: var(--text-secondary);
 
   cursor: pointer;
-
 }
 
 .gender-options input[type="radio"],
 .signup-box .terms input[type="checkbox"] {
-
   accent-color: var(--primary);
-
 }
 
 .gender-options input[type="radio"] {
-
   width: 16px;
 
   height: 16px;
 
   margin: 0;
-
 }
 
 .signup-box .terms {
-
   display: flex;
 
   align-items: center;
@@ -1046,36 +933,29 @@ body {
   color: var(--text-secondary);
 
   cursor: pointer;
-
 }
 
 .signup-box .terms input[type="checkbox"] {
-
   width: 15px;
 
   height: 15px;
 
   margin: 0;
-
 }
-
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 .footer {
-
   background-color: var(--primary);
 
   color: white;
 
   margin-top: 0;
-
 }
 
 .footer-content {
-
   max-width: 950px;
 
   margin: 0 auto;
@@ -1091,17 +971,13 @@ body {
   gap: 100px;
 
   text-align: center;
-
 }
 
 .footer-brand {
-
   min-width: 230px;
-
 }
 
 .footer-logo {
-
   display: flex;
 
   justify-content: center;
@@ -1115,11 +991,9 @@ body {
   font-weight: 700;
 
   margin-bottom: 12px;
-
 }
 
 .footer-logo-icon {
-
   width: 32px;
 
   height: 32px;
@@ -1137,112 +1011,87 @@ body {
   border-radius: 9px;
 
   font-size: 18px;
-
 }
 
 .footer-brand p,
 .footer-link-list a,
 .footer-contact p,
 .copyright p {
-
   color: #ddf7f3;
-
 }
 
 .footer-brand p {
-
   margin: 0;
 
   font-size: 14px;
 
   line-height: 1.7;
-
 }
 
 .footer-links {
-
   min-width: 150px;
-
 }
 
 .footer-links h3,
 .footer-contact h3 {
-
   margin: 0 0 15px;
 
   font-size: 16px;
 
   font-weight: 700;
-
 }
 
 .footer-link-list {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 9px;
-
 }
 
 .footer-link-list a {
-
   text-decoration: none;
 
   font-size: 14px;
 
   transition: 0.2s ease;
-
 }
 
 .footer-link-list a:hover {
-
   color: white;
 
   transform: translateX(3px);
-
 }
 
 .footer-contact {
-
   min-width: 220px;
-
 }
 
 .footer-contact p {
-
   margin: 0 0 10px;
 
   font-size: 14px;
-
 }
 
 .copyright {
-
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 
   text-align: center;
 
   padding: 15px 20px;
-
 }
 
 .copyright p {
-
   margin: 0;
 
   font-size: 13px;
-
 }
-
 
 /* =========================================================
    RECORDS PAGE
 ========================================================= */
 
 .records-page {
-
   width: 100%;
 
   max-width: 1500px;
@@ -1258,11 +1107,9 @@ body {
   min-height: calc(100vh - 200px);
 
   color: var(--text);
-
 }
 
 .records-header {
-
   display: flex;
 
   justify-content: space-between;
@@ -1272,11 +1119,9 @@ body {
   gap: 25px;
 
   margin-bottom: 30px;
-
 }
 
 .records-header h1 {
-
   margin: 0 0 8px;
 
   font-size: clamp(30px, 3vw, 42px);
@@ -1284,21 +1129,17 @@ body {
   font-weight: 700;
 
   color: var(--text);
-
 }
 
 .records-header p {
-
   margin: 0;
 
   font-size: clamp(15px, 1.2vw, 18px);
 
   color: var(--text-secondary);
-
 }
 
 .add-record-btn {
-
   border: none;
 
   background: var(--primary);
@@ -1316,22 +1157,17 @@ body {
   cursor: pointer;
 
   white-space: nowrap;
-
 }
 
 .add-record-btn:hover {
-
   background: var(--primary-dark);
-
 }
-
 
 /* =========================================================
    RECORD SEARCH
 ========================================================= */
 
 .records-toolbar {
-
   display: flex;
 
   gap: 16px;
@@ -1339,11 +1175,9 @@ body {
   margin-bottom: 25px;
 
   width: 100%;
-
 }
 
 .search-box {
-
   flex: 1;
 
   height: 48px;
@@ -1361,21 +1195,17 @@ body {
   padding: 0 15px;
 
   box-sizing: border-box;
-
 }
 
 .search-box span {
-
   color: var(--text-muted);
 
   font-size: 20px;
 
   margin-right: 10px;
-
 }
 
 .search-box input {
-
   border: none;
 
   outline: none;
@@ -1387,17 +1217,13 @@ body {
   color: var(--text);
 
   background: transparent;
-
 }
 
 .search-box input::placeholder {
-
   color: var(--text-muted);
-
 }
 
 .filter-select {
-
   width: 180px;
 
   height: 48px;
@@ -1417,26 +1243,21 @@ body {
   outline: none;
 
   cursor: pointer;
-
 }
-
 
 /* =========================================================
    RECORD CARDS
 ========================================================= */
 
 .records-list {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 16px;
-
 }
 
 .record-card {
-
   width: 100%;
 
   min-height: 120px;
@@ -1448,11 +1269,7 @@ body {
   position: relative;
 
   /* Soft teal-tinted card */
-  background: linear-gradient(
-    135deg,
-    var(--surface),
-    var(--teal-light-2)
-  );
+  background: linear-gradient(135deg, var(--surface), var(--teal-light-2));
 
   /* Stronger teal border */
   border: 1px solid var(--teal-border);
@@ -1473,24 +1290,19 @@ body {
     box-shadow 0.25s ease,
     transform 0.25s ease,
     border-color 0.25s ease;
-
 }
 
 .record-card:hover {
-
   box-shadow: 0 10px 25px var(--shadow);
 
   transform: translateY(-3px);
 
   border-color: var(--primary);
-
 }
-
 
 /* ================= RECORD ICON ================= */
 
 .record-icon {
-
   width: 52px;
 
   height: 52px;
@@ -1516,22 +1328,17 @@ body {
   font-size: 25px;
 
   box-shadow: 0 3px 8px var(--shadow);
-
 }
-
 
 /* ================= RECORD INFORMATION ================= */
 
 .record-info {
-
   flex: 1;
 
   min-width: 0;
-
 }
 
 .record-info h3 {
-
   margin: 0 0 6px;
 
   color: var(--text);
@@ -1539,11 +1346,9 @@ body {
   font-size: 18px;
 
   font-weight: 700;
-
 }
 
 .doctor-name {
-
   margin: 0 0 5px;
 
   /* Teal doctor name */
@@ -1553,24 +1358,19 @@ body {
   font-size: 14px;
 
   font-weight: 600;
-
 }
 
 .record-notes {
-
   margin: 0;
 
   color: var(--text-secondary);
 
   font-size: 13px;
-
 }
-
 
 /* ================= RECORD DATE ================= */
 
 .record-date {
-
   width: 130px;
 
   color: var(--text-secondary);
@@ -1592,14 +1392,11 @@ body {
   border-radius: 8px;
 
   box-sizing: border-box;
-
 }
-
 
 /* ================= RECORD ACTIONS ================= */
 
 .record-actions {
-
   display: flex;
 
   align-items: center;
@@ -1607,12 +1404,10 @@ body {
   gap: 10px;
 
   margin-left: 15px;
-
 }
 
 .view-btn,
 .delete-btn {
-
   padding: 8px 14px;
 
   border-radius: 7px;
@@ -1626,47 +1421,37 @@ body {
     border-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
-
 }
-
 
 /* ================= VIEW BUTTON ================= */
 
 .view-btn {
-
   background: var(--surface);
 
   border: 1px solid var(--teal-border);
 
   color: var(--primary);
-
 }
 
 .view-btn:hover {
-
   background: var(--teal-light);
 
   border-color: var(--primary);
 
   transform: translateY(-1px);
-
 }
-
 
 /* ================= DELETE BUTTON ================= */
 
 .delete-btn {
-
   background: var(--danger-bg);
 
   border: 1px solid var(--danger-border);
 
   color: var(--danger);
-
 }
 
 .delete-btn:hover {
-
   background: var(--danger);
 
   border-color: var(--danger);
@@ -1674,16 +1459,13 @@ body {
   color: white;
 
   transform: translateY(-1px);
-
 }
-
 
 /* =========================================================
    NO RECORDS
 ========================================================= */
 
 .no-records {
-
   background: var(--surface);
 
   border: 1px solid var(--border);
@@ -1693,44 +1475,35 @@ body {
   text-align: center;
 
   padding: 70px 20px;
-
 }
 
 .no-records-icon {
-
   font-size: 40px;
 
   margin-bottom: 12px;
-
 }
 
 .no-records h3 {
-
   margin: 0 0 8px;
 
   color: var(--text);
 
   font-size: 20px;
-
 }
 
 .no-records p {
-
   margin: 0;
 
   color: var(--text-muted);
 
   font-size: 15px;
-
 }
-
 
 /* =========================================================
    PAGINATION
 ========================================================= */
 
 .pagination {
-
   display: flex;
 
   justify-content: center;
@@ -1742,21 +1515,17 @@ body {
   margin-top: 25px;
 
   margin-bottom: 20px;
-
 }
 
 .pagination-pages {
-
   display: flex;
 
   align-items: center;
 
   gap: 6px;
-
 }
 
 .pagination button {
-
   width: 38px;
 
   height: 38px;
@@ -1780,51 +1549,39 @@ body {
   cursor: pointer;
 
   transition: 0.2s ease;
-
 }
 
 .pagination button:hover:not(:disabled) {
-
   background: var(--teal-light);
 
   border-color: var(--primary);
-
 }
 
 .pagination button:disabled {
-
   opacity: 0.45;
 
   cursor: not-allowed;
-
 }
 
 .page-number.active {
-
   background: var(--primary);
 
   border-color: var(--primary);
 
   color: white;
-
 }
 
 .page-number.active:hover {
-
   background: var(--primary-dark);
 
   border-color: var(--primary-dark);
-
 }
 
 .pagination-arrow {
-
   font-size: 18px;
 
   font-weight: 600;
-
 }
-
 
 /* =========================================================
    MODALS
@@ -1832,7 +1589,6 @@ body {
 
 .modal-overlay,
 .medicine-modal-overlay {
-
   position: fixed;
 
   inset: 0;
@@ -1848,13 +1604,11 @@ body {
   background: rgba(10, 35, 45, 0.55);
 
   z-index: 2000;
-
 }
 
 .add-record-modal,
 .view-record-modal,
 .medicine-modal {
-
   background: var(--surface);
 
   color: var(--text);
@@ -1864,31 +1618,25 @@ body {
   box-shadow: 0 12px 35px var(--shadow-dark);
 
   box-sizing: border-box;
-
 }
 
 .add-record-modal {
-
   width: 100%;
 
   max-width: 520px;
 
   padding: 28px;
-
 }
 
 .view-record-modal {
-
   width: 100%;
 
   max-width: 480px;
 
   padding: 28px;
-
 }
 
 .medicine-modal {
-
   position: relative;
 
   width: min(580px, 100%);
@@ -1900,16 +1648,13 @@ body {
   padding: 30px;
 
   border: 1px solid var(--border);
-
 }
-
 
 /* =========================================================
    MODAL HEADER
 ========================================================= */
 
 .modal-header {
-
   display: flex;
 
   align-items: center;
@@ -1917,11 +1662,9 @@ body {
   justify-content: space-between;
 
   margin-bottom: 22px;
-
 }
 
 .modal-header h2 {
-
   margin: 0;
 
   color: var(--text);
@@ -1929,12 +1672,10 @@ body {
   font-size: 24px;
 
   font-weight: 700;
-
 }
 
 .modal-close,
 .medicine-modal-close {
-
   border: none;
 
   background: transparent;
@@ -1944,39 +1685,30 @@ body {
   font-size: 26px;
 
   cursor: pointer;
-
 }
 
 .modal-close:hover,
 .medicine-modal-close:hover {
-
   color: var(--text);
-
 }
-
 
 /* =========================================================
    MODAL FORM
 ========================================================= */
 
 .form-row {
-
   display: grid;
 
   grid-template-columns: 1fr 1fr;
 
   gap: 18px;
-
 }
 
 .form-group {
-
   margin-bottom: 18px;
-
 }
 
 .form-group label {
-
   display: block;
 
   margin-bottom: 7px;
@@ -1986,13 +1718,11 @@ body {
   font-size: 14px;
 
   font-weight: 600;
-
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-
   width: 100%;
 
   padding: 12px;
@@ -2012,39 +1742,30 @@ body {
   font-family: inherit;
 
   box-sizing: border-box;
-
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-
   color: var(--text-muted);
-
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-
   border-color: var(--primary);
-
 }
 
 .form-group textarea {
-
   resize: vertical;
 
   min-height: 100px;
-
 }
-
 
 /* =========================================================
    MODAL BUTTONS
 ========================================================= */
 
 .modal-buttons {
-
   display: flex;
 
   justify-content: flex-end;
@@ -2052,12 +1773,10 @@ body {
   gap: 10px;
 
   margin-top: 10px;
-
 }
 
 .cancel-btn,
 .save-record-btn {
-
   padding: 11px 18px;
 
   border-radius: 7px;
@@ -2065,27 +1784,21 @@ body {
   font-size: 14px;
 
   cursor: pointer;
-
 }
 
 .cancel-btn {
-
   background: var(--surface);
 
   border: 1px solid var(--border);
 
   color: var(--text-secondary);
-
 }
 
 .cancel-btn:hover {
-
   background: var(--surface-alt);
-
 }
 
 .save-record-btn {
-
   background: var(--primary);
 
   border: 1px solid var(--primary);
@@ -2093,22 +1806,17 @@ body {
   color: white;
 
   font-weight: 600;
-
 }
 
 .save-record-btn:hover {
-
   background: var(--primary-dark);
-
 }
-
 
 /* =========================================================
    VIEW RECORD
 ========================================================= */
 
 .record-detail {
-
   display: flex;
 
   align-items: center;
@@ -2122,11 +1830,9 @@ body {
   background: var(--teal-light-2);
 
   border-radius: 8px;
-
 }
 
 .detail-icon {
-
   width: 48px;
 
   height: 48px;
@@ -2142,31 +1848,25 @@ body {
   background: var(--teal-light);
 
   font-size: 22px;
-
 }
 
 .record-detail h3 {
-
   margin: 0 0 5px;
 
   color: var(--text);
 
   font-size: 18px;
-
 }
 
 .record-detail p {
-
   margin: 0;
 
   color: var(--text-muted);
 
   font-size: 13px;
-
 }
 
 .detail-item {
-
   display: flex;
 
   flex-direction: column;
@@ -2176,29 +1876,23 @@ body {
   padding: 12px 0;
 
   border-bottom: 1px solid var(--border-light);
-
 }
 
 .detail-item span {
-
   color: var(--text-muted);
 
   font-size: 13px;
-
 }
 
 .detail-item strong {
-
   color: var(--text);
 
   font-size: 14px;
 
   font-weight: 500;
-
 }
 
 .close-detail-btn {
-
   width: 100%;
 
   margin-top: 18px;
@@ -2218,16 +1912,13 @@ body {
   font-weight: 600;
 
   cursor: pointer;
-
 }
-
 
 /* =========================================================
    HOME PAGE
 ========================================================= */
 
 .home-page {
-
   flex: 1;
 
   width: 100%;
@@ -2239,11 +1930,9 @@ body {
   color: var(--text);
 
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .hero {
-
   width: 90%;
 
   max-width: 1200px;
@@ -2275,11 +1964,9 @@ body {
   overflow: hidden;
 
   animation: heroAppear 0.8s ease forwards;
-
 }
 
 .hero::before {
-
   content: "";
 
   position: absolute;
@@ -2297,11 +1984,9 @@ body {
   border-radius: 50%;
 
   opacity: 0.7;
-
 }
 
 .hero::after {
-
   content: "";
 
   position: absolute;
@@ -2319,11 +2004,9 @@ body {
   border-radius: 50%;
 
   opacity: 0.8;
-
 }
 
 .hero-text {
-
   width: 55%;
 
   position: relative;
@@ -2333,11 +2016,9 @@ body {
   text-align: left;
 
   animation: textSlide 0.9s ease forwards;
-
 }
 
 .welcome-badge {
-
   display: inline-block;
 
   padding: 9px 18px;
@@ -2357,11 +2038,9 @@ body {
   font-weight: 700;
 
   letter-spacing: 1.5px;
-
 }
 
 .hero h1 {
-
   margin: 0;
 
   font-size: clamp(38px, 5vw, 58px);
@@ -2371,17 +2050,13 @@ body {
   font-weight: 700;
 
   color: var(--text);
-
 }
 
 .hero h1 span {
-
   color: var(--primary);
-
 }
 
 .hero-description {
-
   max-width: 600px;
 
   margin: 24px 0 0;
@@ -2391,11 +2066,9 @@ body {
   line-height: 1.8;
 
   color: var(--text-secondary);
-
 }
 
 .hero-buttons {
-
   display: flex;
 
   justify-content: flex-start;
@@ -2407,12 +2080,10 @@ body {
   margin-top: 30px;
 
   width: 100%;
-
 }
 
 .hero-btn-primary,
 .cta-btn {
-
   display: inline-flex;
 
   align-items: center;
@@ -2432,11 +2103,9 @@ body {
   font-weight: 600;
 
   transition: 0.25s ease;
-
 }
 
 .hero-btn-primary {
-
   min-width: 145px;
 
   padding: 13px 23px;
@@ -2444,22 +2113,18 @@ body {
   border: 1px solid var(--primary);
 
   box-shadow: 0 8px 20px var(--shadow);
-
 }
 
 .hero-btn-primary:hover,
 .cta-btn:hover {
-
   background: var(--primary-hover);
 
   border-color: var(--primary-hover);
 
   transform: translateY(-4px);
-
 }
 
 .hero-btn-secondary {
-
   display: inline-flex;
 
   align-items: center;
@@ -2485,19 +2150,15 @@ body {
   font-weight: 600;
 
   transition: 0.25s ease;
-
 }
 
 .hero-btn-secondary:hover {
-
   background: var(--teal-light-2);
 
   transform: translateY(-4px);
-
 }
 
 .hero-image-wrapper {
-
   width: 40%;
 
   min-height: 390px;
@@ -2513,11 +2174,9 @@ body {
   z-index: 2;
 
   animation: imageSlide 1s ease forwards;
-
 }
 
 .image-circle {
-
   position: absolute;
 
   width: 330px;
@@ -2533,11 +2192,9 @@ body {
     0 15px 40px var(--shadow);
 
   animation: circleFloat 5s ease-in-out infinite;
-
 }
 
 .hero-img {
-
   width: 340px;
 
   max-width: 100%;
@@ -2551,36 +2208,29 @@ body {
   filter: drop-shadow(0 15px 20px var(--shadow));
 
   animation: girlFloat 4s ease-in-out infinite;
-
 }
-
 
 /* =========================================================
    FEATURES
 ========================================================= */
 
 .features {
-
   width: 90%;
 
   max-width: 1150px;
 
   margin: 0 auto 90px;
-
 }
 
 .section-heading {
-
   text-align: center;
 
   margin-bottom: 45px;
-
 }
 
 .features-label,
 .why-label,
 .cta-label {
-
   display: inline-block;
 
   margin-bottom: 12px;
@@ -2592,13 +2242,11 @@ body {
   font-weight: 700;
 
   letter-spacing: 2px;
-
 }
 
 .section-heading h2,
 .why-text h2,
 .cta-text h2 {
-
   margin: 0;
 
   color: var(--text);
@@ -2606,29 +2254,23 @@ body {
   font-size: clamp(30px, 4vw, 42px);
 
   line-height: 1.2;
-
 }
 
 .section-heading h2 span,
 .why-text h2 span,
 .cta-text h2 span {
-
   color: var(--primary);
-
 }
 
 .feature-grid {
-
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
 
   gap: 25px;
-
 }
 
 .feature-card {
-
   padding: 32px 28px;
 
   background: var(--surface);
@@ -2644,21 +2286,17 @@ body {
   transition: 0.3s ease;
 
   animation: cardAppear 0.7s ease forwards;
-
 }
 
 .feature-card:hover {
-
   transform: translateY(-8px);
 
   border-color: var(--teal-border);
 
   box-shadow: 0 18px 35px var(--shadow);
-
 }
 
 .feature-icon {
-
   width: 60px;
 
   height: 60px;
@@ -2680,27 +2318,21 @@ body {
   line-height: 1;
 
   transition: 0.3s ease;
-
 }
 
 .feature-card:hover .feature-icon {
-
   transform: scale(1.1) rotate(3deg);
-
 }
 
 .feature-card h3 {
-
   margin: 0 0 12px;
 
   color: var(--text);
 
   font-size: 19px;
-
 }
 
 .feature-card p {
-
   max-width: 280px;
 
   margin: 0 auto 20px;
@@ -2710,11 +2342,9 @@ body {
   font-size: 14px;
 
   line-height: 1.7;
-
 }
 
 .card-link {
-
   color: var(--primary);
 
   text-decoration: none;
@@ -2722,22 +2352,17 @@ body {
   font-size: 14px;
 
   font-weight: 600;
-
 }
 
 .card-link:hover {
-
   color: var(--primary-hover);
-
 }
-
 
 /* =========================================================
    WHY MEDILINK
 ========================================================= */
 
 .why-medilink {
-
   width: 90%;
 
   max-width: 1150px;
@@ -2759,17 +2384,13 @@ body {
   border-radius: 25px;
 
   border: 1px solid var(--teal-border);
-
 }
 
 .why-text h2 {
-
   margin-bottom: 20px;
-
 }
 
 .why-text > p {
-
   max-width: 530px;
 
   color: var(--text-secondary);
@@ -2777,21 +2398,17 @@ body {
   font-size: 15px;
 
   line-height: 1.8;
-
 }
 
 .why-grid {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 18px;
-
 }
 
 .why-card {
-
   display: flex;
 
   align-items: center;
@@ -2809,29 +2426,23 @@ body {
   box-shadow: 0 6px 18px var(--shadow);
 
   transition: 0.25s ease;
-
 }
 
 .why-card:hover {
-
   transform: translateX(7px);
 
   box-shadow: 0 10px 22px var(--shadow);
-
 }
 
 .why-number {
-
   font-size: 22px;
 
   font-weight: 700;
 
   color: var(--primary-hover);
-
 }
 
 .why-card p {
-
   margin: 0;
 
   color: var(--text-secondary);
@@ -2839,26 +2450,21 @@ body {
   font-size: 14px;
 
   line-height: 1.5;
-
 }
-
 
 /* =========================================================
    HOME CTA
 ========================================================= */
 
 .home-cta {
-
   width: 90%;
 
   max-width: 1150px;
 
   margin: 0 auto 70px;
-
 }
 
 .cta-container {
-
   min-height: 350px;
 
   display: flex;
@@ -2869,11 +2475,7 @@ body {
 
   padding: 45px 65px;
 
-  background: linear-gradient(
-    135deg,
-    var(--teal-light),
-    var(--bg)
-  );
+  background: linear-gradient(135deg, var(--teal-light), var(--bg));
 
   border-radius: 25px;
 
@@ -2882,27 +2484,21 @@ body {
   overflow: hidden;
 
   position: relative;
-
 }
 
 .cta-text {
-
   width: 55%;
 
   position: relative;
 
   z-index: 2;
-
 }
 
 .cta-text h2 {
-
   margin-bottom: 17px;
-
 }
 
 .cta-text > p {
-
   max-width: 500px;
 
   margin-bottom: 25px;
@@ -2912,19 +2508,15 @@ body {
   font-size: 15px;
 
   line-height: 1.7;
-
 }
 
 .cta-btn {
-
   padding: 13px 24px;
 
   box-shadow: 0 8px 20px var(--shadow);
-
 }
 
 .cta-image-wrapper {
-
   width: 40%;
 
   height: 300px;
@@ -2936,11 +2528,9 @@ body {
   justify-content: center;
 
   position: relative;
-
 }
 
 .cta-img {
-
   height: 320px;
 
   max-width: 100%;
@@ -2950,16 +2540,13 @@ body {
   filter: drop-shadow(0 15px 20px var(--shadow));
 
   animation: girlFloat 4s ease-in-out infinite;
-
 }
-
 
 /* =========================================================
    DASHBOARD
 ========================================================= */
 
 .dashboard {
-
   width: min(1120px, 100%);
 
   min-height: calc(100vh - 240px);
@@ -2971,17 +2558,13 @@ body {
   box-sizing: border-box;
 
   background: var(--bg);
-
 }
 
 .dashboard-intro {
-
   margin-bottom: 30px;
-
 }
 
 .dashboard-hero {
-
   position: relative;
 
   overflow: hidden;
@@ -2992,11 +2575,7 @@ body {
 
   padding: 26px 30px;
 
-  background: linear-gradient(
-    135deg,
-    var(--teal-light),
-    var(--bg)
-  );
+  background: linear-gradient(135deg, var(--teal-light), var(--bg));
 
   border: 1px solid var(--teal-border);
 
@@ -3005,22 +2584,18 @@ body {
   box-shadow: 0 10px 25px var(--shadow);
 
   text-align: center;
-
 }
 
 .dashboard-hero::before,
 .dashboard-hero::after {
-
   content: "";
 
   position: absolute;
 
   border-radius: 50%;
-
 }
 
 .dashboard-hero::before {
-
   width: 190px;
 
   height: 190px;
@@ -3030,11 +2605,9 @@ body {
   right: -45px;
 
   background: rgba(0, 166, 166, 0.12);
-
 }
 
 .dashboard-hero::after {
-
   width: 140px;
 
   height: 140px;
@@ -3044,11 +2617,9 @@ body {
   left: -35px;
 
   background: rgba(0, 109, 115, 0.08);
-
 }
 
 .dashboard-hero-content {
-
   position: relative;
 
   z-index: 1;
@@ -3058,11 +2629,9 @@ body {
   margin: 0 auto;
 
   text-align: center;
-
 }
 
 .dashboard-eyebrow {
-
   margin: 0 0 6px;
 
   color: var(--primary);
@@ -3072,21 +2641,17 @@ body {
   font-weight: 700;
 
   letter-spacing: 1.3px;
-
 }
 
 .dashboard-hero h2 {
-
   margin: 0 0 7px;
 
   color: var(--text);
 
   font-size: clamp(26px, 3vw, 34px);
-
 }
 
 .dashboard-hero-content > p:not(.dashboard-eyebrow) {
-
   max-width: 590px;
 
   margin: 0 auto;
@@ -3096,11 +2661,9 @@ body {
   font-size: 14px;
 
   line-height: 1.55;
-
 }
 
 .dashboard-health-status {
-
   display: inline-flex;
 
   align-items: center;
@@ -3124,11 +2687,9 @@ body {
   font-size: 12px;
 
   font-weight: 600;
-
 }
 
 .dashboard-health-status span {
-
   width: 8px;
 
   height: 8px;
@@ -3136,11 +2697,9 @@ body {
   background: var(--primary-hover);
 
   border-radius: 50%;
-
 }
 
 .dashboard-hero-symbol {
-
   position: absolute;
 
   z-index: 1;
@@ -3168,26 +2727,21 @@ body {
   font-size: 25px;
 
   font-weight: 700;
-
 }
-
 
 /* =========================================================
    DASHBOARD STAT CARDS
 ========================================================= */
 
 .stats-container {
-
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
 
   gap: 18px;
-
 }
 
 .stat-card {
-
   position: relative;
 
   display: flex;
@@ -3209,55 +2763,33 @@ body {
   box-shadow: 0 8px 22px var(--shadow);
 
   transition: 0.2s ease;
-
 }
 
 .stat-card:hover {
-
   transform: translateY(-3px);
 
   box-shadow: 0 14px 28px var(--shadow);
-
 }
 
 .stat-card--records {
-
-  background: linear-gradient(
-    135deg,
-    var(--surface),
-    var(--teal-light-2)
-  );
+  background: linear-gradient(135deg, var(--surface), var(--teal-light-2));
 
   border-left: 4px solid var(--primary);
-
 }
 
 .stat-card--prescriptions {
-
-  background: linear-gradient(
-    135deg,
-    var(--surface),
-    var(--teal-light)
-  );
+  background: linear-gradient(135deg, var(--surface), var(--teal-light));
 
   border-left: 4px solid var(--primary-hover);
-
 }
 
 .stat-card--doctors {
-
-  background: linear-gradient(
-    135deg,
-    var(--surface),
-    var(--surface-alt)
-  );
+  background: linear-gradient(135deg, var(--surface), var(--surface-alt));
 
   border-left: 4px solid #4d7cce;
-
 }
 
 .stat-icon {
-
   position: relative;
 
   z-index: 1;
@@ -3277,31 +2809,23 @@ body {
   border-radius: 12px;
 
   font-size: 20px;
-
 }
 
 .stat-card--prescriptions .stat-icon {
-
   background: var(--teal-light);
-
 }
 
 .stat-card--doctors .stat-icon {
-
   background: #eaf1ff;
-
 }
 
 .stat-info {
-
   position: relative;
 
   z-index: 1;
-
 }
 
 .stat-info p {
-
   margin: 0;
 
   color: var(--text-secondary);
@@ -3309,26 +2833,21 @@ body {
   font-size: 13px;
 
   font-weight: 600;
-
 }
 
 .stat-info h2 {
-
   margin: 3px 0 0;
 
   color: var(--text);
 
   font-size: 25px;
-
 }
-
 
 /* =========================================================
    DASHBOARD SECTIONS
 ========================================================= */
 
 .dashboard-sections {
-
   display: grid;
 
   grid-template-columns: 1fr 1fr;
@@ -3336,11 +2855,9 @@ body {
   gap: 18px;
 
   margin-top: 28px;
-
 }
 
 .section-box {
-
   padding: 22px;
 
   background: var(--surface);
@@ -3354,19 +2871,15 @@ body {
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
-
 }
 
 .section-box:hover {
-
   transform: translateY(-3px);
 
   box-shadow: 0 16px 30px var(--shadow);
-
 }
 
 .section-header {
-
   display: flex;
 
   justify-content: space-between;
@@ -3380,21 +2893,17 @@ body {
   padding-bottom: 14px;
 
   border-bottom: 1px solid var(--border-light);
-
 }
 
 .section-header h3 {
-
   margin: 0;
 
   color: var(--text);
 
   font-size: 17px;
-
 }
 
 .section-link {
-
   color: var(--primary);
 
   font-size: 13px;
@@ -3402,26 +2911,20 @@ body {
   font-weight: 700;
 
   text-decoration: none;
-
 }
 
 .section-link:hover {
-
   color: var(--primary-hover);
-
 }
 
 .section-link-muted {
-
   color: var(--text-secondary);
 
   font-weight: 500;
-
 }
 
 .dashboard-record,
 .prescription-card {
-
   display: flex;
 
   justify-content: space-between;
@@ -3437,12 +2940,10 @@ body {
   transition:
     background 0.2s ease,
     padding 0.2s ease;
-
 }
 
 .dashboard-record:hover,
 .prescription-card:hover {
-
   padding-right: 7px;
 
   padding-left: 7px;
@@ -3450,18 +2951,14 @@ body {
   background: var(--bg);
 
   border-radius: 9px;
-
 }
 
 .dashboard-record:last-child,
 .prescription-card:last-child {
-
   border-bottom: none;
-
 }
 
 .dashboard-item-main {
-
   display: flex;
 
   align-items: center;
@@ -3469,11 +2966,9 @@ body {
   gap: 11px;
 
   min-width: 0;
-
 }
 
 .dashboard-item-icon {
-
   width: 36px;
 
   height: 36px;
@@ -3487,35 +2982,29 @@ body {
   border-radius: 9px;
 
   font-size: 17px;
-
 }
 
 .dashboard-record h4,
 .prescription-details h4 {
-
   margin: 0 0 5px;
 
   color: var(--text);
 
   font-size: 14px;
-
 }
 
 .dashboard-record p,
 .prescription-details p,
 .prescription-actions span {
-
   margin: 0;
 
   color: var(--text-secondary);
 
   font-size: 12px;
-
 }
 
 .dashboard-record > div:last-child,
 .prescription-actions {
-
   display: flex;
 
   align-items: center;
@@ -3523,12 +3012,10 @@ body {
   gap: 10px;
 
   text-align: right;
-
 }
 
 .dashboard-record button,
 .prescription-actions button {
-
   padding: 6px 10px;
 
   background: var(--surface);
@@ -3544,18 +3031,14 @@ body {
   font-weight: 600;
 
   cursor: pointer;
-
 }
 
 .dashboard-record button:hover,
 .prescription-actions button:hover {
-
   background: var(--teal-light);
-
 }
 
 .dashboard-empty {
-
   min-height: 128px;
 
   display: grid;
@@ -3569,25 +3052,19 @@ body {
   color: var(--text-secondary);
 
   text-align: center;
-
 }
 
 .dashboard-empty > span {
-
   font-size: 28px;
-
 }
 
 .dashboard-empty p {
-
   margin: 0;
 
   font-size: 14px;
-
 }
 
 .dashboard-empty a {
-
   color: var(--primary);
 
   font-size: 13px;
@@ -3595,16 +3072,13 @@ body {
   font-weight: 700;
 
   text-decoration: none;
-
 }
-
 
 /* =========================================================
    EMERGENCY
 ========================================================= */
 
 .emergency-card {
-
   position: relative;
 
   display: grid;
@@ -3621,11 +3095,7 @@ body {
 
   padding: 23px 26px;
 
-  background: linear-gradient(
-    105deg,
-    var(--danger-bg),
-    var(--surface)
-  );
+  background: linear-gradient(105deg, var(--danger-bg), var(--surface));
 
   border: 1px solid var(--danger-border);
 
@@ -3634,11 +3104,9 @@ body {
   border-radius: 14px;
 
   box-shadow: 0 8px 22px rgba(232, 93, 93, 0.08);
-
 }
 
 .emergency-card::after {
-
   content: "✚";
 
   position: absolute;
@@ -3652,31 +3120,25 @@ body {
   font-size: 120px;
 
   font-weight: 700;
-
 }
 
 .emergency-copy,
 .emergency-details,
 .emergency-button {
-
   position: relative;
 
   z-index: 1;
-
 }
 
 .emergency-copy {
-
   display: flex;
 
   align-items: flex-start;
 
   gap: 13px;
-
 }
 
 .emergency-icon {
-
   width: 40px;
 
   height: 40px;
@@ -3696,11 +3158,9 @@ body {
   font-size: 22px;
 
   font-weight: 700;
-
 }
 
 .emergency-label {
-
   margin: 0 0 6px;
 
   color: var(--danger);
@@ -3710,21 +3170,17 @@ body {
   font-weight: 700;
 
   letter-spacing: 1px;
-
 }
 
 .emergency-copy h3 {
-
   margin: 0 0 5px;
 
   color: var(--text);
 
   font-size: 17px;
-
 }
 
 .emergency-copy p:last-child {
-
   margin: 0;
 
   color: var(--text-secondary);
@@ -3732,29 +3188,23 @@ body {
   font-size: 13px;
 
   line-height: 1.5;
-
 }
 
 .emergency-details {
-
   display: grid;
 
   grid-template-columns: repeat(2, minmax(115px, 1fr));
 
   gap: 14px;
-
 }
 
 .emergency-details div {
-
   display: grid;
 
   gap: 4px;
-
 }
 
 .emergency-details span {
-
   color: var(--text-secondary);
 
   font-size: 11px;
@@ -3764,19 +3214,15 @@ body {
   letter-spacing: 0.3px;
 
   text-transform: uppercase;
-
 }
 
 .emergency-details strong {
-
   color: var(--text);
 
   font-size: 14px;
-
 }
 
 .emergency-button {
-
   display: inline-flex;
 
   align-items: center;
@@ -3802,44 +3248,33 @@ body {
   white-space: nowrap;
 
   transition: 0.2s ease;
-
 }
 
 .emergency-button:hover {
-
   background: var(--danger-dark);
 
   transform: translateY(-1px);
-
 }
-
 
 /* =========================================================
    MEDICINE MODAL
 ========================================================= */
 
 .medicine-modal-overlay {
-
   background: rgba(10, 25, 35, 0.65);
-
 }
 
 .medicine-modal {
-
   border: 1px solid var(--border);
 
   box-shadow: 0 20px 45px var(--shadow-dark);
-
 }
 
 .medicine-modal-close {
-
   color: var(--text-secondary);
-
 }
 
 .medicine-modal-label {
-
   margin: 0 0 8px;
 
   color: var(--primary-hover);
@@ -3849,31 +3284,25 @@ body {
   font-weight: 700;
 
   letter-spacing: 1px;
-
 }
 
 .medicine-modal h3 {
-
   margin: 0 0 20px;
 
   color: var(--text);
 
   font-size: 25px;
-
 }
 
 .medicine-detail {
-
   margin-top: 15px;
 
   padding-top: 15px;
 
   border-top: 1px solid var(--border-light);
-
 }
 
 .medicine-detail span {
-
   display: block;
 
   margin-bottom: 5px;
@@ -3885,12 +3314,10 @@ body {
   font-weight: 700;
 
   text-transform: uppercase;
-
 }
 
 .medicine-detail strong,
 .medicine-detail p {
-
   margin: 0;
 
   color: var(--text-secondary);
@@ -3898,27 +3325,21 @@ body {
   font-size: 14px;
 
   line-height: 1.55;
-
 }
 
 .medicine-loading {
-
   color: var(--primary);
 
   font-weight: 600;
-
 }
 
 .medicine-error {
-
   color: var(--danger);
 
   font-weight: 600;
-
 }
 
 .medicine-disclaimer {
-
   margin: 20px 0 0;
 
   padding: 12px;
@@ -3932,282 +3353,200 @@ body {
   font-size: 12px;
 
   line-height: 1.5;
-
 }
-
 
 /* =========================================================
    ANIMATIONS
 ========================================================= */
 
 @keyframes heroAppear {
-
   from {
-
     opacity: 0;
 
     transform: translateY(25px);
-
   }
 
   to {
-
     opacity: 1;
 
     transform: translateY(0);
-
   }
-
 }
 
 @keyframes textSlide {
-
   from {
-
     opacity: 0;
 
     transform: translateX(-25px);
-
   }
 
   to {
-
     opacity: 1;
 
     transform: translateX(0);
-
   }
-
 }
 
 @keyframes imageSlide {
-
   from {
-
     opacity: 0;
 
     transform: translateX(25px);
-
   }
 
   to {
-
     opacity: 1;
 
     transform: translateX(0);
-
   }
-
 }
 
 @keyframes cardAppear {
-
   from {
-
     opacity: 0;
 
     transform: translateY(20px);
-
   }
 
   to {
-
     opacity: 1;
 
     transform: translateY(0);
-
   }
-
 }
 
 @keyframes girlFloat {
-
   0%,
   100% {
-
     transform: translateY(0);
-
   }
 
   50% {
-
     transform: translateY(-10px);
-
   }
-
 }
 
 @keyframes circleFloat {
-
   0%,
   100% {
-
     transform: scale(1);
-
   }
 
   50% {
-
     transform: scale(1.03);
-
   }
-
 }
-
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
 @media (max-width: 900px) {
-
   .hero {
-
     flex-direction: column;
 
     text-align: center;
 
     padding: 50px 35px;
-
   }
 
   .hero-text {
-
     width: 100%;
-
   }
 
   .hero-description {
-
     margin-left: auto;
 
     margin-right: auto;
-
   }
 
   .hero-buttons {
-
     justify-content: center;
-
   }
 
   .hero-image-wrapper {
-
     width: 100%;
 
     min-height: 350px;
 
     margin-top: 25px;
-
   }
 
   .feature-grid {
-
     grid-template-columns: 1fr;
-
   }
 
   .why-medilink {
-
     grid-template-columns: 1fr;
 
     padding: 45px 35px;
 
     gap: 40px;
-
   }
 
   .cta-container {
-
     flex-direction: column;
 
     text-align: center;
 
     padding: 45px 35px;
-
   }
 
   .cta-text {
-
     width: 100%;
-
   }
 
   .cta-text > p {
-
     margin-left: auto;
 
     margin-right: auto;
-
   }
 
   .cta-image-wrapper {
-
     width: 100%;
 
     height: 250px;
-
   }
 
   .cta-img {
-
     height: 270px;
-
   }
 
   .record-date {
-
     width: 110px;
-
   }
 
   .record-actions {
-
     gap: 7px;
-
   }
 
   .form-row {
-
     grid-template-columns: 1fr;
-
   }
-
 }
 
-
 @media (max-width: 768px) {
-
   .header {
-
     height: 65px;
 
     padding: 0 20px;
-
   }
 
   .logo {
-
     font-size: 20px;
-
   }
 
   .logo-icon {
-
     width: 31px;
 
     height: 31px;
-
   }
 
   .menu-btn {
-
     display: block;
-
   }
 
   .nav {
-
     display: none;
 
     position: absolute;
@@ -4229,129 +3568,93 @@ body {
     gap: 20px;
 
     box-shadow: 0 5px 15px var(--shadow-dark);
-
   }
 
   .nav.active {
-
     display: flex;
-
   }
 
   .nav a {
-
     width: 100%;
-
   }
 
   .user-info {
-
     width: 100%;
-
   }
 
   .login-btn {
-
     width: 100%;
 
     text-align: center;
-
   }
 
   .records-page {
-
     padding: 25px 18px;
-
   }
 
   .records-header {
-
     align-items: flex-start;
 
     flex-direction: column;
 
     gap: 15px;
-
   }
 
   .add-record-btn {
-
     width: 100%;
-
   }
 
   .records-toolbar {
-
     flex-direction: column;
-
   }
 
   .search-box {
-
     max-width: none;
-
   }
 
   .filter-select {
-
     width: 100%;
-
   }
 
   .record-card {
-
     flex-wrap: wrap;
 
     padding: 18px;
-
   }
 
   .record-date {
-
     width: auto;
 
     margin-left: auto;
-
   }
 
   .record-actions {
-
     width: 100%;
 
     margin-left: 70px;
 
     margin-top: 12px;
-
   }
 
   .stats-container,
   .dashboard-sections,
   .emergency-card {
-
     grid-template-columns: 1fr;
-
   }
 
   .dashboard-hero {
-
     padding: 24px 18px;
-
   }
 
   .dashboard-hero-symbol {
-
     display: none;
-
   }
 
   .emergency-button {
-
     width: 100%;
-
   }
 
   .footer-content {
-
     flex-direction: column;
 
     align-items: center;
@@ -4359,243 +3662,171 @@ body {
     gap: 30px;
 
     padding: 40px 20px 30px;
-
   }
 
   .footer-brand,
   .footer-links,
   .footer-contact {
-
     min-width: auto;
-
   }
-
 }
 
-
 @media (max-width: 700px) {
-
   .profile-page {
-
     padding: 35px 15px;
-
   }
 
   .profile-content {
-
     width: 100%;
 
     padding: 30px 25px;
-
   }
 
   .profile-content h1 {
-
     font-size: 36px;
-
   }
 
   .profile-content p {
-
     font-size: 16px;
-
   }
 
   .age,
   .bloodGroup {
-
     width: 100%;
-
   }
-
 }
 
-
 @media (max-width: 600px) {
-
   .login-page,
   .signup-page {
-
     min-height: calc(100vh - 65px);
 
     padding: 30px 15px;
 
     align-items: flex-start;
-
   }
 
   .login-box,
   .signup-box {
-
     width: 100%;
 
     margin-top: 20px;
 
     padding: 30px 25px;
-
   }
 
   .login-box h2,
   .signup-box h2 {
-
     font-size: 30px;
-
   }
 
   .gender-options {
-
     gap: 25px;
-
   }
 
   .hero {
-
     width: 94%;
 
     padding: 40px 20px;
 
     border-radius: 22px;
-
   }
 
   .hero h1 {
-
     font-size: 36px;
-
   }
 
   .hero-description {
-
     font-size: 14px;
-
   }
 
   .hero-buttons {
-
     flex-direction: column;
 
     gap: 12px;
-
   }
 
   .hero-btn-primary,
   .hero-btn-secondary {
-
     width: 200px;
-
   }
 
   .image-circle {
-
     width: 270px;
 
     height: 270px;
-
   }
 
   .hero-img {
-
     width: 285px;
-
   }
 
   .features,
   .why-medilink,
   .home-cta {
-
     width: 94%;
-
   }
 
   .why-medilink {
-
     padding: 35px 22px;
-
   }
 
   .cta-container {
-
     padding: 40px 22px;
-
   }
 
   .cta-text h2 {
-
     font-size: 30px;
-
   }
-
 }
 
-
 @media (max-width: 480px) {
-
   .records-header h1 {
-
     font-size: 28px;
-
   }
 
   .record-date {
-
     display: none;
-
   }
 
   .record-actions {
-
     margin-left: 0;
-
   }
 
   .add-record-modal,
   .view-record-modal {
-
     padding: 20px;
-
   }
 
   .dashboard {
-
     padding: 34px 16px 42px;
-
   }
 
   .section-box,
   .emergency-card {
-
     padding: 18px;
-
   }
 
   .dashboard-record > div:last-child,
   .prescription-actions {
-
     flex-direction: column;
 
     align-items: flex-end;
 
     gap: 6px;
-
   }
 
   .emergency-details {
-
     grid-template-columns: 1fr;
-
   }
-
 }
-
 
 /* =========================================================
    USER DROPDOWN POSITIONING
 ========================================================= */
 
 .user-info {
-
   position: relative;
-
 }
 
 /* =========================================================
@@ -5199,7 +4430,6 @@ body {
   opacity: 0.6;
 }
 
-
 /* =========================================
    MEDICAL PRECAUTIONS
 ========================================= */
@@ -5257,7 +4487,6 @@ body {
 .modal-overlay,
 .medicine-modal-overlay,
 .record-modal-overlay {
-
   position: fixed;
 
   inset: 0;
@@ -5277,9 +4506,7 @@ body {
   backdrop-filter: blur(4px);
 
   z-index: 2000;
-
 }
-
 
 /* =========================================================
    ADD RECORD / VIEW RECORD / MEDICINE MODAL
@@ -5289,7 +4516,6 @@ body {
 .view-record-modal,
 .medicine-modal,
 .record-modal {
-
   background: var(--surface);
 
   color: var(--text);
@@ -5303,46 +4529,37 @@ body {
   box-sizing: border-box;
 
   animation: modalAppear 0.25s ease;
-
 }
-
 
 /* =========================================================
    ADD RECORD MODAL
 ========================================================= */
 
 .add-record-modal {
-
   width: 100%;
 
   max-width: 520px;
 
   padding: 28px;
-
 }
-
 
 /* =========================================================
    OLD VIEW RECORD MODAL
 ========================================================= */
 
 .view-record-modal {
-
   width: 100%;
 
   max-width: 500px;
 
   padding: 30px;
-
 }
-
 
 /* =========================================================
    MEDICINE MODAL
 ========================================================= */
 
 .medicine-modal {
-
   position: relative;
 
   width: min(580px, 100%);
@@ -5352,16 +4569,13 @@ body {
   overflow-y: auto;
 
   padding: 30px;
-
 }
-
 
 /* =========================================================
    CURRENT VIEW RECORD MODAL
 ========================================================= */
 
 .record-modal {
-
   width: 100%;
 
   max-width: 520px;
@@ -5371,9 +4585,7 @@ body {
   overflow-y: auto;
 
   padding: 30px;
-
 }
-
 
 /* =========================================================
    MODAL HEADER
@@ -5381,7 +4593,6 @@ body {
 
 .modal-header,
 .record-modal-header {
-
   display: flex;
 
   align-items: center;
@@ -5389,13 +4600,10 @@ body {
   justify-content: space-between;
 
   margin-bottom: 24px;
-
 }
-
 
 .modal-header h2,
 .record-modal-header h2 {
-
   margin: 0;
 
   color: var(--text);
@@ -5403,9 +4611,7 @@ body {
   font-size: 24px;
 
   font-weight: 700;
-
 }
-
 
 /* =========================================================
    OLD CLOSE BUTTON
@@ -5413,7 +4619,6 @@ body {
 
 .modal-close,
 .medicine-modal-close {
-
   width: 34px;
 
   height: 34px;
@@ -5441,28 +4646,22 @@ body {
   cursor: pointer;
 
   transition: 0.2s ease;
-
 }
-
 
 .modal-close:hover,
 .medicine-modal-close:hover {
-
   background: var(--teal-light);
 
   color: var(--primary);
 
   transform: scale(1.05);
-
 }
-
 
 /* =========================================================
    CURRENT VIEW MODAL CLOSE × BUTTON
 ========================================================= */
 
 .modal-close-btn {
-
   width: 34px;
 
   height: 34px;
@@ -5490,12 +4689,9 @@ body {
   cursor: pointer;
 
   transition: all 0.2s ease;
-
 }
 
-
 .modal-close-btn:hover {
-
   background: var(--teal-light);
 
   color: var(--primary);
@@ -5503,31 +4699,25 @@ body {
   border-color: var(--teal-border);
 
   transform: scale(1.05);
-
 }
-
 
 /* =========================================================
    CURRENT VIEW MODAL BODY
 ========================================================= */
 
 .record-modal-body {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 14px;
-
 }
-
 
 /* =========================================================
    VIEW RECORD DETAILS
 ========================================================= */
 
 .record-detail {
-
   display: flex;
 
   align-items: center;
@@ -5542,25 +4732,18 @@ body {
 
   box-sizing: border-box;
 
-  background: linear-gradient(
-    135deg,
-    var(--teal-light),
-    var(--teal-light-2)
-  );
+  background: linear-gradient(135deg, var(--teal-light), var(--teal-light-2));
 
   border: 1px solid var(--teal-border);
 
   border-radius: 10px;
-
 }
-
 
 /* =========================================================
    RECORD DETAIL LABEL
 ========================================================= */
 
 .record-detail span {
-
   min-width: 75px;
 
   color: var(--text);
@@ -5568,16 +4751,13 @@ body {
   font-size: 14px;
 
   font-weight: 400;
-
 }
-
 
 /* =========================================================
    RECORD DETAIL VALUE
 ========================================================= */
 
 .record-detail strong {
-
   color: var(--text);
 
   font-size: 15px;
@@ -5587,16 +4767,13 @@ body {
   line-height: 1.5;
 
   word-break: break-word;
-
 }
-
 
 /* =========================================================
    OLD DETAIL STYLES
 ========================================================= */
 
 .detail-icon {
-
   width: 52px;
 
   height: 52px;
@@ -5618,12 +4795,9 @@ body {
   font-size: 24px;
 
   box-shadow: 0 4px 10px var(--shadow);
-
 }
 
-
 .record-detail h3 {
-
   margin: 0 0 5px;
 
   color: var(--text);
@@ -5631,27 +4805,21 @@ body {
   font-size: 19px;
 
   font-weight: 700;
-
 }
 
-
 .record-detail p {
-
   margin: 0;
 
   color: var(--text-secondary);
 
   font-size: 13px;
-
 }
-
 
 /* =========================================================
    DETAIL ITEMS
 ========================================================= */
 
 .detail-item {
-
   display: flex;
 
   flex-direction: column;
@@ -5661,19 +4829,13 @@ body {
   padding: 14px 2px;
 
   border-bottom: 1px solid var(--border-light);
-
 }
-
 
 .detail-item:last-of-type {
-
   border-bottom: none;
-
 }
 
-
 .detail-item span {
-
   color: var(--text-muted);
 
   font-size: 12px;
@@ -5683,12 +4845,9 @@ body {
   text-transform: uppercase;
 
   letter-spacing: 0.5px;
-
 }
 
-
 .detail-item strong {
-
   color: var(--text);
 
   font-size: 14px;
@@ -5698,27 +4857,21 @@ body {
   line-height: 1.5;
 
   word-break: break-word;
-
 }
-
 
 /* =========================================================
    CURRENT VIEW MODAL FOOTER
 ========================================================= */
 
 .record-modal-footer {
-
   margin-top: 24px;
-
 }
-
 
 /* =========================================================
    CURRENT VIEW MODAL CLOSE BUTTON
 ========================================================= */
 
 .modal-close-button {
-
   width: 100%;
 
   padding: 12px 18px;
@@ -5738,27 +4891,21 @@ body {
   cursor: pointer;
 
   transition: all 0.2s ease;
-
 }
 
-
 .modal-close-button:hover {
-
   background: var(--primary-hover);
 
   transform: translateY(-1px);
 
   box-shadow: 0 6px 14px var(--shadow);
-
 }
-
 
 /* =========================================================
    OLD CLOSE DETAIL BUTTON
 ========================================================= */
 
 .close-detail-btn {
-
   width: 100%;
 
   margin-top: 22px;
@@ -5780,121 +4927,86 @@ body {
   cursor: pointer;
 
   transition: 0.2s ease;
-
 }
 
-
 .close-detail-btn:hover {
-
   background: var(--primary-dark);
 
   transform: translateY(-1px);
 
   box-shadow: 0 6px 14px var(--shadow);
-
 }
-
 
 /* =========================================================
    MODAL ANIMATION
 ========================================================= */
 
 @keyframes modalAppear {
-
   from {
-
     opacity: 0;
 
     transform: translateY(12px) scale(0.98);
-
   }
 
   to {
-
     opacity: 1;
 
     transform: translateY(0) scale(1);
-
   }
-
 }
-
 
 /* =========================================================
    MODAL RESPONSIVE
 ========================================================= */
 
 @media (max-width: 600px) {
-
   .record-modal-overlay {
-
     padding: 15px;
-
   }
 
   .record-modal {
-
     max-width: 100%;
 
     padding: 22px;
 
     border-radius: 12px;
-
   }
 
   .record-modal-header h2 {
-
     font-size: 21px;
-
   }
 
   .record-detail {
-
     gap: 10px;
 
     padding: 13px 14px;
-
   }
 
   .record-detail span {
-
     min-width: 68px;
 
     font-size: 13px;
-
   }
 
   .record-detail strong {
-
     font-size: 14px;
-
   }
-
 }
 
-
 @media (max-width: 400px) {
-
   .record-modal {
-
     padding: 18px;
-
   }
 
   .record-detail {
-
     flex-direction: column;
 
     align-items: flex-start;
 
     gap: 5px;
-
   }
 
   .record-detail span {
-
     min-width: auto;
-
   }
-
 }
