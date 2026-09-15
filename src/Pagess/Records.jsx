@@ -34,11 +34,11 @@ const initialRecords = [
 ];
 
 const Records = () => {
-  const [records] = useState(() => {
-    const savedRecords = localStorage.getItem("medilinkRecords");
+ const [records, setRecords] = useState(() => {
+  const savedRecords = localStorage.getItem("medilinkRecords");
 
-    return savedRecords ? JSON.parse(savedRecords) : initialRecords;
-  });
+  return savedRecords ? JSON.parse(savedRecords) : initialRecords;
+});
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All Types");
@@ -105,7 +105,11 @@ const Records = () => {
   const handleView = (record) => {
     setSelectedRecord(record);
   };
-
+const handleDelete = (id) => {
+  setRecords((prevRecords) =>
+    prevRecords.filter((record) => record.id !== id)
+  );
+};
   const closeModal = () => {
     setSelectedRecord(null);
   };
@@ -177,7 +181,7 @@ const Records = () => {
               onView={() => handleView(record)}
 
               // Delete button stays visible but does nothing
-              onDelete={() => {}}
+              onDelete={() => handleDelete(record.id)}
             />
           ))
 
