@@ -1,5 +1,5 @@
-
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import RecordCard from "../Components/RecordCard";
 
 const initialRecords = [
@@ -34,19 +34,28 @@ const initialRecords = [
 ];
 
 const Records = () => {
- const [records, setRecords] = useState(() => {
-  const savedRecords = localStorage.getItem("medilinkRecords");
 
-  return savedRecords ? JSON.parse(savedRecords) : initialRecords;
-});
-const [showAddModal, setShowAddModal] = useState(false);
+  // Gets the records from localStorage when the component loads
+  const [records, setRecords] = useState(() => {
+    const savedRecords = localStorage.getItem("medilinkRecords");
 
-const [newRecord, setNewRecord] = useState({
-  type: "",
-  doctor: "",
-  date: "",
-  notes: "",
-});
+    return savedRecords
+      ? JSON.parse(savedRecords)
+      : initialRecords;
+  });
+
+  // Reads query parameters from the URL.
+  // Example: /records?view=2
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const [newRecord, setNewRecord] = useState({
+    type: "",
+    doctor: "",
+    date: "",
+    notes: "",
+  });
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All Types");
@@ -60,6 +69,22 @@ const [newRecord, setNewRecord] = useState({
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, filterType]);
+  useEffect(() => {
+  const viewId = searchParams.get("view");
+
+  // If there is no "view" parameter, do nothing.
+  if (!viewId) return;
+
+  // Find the record whose id matches the id from the URL.
+  const recordToView = records.find(
+    (record) => record.id.toString() === viewId
+  );
+
+  // If the record exists, open it in the View modal.
+  if (recordToView) {
+    setSelectedRecord(recordToView);
+  }
+}, [searchParams, records]);
 useEffect(() => {
   localStorage.setItem(
     "medilinkRecords",
@@ -147,6 +172,7 @@ const handleAddRecord = (e) => {
 };
   const closeModal = () => {
     setSelectedRecord(null);
+      setSearchParams({});
   };
 
   return (
