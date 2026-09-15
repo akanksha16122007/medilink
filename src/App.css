@@ -848,7 +848,16 @@ body {
   position: relative;
   width: 100%;
 }
+.password-field > i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
+.password-field .pass {
+  padding-left: 40px;
+}
 .show-password {
   position: absolute;
   right: 12px;
@@ -868,6 +877,45 @@ body {
 .show-password:hover {
   color: var(--primary);
 }
+.login-pic {
+  width: 60%;
+  height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.login-page {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+.input-field {
+  position: relative;
+}
+
+.input-field i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-field .email {
+  padding-left: 40px;
+}
+
 /* =========================================================
    SIGNUP
 ========================================================= */
@@ -3829,7 +3877,6 @@ body {
   position: relative;
 }
 
-
 /* =========================================================
    MODALS
 ========================================================= */
@@ -4360,7 +4407,7 @@ body {
     min-width: auto;
   }
 }
- /* =========================================================
+/* =========================================================
    MEDILINK DASHBOARD
 ========================================================= */
 
@@ -4392,7 +4439,6 @@ body {
 .dashboard p {
   margin-top: 0;
 }
-
 
 /* =========================================================
    HEALTH OVERVIEW
@@ -4449,7 +4495,6 @@ body {
   background: #4caf7d;
 }
 
-
 /* =========================================================
    STATISTICS
 ========================================================= */
@@ -4460,7 +4505,6 @@ body {
   gap: 18px;
   margin-bottom: 28px;
 }
-
 
 /* =========================================================
    MAIN DASHBOARD GRID
@@ -4482,7 +4526,6 @@ body {
   box-sizing: border-box;
   box-shadow: 0 5px 18px rgba(16, 42, 67, 0.05);
 }
-
 
 /* =========================================================
    SECTION HEADINGS
@@ -4514,7 +4557,6 @@ body {
 .section-link:hover {
   text-decoration: underline;
 }
-
 
 /* =========================================================
    HEALTH ACTIVITY
@@ -4611,7 +4653,6 @@ body {
   color: white;
 }
 
-
 /* =========================================================
    EMPTY ACTIVITY
 ========================================================= */
@@ -4650,7 +4691,6 @@ body {
   font-weight: 700;
   text-decoration: none;
 }
-
 
 /* =========================================================
    MEDICAL PRECAUTIONS
@@ -4713,7 +4753,6 @@ body {
   font-size: 11px;
 }
 
-
 /* =========================================================
    SMART HEALTH SNAPSHOT
 ========================================================= */
@@ -4768,7 +4807,6 @@ body {
   font-size: 13px;
 }
 
-
 /* =========================================================
    PRIVACY BUTTON
 ========================================================= */
@@ -4799,7 +4837,6 @@ body {
   border-color: var(--primary);
   color: white;
 }
-
 
 /* =========================================================
    HEALTH DETAILS
@@ -4843,7 +4880,6 @@ body {
   filter: blur(5px);
   user-select: none;
 }
-
 
 /* =========================================================
    SMART HEALTH FOOTER
@@ -4916,7 +4952,6 @@ body {
   opacity: 0.9;
 }
 
-
 /* =========================================================
    RECORD INSIGHTS
 ========================================================= */
@@ -4965,7 +5000,6 @@ body {
   background: var(--surface-alt);
   font-size: 21px;
 }
-
 
 /* =========================================================
    INSIGHT BOXES
@@ -5021,7 +5055,6 @@ body {
   font-size: 15px;
 }
 
-
 /* =========================================================
    RECORD TYPE BARS
 ========================================================= */
@@ -5075,7 +5108,6 @@ body {
   border-radius: 10px;
   background: var(--primary);
 }
-
 
 /* =========================================================
    HEALTH PROFILE STATUS
@@ -5175,13 +5207,11 @@ body {
   opacity: 0.9;
 }
 
-
 /* =========================================================
    TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
-
   .dashboard-main-grid {
     grid-template-columns: 1fr;
   }
@@ -5204,13 +5234,11 @@ body {
   }
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 650px) {
-
   .dashboard {
     padding: 28px 16px 45px;
   }
@@ -5304,13 +5332,11 @@ body {
   }
 }
 
-
 /* =========================================================
    SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 430px) {
-
   .dashboard {
     padding-left: 12px;
     padding-right: 12px;

@@ -32,6 +32,9 @@ const Login = () => {
 
   return (
     <div className="login-page">
+      <div className="login-pic">
+        <img src="/logins.png" alt="MediLink" />
+      </div>
       <div className="login-box">
         <div className="login-image">
           <img src="/favicon.svg" />
@@ -44,17 +47,21 @@ const Login = () => {
         </p>
         <form onSubmit={handleSubmit}>
           <label>Email</label>
-          <input
-            type="email"
-            className="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className="input-field">
+            <i class="fa-regular fa-envelope"></i>
+            <input
+              type="email"
+              className="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
           <label>Password</label>
           <div className="password-field">
+            <i class="fa-solid fa-unlock-keyhole"></i>
             <input
               type={showPassword ? "text" : "password"}
               className="pass"
