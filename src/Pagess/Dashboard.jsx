@@ -4,52 +4,101 @@ import StatCard from "../Components/StatCard";
 
 const Dashboard = () => {
   const [profile, setProfile] = useState(() => {
-  return JSON.parse(localStorage.getItem("profile")) || {};
-});
-useEffect(() => {
-  const updateProfile = () => {
-    const savedProfile =
-      JSON.parse(localStorage.getItem("profile")) || {};
+    return JSON.parse(localStorage.getItem("profile")) || {};
+  });
 
-    setProfile(savedProfile);
-  };
+  const [privacyMode, setPrivacyMode] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  updateProfile();
+  /* =========================================
+     LOAD PROFILE
+  ========================================= */
 
-  window.addEventListener("profileUpdated", updateProfile);
+  useEffect(() => {
+    const updateProfile = () => {
+      const savedProfile =
+        JSON.parse(localStorage.getItem("profile")) || {};
 
-  return () => {
-    window.removeEventListener(
-      "profileUpdated",
-      updateProfile
-    );
-  };
-}, []);
+      setProfile(savedProfile);
+    };
+
+    updateProfile();
+
+    window.addEventListener("profileUpdated", updateProfile);
+
+    return () => {
+      window.removeEventListener(
+        "profileUpdated",
+        updateProfile
+      );
+    };
+  }, []);
+
+  /* =========================================
+     LOAD RECORDS
+  ========================================= */
 
   const savedRecords = localStorage.getItem("medilinkRecords");
   const records = savedRecords ? JSON.parse(savedRecords) : [];
 
+  /* =========================================
+     BASIC RECORD INSIGHTS
+  ========================================= */
+
   const uniqueDoctors = new Set(
-    records.map((record) => record.doctor).filter(Boolean)
+    records
+      .map((record) => record.doctor)
+      .filter(Boolean)
+  ).size;
+
+  const uniqueTypes = new Set(
+    records
+      .map((record) => record.type)
+      .filter(Boolean)
   ).size;
 
   const recentRecords = records.slice(0, 3);
 
   /* =========================================
+     MOST COMMON RECORD TYPE
+  ========================================= */
+
+  const recordTypeCount = {};
+
+  records.forEach((record) => {
+    if (record.type) {
+      recordTypeCount[record.type] =
+        (recordTypeCount[record.type] || 0) + 1;
+    }
+  });
+
+  let mostCommonType = "No records yet";
+  let highestCount = 0;
+
+  Object.keys(recordTypeCount).forEach((type) => {
+    if (recordTypeCount[type] > highestCount) {
+      highestCount = recordTypeCount[type];
+      mostCommonType = type;
+    }
+  });
+
+  /* =========================================
      PROFILE COMPLETION
   ========================================= */
 
- const profileFields = [
-  profile.name,
-  profile.age,
-  profile.bloodGroup,
-  profile.phoneno,
-  profile.allergies,
-  profile.medical,
-];
+  const profileFields = [
+    profile.name,
+    profile.age,
+    profile.bloodGroup,
+    profile.phoneno,
+    profile.allergies,
+    profile.medical,
+  ];
 
   const completedFields = profileFields.filter(
-    (field) => field && field.toString().trim() !== ""
+    (field) =>
+      field &&
+      field.toString().trim() !== ""
   ).length;
 
   const profileCompletion = Math.round(
@@ -57,37 +106,63 @@ useEffect(() => {
   );
 
   /* =========================================
-     SHARED LOCATION
+     DYNAMIC HEALTH STATUS
   ========================================= */
+
+  let healthStatus = "";
+  let healthStatusText = "";
+
+  if (profileCompletion >= 76) {
+    healthStatus = "Profile Ready";
+    healthStatusText =
+      "Your essential health information is mostly complete.";
+  } else if (profileCompletion >= 41) {
+    healthStatus = "Partially Complete";
+    healthStatusText =
+      "Add a few more details to complete your health profile.";
+  } else {
+    healthStatus = "Profile Incomplete";
+    healthStatusText =
+      "Complete your health profile to keep important information ready.";
+  }
 
   /* =========================================
-     NEARBY HEALTHCARE
+     PRIVACY MODE
   ========================================= */
+
+  const togglePrivacyMode = () => {
+    setPrivacyMode((prev) => !prev);
+  };
 
   /* =========================================
-     USE MY LOCATION
+     COPY HEALTH DETAILS
   ========================================= */
 
+  const copyEmergencyDetails = () => {
+    const emergencyText = `
+MediLink Emergency Information
 
-  /* =========================================
-     HAVERSINE DISTANCE
-  ========================================= */
+Blood Group: ${profile.bloodGroup || "Not added"}
+Emergency Contact: ${profile.phoneno || "Not added"}
+Allergies: ${profile.allergies || "None"}
+Medical Conditions: ${profile.medical || "None"}
+    `.trim();
 
-  /* =========================================
-     OPENSTREETMAP + OVERPASS
-  ========================================= */
+    navigator.clipboard.writeText(emergencyText);
 
-  /* =========================================
-     DIRECTIONS
-  ========================================= */
+    setCopied(true);
 
-
-
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
 
   return (
     <div className="dashboard">
 
-      {/* HEALTH OVERVIEW */}
+      {/* =========================================
+          HEALTH OVERVIEW
+      ========================================= */}
 
       <section className="dashboard-overview">
 
@@ -120,7 +195,9 @@ useEffect(() => {
       </section>
 
 
-      {/* STATISTICS */}
+      {/* =========================================
+          STATISTICS
+      ========================================= */}
 
       <div className="stats-container">
 
@@ -148,7 +225,9 @@ useEffect(() => {
       </div>
 
 
-      {/* ACTIVITY + ENVIRONMENT */}
+      {/* =========================================
+          RECORDS + PRECAUTIONS
+      ========================================= */}
 
       <div className="dashboard-main-grid">
 
@@ -184,57 +263,55 @@ useEffect(() => {
 
             <div className="activity-list">
 
-              {recentRecords.map(
-                (record) => (
+              {recentRecords.map((record) => (
 
-                  <div
-                    className="activity-item"
-                    key={record.id}
-                  >
+                <div
+                  className="activity-item"
+                  key={record.id}
+                >
 
-                    <div className="activity-marker">
-                      <span></span>
-                    </div>
+                  <div className="activity-marker">
+                    <span></span>
+                  </div>
 
-                    <div className="activity-content">
+                  <div className="activity-content">
 
-                      <div className="activity-top">
+                    <div className="activity-top">
 
-                        <h4>
-                          {record.type}
-                        </h4>
+                      <h4>
+                        {record.type}
+                      </h4>
 
-                        <span>
-                          {record.date}
-                        </span>
-
-                      </div>
-
-                      <p>
-                        Dr.{" "}
-                        {record.doctor ||
-                          "Not specified"}
-                      </p>
-
-                      {record.notes && (
-                        <small>
-                          {record.notes}
-                        </small>
-                      )}
+                      <span>
+                        {record.date}
+                      </span>
 
                     </div>
 
-                    <Link
-                      to={`/records?view=${record.id}`}
-                      className="activity-view"
-                    >
-                      View
-                    </Link>
+                    <p>
+                      Dr.{" "}
+                      {record.doctor ||
+                        "Not specified"}
+                    </p>
+
+                    {record.notes && (
+                      <small>
+                        {record.notes}
+                      </small>
+                    )}
 
                   </div>
 
-                )
-              )}
+                  <Link
+                    to={`/records?view=${record.id}`}
+                    className="activity-view"
+                  >
+                    View
+                  </Link>
+
+                </div>
+
+              ))}
 
             </div>
 
@@ -270,193 +347,465 @@ useEffect(() => {
         </section>
 
 
-      {/* MEDICAL PRECAUTIONS */}
+        {/* MEDICAL PRECAUTIONS */}
 
-<section className="environment-section">
+        <section className="environment-section">
 
-  <div className="environment-header">
-    <div>
-      <p className="section-eyebrow">
-        HEALTH & SAFETY
-      </p>
+          <div className="environment-header">
 
-      <h3>
-        Medical Precautions
-      </h3>
-    </div>
-  </div>
+            <div>
 
-  <div className="precautions-grid">
+              <p className="section-eyebrow">
+                HEALTH & SAFETY
+              </p>
 
-    <div className="precaution-item">
-      <div className="precaution-icon">✓</div>
-      <div>
-        <h4>Keep Records Updated</h4>
-        <p>Keep your latest health records up to date.</p>
+              <h3>
+                Medical Precautions
+              </h3>
+
+            </div>
+
+          </div>
+
+
+          <div className="precautions-grid">
+
+            <div className="precaution-item">
+              <div className="precaution-icon">
+                ✓
+              </div>
+
+              <div>
+                <h4>
+                  Keep Records Updated
+                </h4>
+
+                <p>
+                  Keep your latest health records up to date.
+                </p>
+              </div>
+            </div>
+
+
+            <div className="precaution-item">
+              <div className="precaution-icon">
+                ✓
+              </div>
+
+              <div>
+                <h4>
+                  Keep Allergies Updated
+                </h4>
+
+                <p>
+                  Mention known allergies clearly in your profile.
+                </p>
+              </div>
+            </div>
+
+
+            <div className="precaution-item">
+              <div className="precaution-icon">
+                ✓
+              </div>
+
+              <div>
+                <h4>
+                  Follow Prescribed Medicines
+                </h4>
+
+                <p>
+                  Take medicines only as directed by your provider.
+                </p>
+              </div>
+            </div>
+
+
+            <div className="precaution-item">
+              <div className="precaution-icon">
+                ✓
+              </div>
+
+              <div>
+                <h4>
+                  Keep Emergency Details Ready
+                </h4>
+
+                <p>
+                  Keep blood group and emergency contact updated.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div className="environment-footer">
+            General health and safety guidance
+          </div>
+
+        </section>
+
       </div>
-    </div>
-
-    <div className="precaution-item">
-      <div className="precaution-icon">✓</div>
-      <div>
-        <h4>Keep Allergies Updated</h4>
-        <p>Mention known allergies clearly in your profile.</p>
-      </div>
-    </div>
-
-    <div className="precaution-item">
-      <div className="precaution-icon">✓</div>
-      <div>
-        <h4>Follow Prescribed Medicines</h4>
-        <p>Take medicines only as directed by your provider.</p>
-      </div>
-    </div>
-
-    <div className="precaution-item">
-      <div className="precaution-icon">✓</div>
-      <div>
-        <h4>Keep Emergency Details Ready</h4>
-        <p>Keep blood group and emergency contact updated.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div className="environment-footer">
-    General health and safety guidance
-  </div>
-
-</section>
-
-      </div>
 
 
-      {/* EMERGENCY INFORMATION */}
+      {/* =========================================
+          SMART HEALTH SNAPSHOT
+      ========================================= */}
 
-      <section
-        className="emergency-card"
-        aria-labelledby="emergency-heading"
-      >
+      <section className="smart-health-card">
 
-        <div className="emergency-copy">
+        <div className="smart-health-header">
 
-          <span
-            className="emergency-icon"
-            aria-hidden="true"
+          <div className="smart-health-title">
+
+            <div className="smart-health-icon">
+              🩺
+            </div>
+
+            <div>
+
+              <p className="section-eyebrow">
+                QUICK ACCESS
+              </p>
+
+              <h3>
+                Smart Health Snapshot
+              </h3>
+
+              <p>
+                Important health details available
+                when you need them.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <button
+            className={`privacy-toggle ${
+              privacyMode ? "active" : ""
+            }`}
+            onClick={togglePrivacyMode}
           >
-            ✚
-          </span>
 
-          <div>
+            <span>
+              {privacyMode ? "🔒" : "👁"}
+            </span>
 
-            <p className="emergency-label">
-              IMPORTANT FOR URGENT CARE
-            </p>
+            {privacyMode
+              ? "Privacy On"
+              : "Privacy Mode"}
 
-            <h3 id="emergency-heading">
-              Emergency Information
-            </h3>
+          </button>
 
-            <p>
-              Important details available
-              when they are needed.
-            </p>
+        </div>
+
+
+        {/* HEALTH DETAILS */}
+
+        <div className="smart-health-details">
+
+          <div className="health-detail-box">
+
+            <span className="detail-icon">
+              🩸
+            </span>
+
+            <div>
+
+              <p>
+                Blood Group
+              </p>
+
+              <strong
+                className={
+                  privacyMode
+                    ? "privacy-hidden"
+                    : ""
+                }
+              >
+                {profile.bloodGroup ||
+                  "Not added"}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div className="health-detail-box">
+
+            <span className="detail-icon">
+              ⚠️
+            </span>
+
+            <div>
+
+              <p>
+                Allergies
+              </p>
+
+              <strong
+                className={
+                  privacyMode
+                    ? "privacy-hidden"
+                    : ""
+                }
+              >
+                {profile.allergies ||
+                  "None"}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div className="health-detail-box">
+
+            <span className="detail-icon">
+              ☎
+            </span>
+
+            <div>
+
+              <p>
+                Emergency Contact
+              </p>
+
+              <strong
+                className={
+                  privacyMode
+                    ? "privacy-hidden"
+                    : ""
+                }
+              >
+                {profile.phoneno ||
+                  "Not added"}
+              </strong>
+
+            </div>
 
           </div>
 
         </div>
 
 
-        {/* EMERGENCY DETAILS */}
+        {/* SNAPSHOT FOOTER */}
 
-        <div className="emergency-details">
+        <div className="smart-health-footer">
 
-          <div>
+          <div className="snapshot-status">
+
+            <span className="status-dot"></span>
 
             <span>
-              Blood Group
+              Health information available
             </span>
-
-            <strong>
-              {profile.bloodGroup ||
-                "Not added"}
-            </strong>
 
           </div>
 
 
-          <div>
+          <div className="snapshot-actions">
 
-            <span>
-              Emergency Contact
-            </span>
+            <button
+              className="copy-health-btn"
+              onClick={copyEmergencyDetails}
+            >
+              {copied
+                ? "✓ Copied!"
+                : "Copy Details"}
+            </button>
 
-            <strong>
-              {profile.phoneno ||
-                "Not added"}
-            </strong>
-
-          </div>
-
-
-          <div>
-
-            <span>
-              Allergies
-            </span>
-
-            <strong>
-              {profile.allergies ||
-                "None"}
-            </strong>
+            <Link
+              to="/profile"
+              className="snapshot-profile-btn"
+            >
+              Open Profile →
+            </Link>
 
           </div>
 
         </div>
-
-
 
       </section>
 
 
-      {/* PROFILE HEALTH CHECK */}
+      {/* =========================================
+          RECORD INSIGHTS
+      ========================================= */}
 
-      <section className="profile-check">
+      <section className="record-insights">
 
-        <div className="profile-check-info">
-
-          <div className="profile-check-icon">
-            ✓
-          </div>
+        <div className="insights-heading">
 
           <div>
 
             <p className="section-eyebrow">
-              PROFILE STATUS
+              YOUR HEALTH DATA
             </p>
 
             <h3>
-              Health Profile
+              Medical Records Insights
             </h3>
 
             <p>
-              Keep your information complete
-              and up to date.
+              A simple overview of your stored medical records.
             </p>
+
+          </div>
+
+          <div className="insights-icon">
+            📊
+          </div>
+
+        </div>
+
+
+        <div className="insights-grid">
+
+          <div className="insight-box">
+
+            <span className="insight-number">
+              {records.length}
+            </span>
+
+            <span className="insight-label">
+              Total Records
+            </span>
+
+          </div>
+
+
+          <div className="insight-box">
+
+            <span className="insight-number">
+              {uniqueDoctors}
+            </span>
+
+            <span className="insight-label">
+              Doctors
+            </span>
+
+          </div>
+
+
+          <div className="insight-box">
+
+            <span className="insight-number">
+              {uniqueTypes}
+            </span>
+
+            <span className="insight-label">
+              Record Types
+            </span>
+
+          </div>
+
+
+          <div className="insight-box wide-insight">
+
+            <span className="insight-small-label">
+              MOST COMMON RECORD
+            </span>
+
+            <strong>
+              {mostCommonType}
+            </strong>
 
           </div>
 
         </div>
 
 
-        <div className="profile-progress-area">
+        {records.length > 0 && (
 
-          <div className="profile-progress-top">
+          <div className="record-type-bars">
+
+            <div className="bars-heading">
+              Record Type Distribution
+            </div>
+
+            {Object.entries(recordTypeCount).map(
+              ([type, count]) => {
+
+                const percentage =
+                  (count / records.length) * 100;
+
+                return (
+                  <div
+                    className="record-bar-row"
+                    key={type}
+                  >
+
+                    <div className="record-bar-label">
+                      <span>
+                        {type}
+                      </span>
+
+                      <strong>
+                        {count}
+                      </strong>
+                    </div>
+
+                    <div className="record-bar">
+                      <div
+                        className="record-bar-fill"
+                        style={{
+                          width: `${percentage}%`,
+                        }}
+                      ></div>
+                    </div>
+
+                  </div>
+                );
+              }
+            )}
+
+          </div>
+
+        )}
+
+      </section>
+
+
+      {/* =========================================
+          HEALTH PROFILE STATUS
+      ========================================= */}
+
+      <section className="health-status-card">
+
+        <div className="health-status-icon">
+          {profileCompletion >= 76
+            ? "✓"
+            : "!"}
+        </div>
+
+        <div className="health-status-content">
+
+          <p className="section-eyebrow">
+            PROFILE STATUS
+          </p>
+
+          <h3>
+            {healthStatus}
+          </h3>
+
+          <p>
+            {healthStatusText}
+          </p>
+
+        </div>
+
+
+        <div className="health-status-progress">
+
+          <div className="status-progress-top">
 
             <span>
-              {completedFields} of{" "}
-              {profileFields.length}{" "}
-              details completed - 
+              Profile completion
             </span>
 
             <strong>
@@ -465,10 +814,10 @@ useEffect(() => {
 
           </div>
 
-          <div className="profile-progress">
+          <div className="status-progress-bar">
 
             <div
-              className="profile-progress-fill"
+              className="status-progress-fill"
               style={{
                 width: `${profileCompletion}%`,
               }}
@@ -479,13 +828,11 @@ useEffect(() => {
         </div>
 
 
-        {/* DIRECT PROFILE BUTTON */}
-
         <Link
           to="/profile"
-          className="profile-check-button"
+          className="health-status-button"
         >
-          Open Profile →
+          Update Profile →
         </Link>
 
       </section>
