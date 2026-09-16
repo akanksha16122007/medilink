@@ -14,9 +14,17 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    if (VALID_EMAILS.includes(email) && password === VALID_PASSWORD) {
+    const savedSignup = JSON.parse(localStorage.getItem("signup") || "null");
+    const isDemoLogin =
+      VALID_EMAILS.includes(email) && password === VALID_PASSWORD;
+    const isSignupLogin =
+      savedSignup &&
+      savedSignup.email === email &&
+      savedSignup.pass === password;
+
+    if (isDemoLogin || isSignupLogin) {
       const user = {
-        name: "Ananya Malhotra",
+        name: savedSignup?.name,
         email: email,
         password: password,
         profilePic:

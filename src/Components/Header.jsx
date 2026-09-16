@@ -1,19 +1,36 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+const getStoredUser = () => JSON.parse(localStorage.getItem("user"));
 
 const Header = ({ darkMode, toggleTheme }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLogOut, setshowLogOut] = useState(false);
-
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(getStoredUser);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setUser(getStoredUser());
+  }, [location]);
+
+  useEffect(() => {
+    const syncUser = () => setUser(getStoredUser());
+
+    window.addEventListener("profileUpdated", syncUser);
+    window.addEventListener("userUpdated", syncUser);
+
+    return () => {
+      window.removeEventListener("profileUpdated", syncUser);
+      window.removeEventListener("userUpdated", syncUser);
+    };
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-
+    setUser(null);
     setshowLogOut(false);
-
     navigate("/login");
   };
 

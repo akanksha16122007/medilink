@@ -12,12 +12,21 @@ const Profile = () => {
     medical: "",
   });
 
-  // Load saved profile
+  // Load saved profile, falling back to the logged-in user's name
   useEffect(() => {
-    const savedProfile = localStorage.getItem("profile");
+    const savedProfile = JSON.parse(localStorage.getItem("profile") || "null");
+    const savedUser = JSON.parse(localStorage.getItem("user") || "null");
 
     if (savedProfile) {
-      setProfile(JSON.parse(savedProfile));
+      setProfile({
+        ...savedProfile,
+        name: savedProfile.name || savedUser?.name || "",
+      });
+      return;
+    }
+
+    if (savedUser?.name) {
+      setProfile((prev) => ({ ...prev, name: savedUser.name }));
     }
   }, []);
 
@@ -34,6 +43,22 @@ const Profile = () => {
     e.preventDefault();
 
     localStorage.setItem("profile", JSON.stringify(profile));
+
+    const savedUser = JSON.parse(localStorage.getItem("user") || "null");
+    if (savedUser) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...savedUser, name: profile.name })
+      );
+    }
+
+    const savedSignup = JSON.parse(localStorage.getItem("signup") || "null");
+    if (savedSignup) {
+      localStorage.setItem(
+        "signup",
+        JSON.stringify({ ...savedSignup, name: profile.name })
+      );
+    }
 
     window.dispatchEvent(new Event("profileUpdated"));
 
