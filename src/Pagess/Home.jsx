@@ -27,7 +27,7 @@ const Home = () => {
           <div className="hero-buttons">
 
             {/* GET STARTED → SIGN UP */}
-            <Link to="/signup" className="hero-btn-primary">
+            <Link to="/profile" className="hero-btn-primary">
               Get Started →
             </Link>
 
@@ -226,11 +226,6 @@ const Home = () => {
               Start organizing your medical information with MediLink in just
               a few clicks.
             </p>
-
-            {/* GET STARTED NOW → SIGN UP */}
-            <Link to="/signup" className="cta-btn">
-              Get Started Now →
-            </Link>
 
           </div>
 

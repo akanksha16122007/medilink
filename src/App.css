@@ -2842,6 +2842,12 @@ body {
   border-left: 4px solid #4d7cce;
 }
 
+.stat-card--blood {
+  background: linear-gradient(135deg, var(--surface), var(--surface-alt));
+
+  border-left: 4px solid #eb5f5f;
+}
+
 .stat-icon {
   position: relative;
 
@@ -4568,8 +4574,8 @@ body {
    SECTION HEADINGS
 ========================================================= */
 
-.section-heading,
-.environment-header {
+.dashboard .section-heading,
+.dashboard .environment-header {
   display: flex;
   align-items: center;
   justify-content: space-between;

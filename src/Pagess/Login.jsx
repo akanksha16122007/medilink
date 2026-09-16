@@ -31,7 +31,7 @@ const Login = () => {
           "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg",
       };
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/profile");
+      navigate("/");
       return;
     }
 
@@ -85,9 +85,9 @@ const Login = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-              ) : (
                 <i class="fa-solid fa-eye"></i>
+              ) : (
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
               )}
             </button>
           </div>
