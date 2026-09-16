@@ -77,9 +77,9 @@ const Login = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-              ) : (
                 <i class="fa-solid fa-eye"></i>
+              ) : (
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
               )}
             </button>
           </div>
