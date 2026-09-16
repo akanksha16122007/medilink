@@ -27,7 +27,7 @@ const Home = () => {
           <div className="hero-buttons">
 
             {/* GET STARTED → SIGN UP */}
-            <Link to="/dashboard" className="hero-btn-primary">
+            <Link to="/profile" className="hero-btn-primary">
               Get Started →
             </Link>
 
