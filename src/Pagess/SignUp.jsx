@@ -104,6 +104,8 @@ const SignUp = () => {
             type="tel"
             name="phoneno"
             placeholder="Enter your phone number"
+            maxLength={10}
+            pattern="[0-9]{10}"
             value={signup.phoneno}
             onChange={handleChange}
             required
