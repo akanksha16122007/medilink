@@ -113,6 +113,8 @@ const Profile = () => {
               type="tel"
               name="phoneno"
               placeholder="e.g. +91 XXXXX XXXXX"
+              maxLength={10}
+              pattern="[0-9]{10}"
               value={profile.phoneno}
               onChange={handleChange}
             />
