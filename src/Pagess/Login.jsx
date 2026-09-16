@@ -41,11 +41,11 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="login-pic">
-        <img src="/logins.png" alt="MediLink" />
+        <img src="/login.png" alt="MediLink" />
       </div>
       <div className="login-box">
         <div className="login-image">
-          <img src="/favicon.svg" />
+          <img src="/favicon.svg" alt="MediLink" />
         </div>
 
         <h2>Welcome Back!</h2>
