@@ -98,11 +98,11 @@ const Home = () => {
             </div>
 
             <h3>
-              Prescriptions
+              Dashboard
             </h3>
 
             <p>
-              Keep track of your active medications and prescription history.
+              Keep track of your active records and medical history.
             </p>
 
             <Link to="/dashboard" className="card-link">
@@ -197,7 +197,7 @@ const Home = () => {
             </span>
 
             <p>
-              Keep family and emergency contact information consolidated
+              Keep emergency contact and information at hand.
             </p>
 
           </div>
