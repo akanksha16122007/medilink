@@ -28,7 +28,7 @@ const Login = () => {
         email: email,
         password: password,
         profilePic:
-          "https://i.pinimg.com/736x/db/a9/ce/dba9ce433113b68e719456b6d78c4f2a.jpg",
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
       };
       localStorage.setItem("user", JSON.stringify(user));
       navigate("/");

@@ -43,30 +43,13 @@ const Header = ({ darkMode, toggleTheme }) => {
       </Link>
 
       {/* Hamburger button */}
-      <button
-        className="menu-btn"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
+      <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </button>
 
       {/* Navigation */}
       <nav className={menuOpen ? "nav active" : "nav"}>
-        <Link to="/" onClick={() => setMenuOpen(false)}>
-          Home
-        </Link>
-
-        <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
-          Dashboard
-        </Link>
-
-        <Link to="/records" onClick={() => setMenuOpen(false)}>
-          Records
-        </Link>
-
-        <Link to="/profile" onClick={() => setMenuOpen(false)}>
-          Profile
-        </Link>
+        <i class="fa-solid fa-bell"></i>
 
         {/* Login / User */}
         {user ? (
@@ -90,7 +73,6 @@ const Header = ({ darkMode, toggleTheme }) => {
             {/* Dropdown */}
             {showLogOut && (
               <div className="logout-menu">
-
                 {/* Logout */}
                 <button onClick={handleLogout}>
                   <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -98,13 +80,9 @@ const Header = ({ darkMode, toggleTheme }) => {
                 </button>
 
                 {/* Theme */}
-                <button
-                  className="theme-menu-btn"
-                  onClick={toggleTheme}
-                >
+                <button className="theme-menu-btn" onClick={toggleTheme}>
                   {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
                 </button>
-
               </div>
             )}
           </div>
