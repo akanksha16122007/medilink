@@ -2,158 +2,470 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  // const navigate = useNavigate();
-  // const [profile, setProfile] = useState({
-  //   name: "",
-  //   age: "",
-  //   bloodGroup: "",
-  //   phoneno: "",
-  //   allergies: "",
-  //   medical: "",
-  // });
-  // // Load saved profile, falling back to the logged-in user's name
-  // useEffect(() => {
-  //   const savedProfile = JSON.parse(localStorage.getItem("profile") || "null");
-  //   const savedUser = JSON.parse(localStorage.getItem("user") || "null");
-  //   if (savedProfile) {
-  //     setProfile({
-  //       ...savedProfile,
-  //       name: savedProfile.name || savedUser?.name || "",
-  //     });
-  //     return;
-  //   }
-  //   if (savedUser?.name) {
-  //     setProfile((prev) => ({ ...prev, name: savedUser.name }));
-  //   }
-  // }, []);
-  // // Handle input changes
-  // const handleChange = (e) => {
-  //   setProfile({
-  //     ...profile,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-  // // Save profile
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   localStorage.setItem("profile", JSON.stringify(profile));
-  //   const savedUser = JSON.parse(localStorage.getItem("user") || "null");
-  //   if (savedUser) {
-  //     localStorage.setItem(
-  //       "user",
-  //       JSON.stringify({ ...savedUser, name: profile.name })
-  //     );
-  //   }
-  //   const savedSignup = JSON.parse(localStorage.getItem("signup") || "null");
-  //   if (savedSignup) {
-  //     localStorage.setItem(
-  //       "signup",
-  //       JSON.stringify({ ...savedSignup, name: profile.name })
-  //     );
-  //   }
-  //   window.dispatchEvent(new Event("profileUpdated"));
-  //   alert("Profile saved successfully!");
-  //   navigate("/dashboard");
-  // };
-  // return (
-  //   <div className="profile-page">
-  //     <div className="profile-content">
-  //       {/* Heading */}
-  //       <div className="profile-heading">
-  //         <p className="profile-label">STAY HEALTH READY</p>
-  //         <h1>
-  //           My <span>Health Profile</span>
-  //         </h1>
-  //         <p className="profile-description">
-  //           Keep your personal and health information organized in one place.
-  //         </p>
-  //       </div>
-  //       {/* Form */}
-  //       <form onSubmit={handleSubmit}>
-  //         <div className="form-group full-width">
-  //           <label>Full Name</label>
-  //           <input
-  //             type="text"
-  //             name="name"
-  //             placeholder="Enter your full name"
-  //             value={profile.name}
-  //             onChange={handleChange}
-  //           />
-  //         </div>
-  //         <div className="form-group">
-  //           <label>Age</label>
-  //           <input
-  //             type="number"
-  //             name="age"
-  //             placeholder="Enter your age"
-  //             value={profile.age}
-  //             onChange={handleChange}
-  //           />
-  //         </div>
-  //         <div className="form-group">
-  //           <label>Blood Group</label>
-  //           <select
-  //             name="bloodGroup"
-  //             value={profile.bloodGroup}
-  //             onChange={handleChange}
-  //           >
-  //             <option value="">Select blood group</option>
-  //             <option value="O+">O+</option>
-  //             <option value="O-">O-</option>
-  //             <option value="A+">A+</option>
-  //             <option value="A-">A-</option>
-  //             <option value="B+">B+</option>
-  //             <option value="B-">B-</option>
-  //             <option value="AB+">AB+</option>
-  //             <option value="AB-">AB-</option>
-  //           </select>
-  //         </div>
-  //         <div className="form-group full-width">
-  //           <label>Emergency Contact</label>
-  //           <input
-  //             type="tel"
-  //             name="phoneno"
-  //             placeholder="e.g. +91 XXXXX XXXXX"
-  //             maxLength={10}
-  //             pattern="[0-9]{10}"
-  //             value={profile.phoneno}
-  //             onChange={handleChange}
-  //           />
-  //         </div>
-  //         <div className="form-group full-width">
-  //           <label>Allergies</label>
-  //           <input
-  //             type="text"
-  //             name="allergies"
-  //             placeholder="e.g. Dust, pollen or None"
-  //             value={profile.allergies}
-  //             onChange={handleChange}
-  //           />
-  //         </div>
-  //         <div className="form-group full-width">
-  //           <label>Medical Conditions</label>
-  //           <input
-  //             type="text"
-  //             name="medical"
-  //             placeholder="e.g. Asthma or None"
-  //             value={profile.medical}
-  //             onChange={handleChange}
-  //           />
-  //         </div>
-  //         <button type="submit" className="submit">
-  //           Save Profile →
-  //         </button>
-  //       </form>
-  //     </div>
-  //   </div>
-  //   );
-  <div className="profile">
-    <div className="profile-card">
-      <h1></h1>
+  const [isEditing, SetIsEditing] = useState(false);
+  const [personalDetails, setPersonalDetails] = useState({
+    name: "Akanksha Khurana",
+    gender: "Female",
+    age: "18 years",
+    location: "Chandigarh,India",
+  });
+  const [personalFormData, setPersonalFormData] = useState(personalDetails);
+  const handleChange = (e) => {
+    setPersonalFormData({
+      ...personalFormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSave = (e) => {
+    e.preventDefault();
+    setPersonalDetails(personalFormData);
+    SetIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setPersonalFormData(personalDetails);
+    SetIsEditing(false);
+  };
+  const [isEditingPersonal, setIsEditingPersonal] = useState(false);
+  const [personalInfo, setPersonalInfo] = useState({
+    name: "Akanksha Khurana",
+    dob: "16-12-2007",
+    gender: "Female",
+    phoneno: "6283722167",
+    email: "akankshakhurana01@gmail.com",
+    location: "Chandigarh,India",
+    height: "175cm",
+    weight: "50kg",
+  });
+  const [personalInfoForm, setPersonalInfoForm] = useState(personalInfo);
+  const handleChange1 = (e) => {
+    setPersonalInfoForm({
+      ...personalInfoForm,
+      [e.target.name]: [e.target.value],
+    });
+  };
+  const handleSave1 = (e) => {
+    e.preventDefault();
+    setPersonalInfo(personalInfoForm);
+    setIsEditingPersonal(false);
+  };
+  const handleCancel1 = () => {
+    setPersonalInfoForm(personalInfo);
+    setIsEditingPersonal(false);
+  };
+
+  const [isMedicalEditing, setIsMedicalEditing] = useState(false);
+
+  const [medicalInfo, setMedicalInfo] = useState({
+    bloodGroup: "O+",
+    allergies: "None",
+    chronicConditions: "None",
+    currentMedications: "None",
+    pastIllnesses: "None",
+    otherNotes: "-",
+  });
+
+  const [medicalForm, setMedicalForm] = useState(medicalInfo);
+
+  const handleMedicalChange = (e) => {
+    const { name, value } = e.target;
+
+    setMedicalForm({
+      ...medicalForm,
+      [name]: value,
+    });
+  };
+
+  const handleMedicalEdit = () => {
+    setMedicalForm({ ...medicalInfo });
+    setIsMedicalEditing(true);
+  };
+
+  const handleMedicalSave = (e) => {
+    e.preventDefault();
+    setMedicalInfo({ ...medicalForm });
+    setIsMedicalEditing(false);
+  };
+
+  const handleMedicalCancel = () => {
+    setMedicalForm({ ...medicalInfo });
+    setIsMedicalEditing(false);
+  };
+
+  const [isEmergencyEditing, setIsEmergencyEditing] = useState(false);
+
+  const [emergencyInfo, setEmergencyInfo] = useState({
+    name: "Suresh Khurana",
+    phone: "8728074400",
+    relation: "Father",
+    address: "Chandigarh,India",
+  });
+
+  const [emergencyForm, setEmergencyForm] = useState(emergencyInfo);
+
+  const handleEmergencyChange = (e) => {
+    const { name, value } = e.target;
+
+    setEmergencyForm({
+      ...emergencyForm,
+      [name]: value,
+    });
+  };
+
+  const handleEmergencyEdit = () => {
+    setEmergencyForm({ ...emergencyInfo });
+    setIsEmergencyEditing(true);
+  };
+
+  const handleEmergencySave = (e) => {
+    e.preventDefault();
+    setEmergencyInfo({ ...emergencyForm });
+    setIsEmergencyEditing(false);
+  };
+
+  const handleEmergencyCancel = () => {
+    setEmergencyForm({ ...emergencyInfo });
+    setIsEmergencyEditing(false);
+  };
+
+  return (
+    <div className="profile">
+      <div className="profile-card">
+        <div className="profile-img">
+          <img
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+            alt="profile-img"
+          />
+        </div>
+        <div className="profile-info">
+          {isEditing ? (
+            <form onSubmit={handleSave}>
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={personalFormData.name}
+              />
+              <label>Gender</label>
+              <select
+                name="gender"
+                value={personalFormData.gender}
+                onChange={handleChange}
+              >
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+              </select>
+              <label>Age</label>
+              <input
+                type="number"
+                value={personalFormData.age}
+                onChange={handleChange}
+                name="age"
+              />
+              <label>Location</label>
+              <input
+                name="location"
+                onChange={handleChange}
+                value={personalFormData.location}
+              />
+              <div className="form-buttons">
+                <button className="button" type="submit">
+                  Save Changes
+                </button>
+
+                <button className="button" type="button" onClick={handleCancel}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <h2>{personalDetails.name}</h2>
+              <p>{personalDetails.gender}</p>
+              <p>{personalDetails.age}</p>
+              <p>{personalDetails.location}</p>
+              <p>"Better health,Brigther days.💚"</p>
+              <button
+                className="button"
+                type="button"
+                onClick={() => {
+                  setPersonalFormData(personalDetails);
+                  SetIsEditing(true);
+                }}
+              >
+                <i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;Edit Profile
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="personal-details">
+        <div className="header-details">
+          <h2>
+            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Personal Details
+          </h2>
+          <button
+            onClick={() => {
+              setIsEditingPersonal(true);
+              setPersonalInfoForm(personalInfo);
+            }}
+          >
+            <i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;Edit
+          </button>
+        </div>
+        <div className="body-details">
+          {isEditingPersonal ? (
+            <form onSubmit={handleSave1}>
+              <label>Full Name</label>
+              <input
+                type="text"
+                onChange={handleChange1}
+                name="name"
+                value={personalInfoForm.name}
+              />
+              <label>Date of birth</label>
+              <input
+                type="date"
+                onChange={handleChange1}
+                value={personalInfoForm.dob}
+                name="dob"
+              />
+              <label>Gender</label>
+              <select
+                onChange={handleChange1}
+                value={personalInfoForm.gender}
+                name="gender"
+              >
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+              </select>
+              <label>Phone Number</label>
+              <input
+                type="text"
+                onChange={handleChange1}
+                value={personalInfoForm.phoneno}
+                name="phoneno"
+              />
+              <label>Email Address</label>
+              <input
+                type="email"
+                onChange={handleChange1}
+                value={personalInfoForm.email}
+                name="email"
+              />
+              <label>Location</label>
+              <input
+                type="text"
+                onChange={handleChange1}
+                value={personalInfoForm.location}
+                name="location"
+              />
+              <label>Height</label>
+              <input
+                type="text"
+                onChange={handleChange1}
+                value={personalInfoForm.height}
+                name="height"
+              />
+              <label>Weight</label>
+              <input
+                type="text"
+                onChange={handleChange1}
+                value={personalInfoForm.weight}
+                name="weight"
+              />
+              <div className="form-buttons">
+                <button className="button" type="submit">
+                  Save Changes
+                </button>
+
+                <button
+                  className="button"
+                  type="button"
+                  onClick={handleCancel1}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <label>Full Name</label>
+              <p>{personalInfoForm.name}</p>
+              <label>Date of Birth</label>
+              <p>{personalInfoForm.dob}</p>
+              <label>Gender</label>
+              <p>{personalInfoForm.gender}</p>
+              <label>Phone Number</label>
+              <p>{personalInfoForm.phoneno}</p>
+              <label>Email Address</label>
+              <p>{personalInfoForm.email}</p>
+              <label>Location</label>
+              <p>{personalInfoForm.location}</p>
+              <label>Height</label>
+              <p>{personalInfoForm.height}</p>
+              <label>Weight</label>
+              <p>{personalInfoForm.weight}</p>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="medical-info">
+        <div className="header-medical">
+          <h2>
+            <i class="fa-solid fa-stethoscope"></i>&nbsp;&nbsp;Medical
+            Information
+          </h2>
+          <button className="button" type="button" onClick={handleMedicalEdit}>
+            <i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;Edit
+          </button>
+        </div>
+        <div className="body-medical">
+          {isMedicalEditing ? (
+            <form onSubmit={handleMedicalSave}>
+              <label>Blood Group</label>
+              <input
+                name="bloodGroup"
+                value={medicalForm.bloodGroup}
+                onChange={handleMedicalChange}
+              />
+              <label>Allergies</label>
+              <input
+                name="allergies"
+                value={medicalForm.allergies}
+                onChange={handleMedicalChange}
+              />
+
+              <label>Chronic Conditions</label>
+              <input
+                name="chronicConditions"
+                value={medicalForm.chronicConditions}
+                onChange={handleMedicalChange}
+              />
+
+              <label>Current Medications</label>
+              <input
+                name="currentMedications"
+                value={medicalForm.currentMedications}
+                onChange={handleMedicalChange}
+              />
+
+              <label>Past Illnesses</label>
+              <input
+                name="pastIllnesses"
+                value={medicalForm.pastIllnesses}
+                onChange={handleMedicalChange}
+              />
+
+              <label>Other Notes</label>
+              <textarea
+                name="otherNotes"
+                value={medicalForm.otherNotes}
+                onChange={handleMedicalChange}
+              />
+              <div className="form-buttons">
+                <button type="submit">Save Changes</button>
+                <button type="button" onClick={handleMedicalCancel}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <label>Blood Group</label>
+              <p>{medicalForm.bloodGroup}</p>
+              <label>Allergies</label>
+              <p>{medicalForm.allergies}</p>
+              <label>Chronic conditions</label>
+              <p>{medicalForm.chronicConditions}</p>
+              <label>Current Medications</label>
+              <p>{medicalForm.currentMedications}</p>
+              <label>Past Illnesses</label>
+              <p>{medicalForm.pastIllnesses}</p>
+              <label>Other Notes</label>
+              <p>{medicalForm.otherNotes}</p>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="emergency-info">
+        <div className="header-emergency">
+          <h2>
+            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Emergency Contact
+          </h2>
+          <button onClick={handleEmergencyEdit}>
+            <i class="fa-solid fa-pencil"></i>
+            &nbsp;&nbsp;Edit
+          </button>
+        </div>
+        <div className="body-emergency">
+          {isEmergencyEditing ? (
+            <form onSubmit={handleEmergencySave}>
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={emergencyForm.name}
+                onChange={handleEmergencyChange}
+                placeholder="Enter contact name"
+                required
+              />
+
+              <label>Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                value={emergencyForm.phone}
+                onChange={handleEmergencyChange}
+                placeholder="Enter phone number"
+                required
+              />
+
+              <label>Relation</label>
+              <input
+                type="text"
+                name="relation"
+                value={emergencyForm.relation}
+                onChange={handleEmergencyChange}
+                placeholder="e.g. Mother, Father"
+                required
+              />
+
+              <label>Address</label>
+              <textarea
+                name="address"
+                value={emergencyForm.address}
+                onChange={handleEmergencyChange}
+                placeholder="Enter address"
+                required
+              />
+              <div className="form-buttons">
+                <button type="submit">Save Changes</button>
+
+                <button type="button" onClick={handleEmergencyCancel}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <label>Name</label>
+              <p>{emergencyInfo.name}</p>
+              <label>Phone Number</label>
+              <p>{emergencyInfo.phone}</p>
+              <label>Relation</label>
+              <p>{emergencyInfo.relation}</p>
+              <label>Address</label>
+              <p>{emergencyInfo.address}</p>
+            </>
+          )}
+        </div>
+      </div>
     </div>
-    <div></div>
-    <div></div>
-  </div>;
+  );
 };
 
 export default Profile;

@@ -458,171 +458,6 @@ body {
 }
 
 /* =========================================================
-   PROFILE
-========================================================= */
-
-.profile-page {
-  min-height: 100vh;
-
-  display: flex;
-
-  justify-content: center;
-
-  padding: 55px 20px;
-
-  background: var(--bg);
-
-  box-sizing: border-box;
-}
-
-.profile-content {
-  width: 750px;
-
-  background: var(--surface);
-
-  padding: 40px 50px;
-
-  border: 1px solid var(--border);
-
-  border-radius: 16px;
-
-  box-shadow: 0 6px 20px var(--shadow);
-
-  box-sizing: border-box;
-}
-
-.profile-content h1 {
-  font-size: 44px;
-
-  font-weight: 700;
-
-  color: var(--text);
-
-  margin: 0 0 10px;
-
-  line-height: 1.2;
-}
-
-.profile-content p {
-  font-size: 18px;
-
-  color: var(--text-secondary);
-
-  margin: 0 0 30px;
-
-  line-height: 1.5;
-}
-
-.profile-content form {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.profile-content label {
-  font-size: 15px;
-
-  font-weight: 600;
-
-  color: var(--text);
-
-  margin: 16px 0 8px;
-}
-
-.name,
-.phoneno,
-.allergies,
-.medical,
-.age,
-.bloodGroup {
-  height: 50px;
-
-  padding: 0 14px;
-
-  border: 1px solid var(--border-input);
-
-  border-radius: 8px;
-
-  background: var(--input-bg);
-
-  color: var(--text);
-
-  font-size: 16px;
-
-  outline: none;
-
-  box-sizing: border-box;
-
-  transition: 0.2s ease;
-}
-
-.name,
-.phoneno,
-.allergies,
-.medical {
-  width: 100%;
-}
-
-.age {
-  width: 120px;
-}
-
-.bloodGroup {
-  width: 200px;
-}
-
-.name::placeholder,
-.phoneno::placeholder,
-.allergies::placeholder,
-.medical::placeholder,
-.age::placeholder {
-  color: var(--text-muted);
-}
-
-.name:focus,
-.phoneno:focus,
-.allergies:focus,
-.medical:focus,
-.age:focus,
-.bloodGroup:focus {
-  border-color: var(--primary-hover);
-
-  box-shadow: 0 0 0 3px rgba(0, 166, 166, 0.15);
-}
-
-.submit {
-  margin-top: 30px;
-
-  height: 52px;
-
-  width: 100%;
-
-  background: var(--primary);
-
-  color: white;
-
-  border: none;
-
-  border-radius: 8px;
-
-  font-size: 16px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.submit:hover {
-  background: var(--primary-hover);
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 6px 14px var(--shadow);
-}
-
-/* =========================================================
    LOGIN
 ========================================================= */
 .login-page,
@@ -5428,6 +5263,12 @@ body {
   background-color: #e6f4f1;
   border-color: #b8ddd5;
   box-shadow: 4px 0 12px rgba(15, 118, 110, 0.12);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: visible;
 }
 .sidebar.closed {
   width: 70px;
@@ -5471,7 +5312,6 @@ body {
   display: none;
 }
 
-
 /* =========================================================
    MEDICAL RECORD CRUD + PRINT PREVIEW ADDITIONS
    Added to App.css so no separate Records.css file is needed.
@@ -5506,16 +5346,24 @@ body {
   border: 1px solid var(--teal-border);
   color: var(--primary);
 }
-.edit-record-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+.edit-record-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
 
 .print-record-btn {
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text);
 }
-.print-record-btn:hover { background: var(--teal-light); border-color: var(--primary); }
+.print-record-btn:hover {
+  background: var(--teal-light);
+  border-color: var(--primary);
+}
 
-.print-overlay { z-index: 2100; }
+.print-overlay {
+  z-index: 2100;
+}
 .print-preview-modal {
   width: min(920px, 96vw);
   max-height: 92vh;
@@ -5535,7 +5383,11 @@ body {
   color: #18212b;
   font-weight: 700;
 }
-.print-preview-toolbar > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.print-preview-toolbar > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 .print-document {
   box-sizing: border-box;
   width: min(100%, 760px);
@@ -5544,7 +5396,7 @@ body {
   padding: 56px 60px;
   background: #fff;
   color: #18212b;
-  box-shadow: 0 3px 18px rgba(0,0,0,.12);
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.12);
   font-family: Arial, Helvetica, sans-serif;
 }
 .print-document-header {
@@ -5555,12 +5407,33 @@ body {
   padding-bottom: 20px;
   border-bottom: 2px solid #087f83;
 }
-.print-logo { color: #087f83; font-size: 25px; font-weight: 800; }
-.print-logo span { color: #18212b; }
-.print-document-header p { color: #64748b; font-size: 11px; letter-spacing: 1.5px; text-align: right; }
-.print-document > h1 { margin: 34px 0 6px; font-size: 28px; }
-.print-subtitle { color: #64748b; margin: 0 0 22px; }
-.print-document-rule { height: 1px; background: #dbe3e8; margin-bottom: 20px; }
+.print-logo {
+  color: #087f83;
+  font-size: 25px;
+  font-weight: 800;
+}
+.print-logo span {
+  color: #18212b;
+}
+.print-document-header p {
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-align: right;
+}
+.print-document > h1 {
+  margin: 34px 0 6px;
+  font-size: 28px;
+}
+.print-subtitle {
+  color: #64748b;
+  margin: 0 0 22px;
+}
+.print-document-rule {
+  height: 1px;
+  background: #dbe3e8;
+  margin-bottom: 20px;
+}
 .print-detail {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
@@ -5569,44 +5442,124 @@ body {
   border-bottom: 1px solid #e5e7eb;
   overflow-wrap: anywhere;
 }
-.print-detail span { color: #64748b; }
-.print-detail strong { font-weight: 700; }
-.print-notes { margin-top: 30px; padding: 20px; background: #f7fafb; border: 1px solid #dbe7e7; border-radius: 8px; }
-.print-notes h2 { margin: 0 0 12px; font-size: 16px; }
-.print-notes p { margin: 0; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
-.print-document-footer { display: flex; flex-direction: column; gap: 6px; margin-top: 70px; padding-top: 15px; border-top: 1px solid #dbe3e8; color: #64748b; font-size: 11px; }
+.print-detail span {
+  color: #64748b;
+}
+.print-detail strong {
+  font-weight: 700;
+}
+.print-notes {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f7fafb;
+  border: 1px solid #dbe7e7;
+  border-radius: 8px;
+}
+.print-notes h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.print-notes p {
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.print-document-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 70px;
+  padding-top: 15px;
+  border-top: 1px solid #dbe3e8;
+  color: #64748b;
+  font-size: 11px;
+}
 
 @media (max-width: 900px) {
-  .record-card { flex-wrap: wrap; gap: 12px; }
-  .record-info { min-width: 180px; }
-  .record-date { margin-left: auto; }
-  .record-actions { width: 100%; margin-left: 0; justify-content: flex-start; }
+  .record-card {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .record-info {
+    min-width: 180px;
+  }
+  .record-date {
+    margin-left: auto;
+  }
+  .record-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
 }
 @media (max-width: 600px) {
-  .form-row { grid-template-columns: 1fr; gap: 0; }
-  .print-preview-modal { padding: 10px; }
-  .print-document { min-height: auto; padding: 28px 22px; }
-  .print-detail { grid-template-columns: 1fr; gap: 5px; }
-  .print-document-header { align-items: flex-start; flex-direction: column; }
-  .print-document-header p { text-align: left; }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .print-preview-modal {
+    padding: 10px;
+  }
+  .print-document {
+    min-height: auto;
+    padding: 28px 22px;
+  }
+  .print-detail {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .print-document-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .print-document-header p {
+    text-align: left;
+  }
 }
 
 @media print {
-  @page { size: A4; margin: 15mm; }
-  body * { visibility: hidden !important; }
-  #medical-record-print, #medical-record-print * { visibility: visible !important; }
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+  body * {
+    visibility: hidden !important;
+  }
+  #medical-record-print,
+  #medical-record-print * {
+    visibility: visible !important;
+  }
   #medical-record-print {
     position: absolute !important;
-    left: 0 !important; top: 0 !important;
-    width: 100% !important; min-height: 0 !important;
-    margin: 0 !important; padding: 0 !important;
-    box-shadow: none !important; border: 0 !important;
-    color: #000 !important; background: #fff !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    color: #000 !important;
+    background: #fff !important;
   }
-  .no-print { display: none !important; }
-  .print-preview-modal { width: 100% !important; max-height: none !important; overflow: visible !important; padding: 0 !important; background: #fff !important; }
-  .print-notes { background: #fff !important; break-inside: avoid; }
-  .print-detail { break-inside: avoid; }
+  .no-print {
+    display: none !important;
+  }
+  .print-preview-modal {
+    width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .print-notes {
+    background: #fff !important;
+    break-inside: avoid;
+  }
+  .print-detail {
+    break-inside: avoid;
+  }
 }
 
 /* Inline phone-number validation message */
@@ -5620,7 +5573,6 @@ body {
 #doctor-phone[aria-invalid="true"] {
   border-color: #d93025;
 }
-
 
 .records-toast {
   position: fixed !important;
@@ -5659,3 +5611,606 @@ body {
   cursor: pointer;
 }
 
+.logo-icon {
+  margin-left: 30px;
+}
+
+/* ===== PROFILE PAGE ===== */
+.profile {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  color: #294744;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== COMMON CARD STYLING ===== */
+.profile-card,
+.personal-details,
+.medical-info,
+.emergency-info {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #d9efec;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+  width: 100%;
+  padding: 28px 32px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Profile Image */
+.profile-img {
+  flex-shrink: 0;
+}
+
+.profile-img img {
+  display: block;
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  margin: 0;
+}
+
+/* Profile Information */
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-info h2 {
+  margin: 0 0 12px;
+  color: #205b53;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.profile-info p {
+  margin: 7px 0;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== PERSONAL DETAILS ===== */
+.personal-details {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.header-details,
+.header-medical,
+.header-emergency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-details h2,
+.header-medical h2,
+.header-emergency h2 {
+  margin: 0;
+  color: #205b53;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+/* Personal Details Layout */
+.body-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.body-details label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.body-details p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== MEDICAL INFORMATION ===== */
+.medical-info {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.body-medical {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.body-medical label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.body-medical p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== EMERGENCY CONTACT ===== */
+.emergency-info {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.emergency-info > div:last-child {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.emergency-info label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.emergency-info p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== BUTTONS ===== */
+.button,
+.header-details button,
+.header-medical button,
+.header-emergency button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover,
+.header-details button:hover,
+.header-medical button:hover,
+.header-emergency button:hover {
+  background-color: #20675d;
+}
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-buttons .button {
+  margin-top: 0;
+}
+/* ===== EDIT PROFILE FORM ===== */
+.profile-info form,
+.body-details form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.profile-info form label,
+.body-details form label {
+  font-size: 14px;
+  color: #456761;
+}
+
+.profile-info input,
+.profile-info select,
+.profile-info textarea,
+.body-details input,
+.body-details select,
+.body-details textarea {
+  width: 100%;
+  max-width: 380px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #b8d5cf;
+  border-radius: 7px;
+  background-color: #ffffff;
+  color: #294744;
+  font: inherit;
+}
+
+.profile-info textarea,
+.body-details textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+.profile-info input:focus,
+.profile-info select:focus,
+.profile-info textarea:focus,
+.body-details input:focus,
+.body-details select:focus,
+.body-details textarea:focus {
+  outline: 2px solid #70b8ac;
+  outline-offset: 1px;
+}
+.body-details form {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+}
+
+.body-details form input,
+.body-details form select,
+.body-details form textarea {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .profile {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .profile-card,
+  .personal-details,
+  .medical-info,
+  .emergency-info {
+    padding: 22px 20px;
+  }
+
+  .profile-card {
+    gap: 20px;
+  }
+
+  .profile-img img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .body-details,
+  .body-medical,
+  .emergency-info > div:last-child {
+    column-gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile {
+    padding: 16px 12px;
+  }
+
+  .profile-card {
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .profile-img img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .profile-info h2 {
+    font-size: 20px;
+  }
+
+  .personal-details,
+  .medical-info,
+  .emergency-info {
+    padding: 20px 16px;
+  }
+
+  .body-details,
+  .body-medical,
+  .emergency-info > div:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .header-details h2,
+  .header-medical h2,
+  .header-emergency h2 {
+    font-size: 18px;
+  }
+}
+/* Page background and text */
+.profile {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* All cards keep the teal background */
+.profile-card {
+  background-color: #d9efec;
+  color: #000000;
+}
+.personal-details,
+.medical-info,
+.emergency-info {
+  background-color: white;
+}
+
+/* All headings */
+.profile-info h2,
+.header-details h2,
+.header-medical h2,
+.header-emergency h2 {
+  color: #000000;
+}
+
+/* All details text */
+.profile-info p,
+.body-details p,
+.body-medical p,
+.emergency-info p {
+  color: #000000;
+}
+
+/* Labels */
+.body-details label,
+.body-medical label,
+.emergency-info label,
+.profile-info form label {
+  color: #000000;
+}
+
+/* ===== MEDICAL INFORMATION ===== */
+.medical-info {
+  width: 100%;
+  margin: 0;
+  padding: 28px 32px;
+  box-sizing: border-box;
+
+  color: #000000;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+}
+
+.header-medical {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-medical h2 {
+  margin: 0;
+  color: #000000;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.body-medical {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 8px;
+}
+
+.body-medical label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.body-medical p {
+  margin: 0 0 18px;
+  color: #000000;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== EMERGENCY CONTACT ===== */
+.emergency-info {
+  width: 100%;
+  margin: 0;
+  padding: 28px 32px;
+  box-sizing: border-box;
+
+  color: #000000;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+}
+
+.header-emergency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-emergency h2 {
+  margin: 0;
+  color: #000000;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.body-emergency {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 8px;
+}
+
+.body-emergency label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.body-emergency p {
+  margin: 0 0 18px;
+  color: #000000;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ===== BUTTONS ===== */
+.header-medical button,
+.header-emergency button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.header-medical button:hover,
+.header-emergency button:hover {
+  background-color: #20675d;
+}
+
+/* ===== EDIT FORMS ===== */
+.body-medical form,
+.body-emergency form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.body-medical input,
+.body-medical textarea,
+.body-medical select,
+.body-emergency input,
+.body-emergency textarea,
+.body-emergency select {
+  width: 100%;
+  max-width: 500px;
+  padding: 11px 12px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #b8d5cf;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.body-medical textarea,
+.body-emergency textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.body-medical form button,
+.body-emergency form button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.body-medical form button:hover,
+.body-emergency form button:hover {
+  background-color: #20675d;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .medical-info,
+  .emergency-info {
+    padding: 22px 20px;
+  }
+
+  .body-medical,
+  .body-emergency {
+    grid-template-columns: 1fr;
+  }
+
+  .header-medical h2,
+  .header-emergency h2 {
+    font-size: 18px;
+  }
+}
+
+.body-medical form,
+.body-emergency form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-column: 1 / -1 !important;
+  box-sizing: border-box !important;
+}
+
+.body-medical form label,
+.body-emergency form label {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.body-medical form input,
+.body-medical form textarea,
+.body-medical form select,
+.body-emergency form input,
+.body-emergency form textarea,
+.body-emergency form select {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.body-medical form .form-buttons,
+.body-emergency form .form-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 12px;
+  width: 100%;
+}
