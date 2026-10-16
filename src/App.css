@@ -5470,3 +5470,192 @@ body {
 .sidebar.closed .listItems li a span {
   display: none;
 }
+
+
+/* =========================================================
+   MEDICAL RECORD CRUD + PRINT PREVIEW ADDITIONS
+   Added to App.css so no separate Records.css file is needed.
+========================================================= */
+
+/* Extra styles for CRUD actions and the paper-style print preview.
+   The main MediLink record cards, forms, theme, and modals use App.css. */
+
+.doctor-phone {
+  margin: 0 0 5px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.record-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.edit-record-btn,
+.print-record-btn {
+  padding: 8px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-record-btn {
+  background: var(--teal-light);
+  border: 1px solid var(--teal-border);
+  color: var(--primary);
+}
+.edit-record-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+
+.print-record-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.print-record-btn:hover { background: var(--teal-light); border-color: var(--primary); }
+
+.print-overlay { z-index: 2100; }
+.print-preview-modal {
+  width: min(920px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  padding: 18px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #e8edf0;
+}
+.print-preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #18212b;
+  font-weight: 700;
+}
+.print-preview-toolbar > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.print-document {
+  box-sizing: border-box;
+  width: min(100%, 760px);
+  min-height: 850px;
+  margin: 0 auto;
+  padding: 56px 60px;
+  background: #fff;
+  color: #18212b;
+  box-shadow: 0 3px 18px rgba(0,0,0,.12);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.print-document-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #087f83;
+}
+.print-logo { color: #087f83; font-size: 25px; font-weight: 800; }
+.print-logo span { color: #18212b; }
+.print-document-header p { color: #64748b; font-size: 11px; letter-spacing: 1.5px; text-align: right; }
+.print-document > h1 { margin: 34px 0 6px; font-size: 28px; }
+.print-subtitle { color: #64748b; margin: 0 0 22px; }
+.print-document-rule { height: 1px; background: #dbe3e8; margin-bottom: 20px; }
+.print-detail {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+  overflow-wrap: anywhere;
+}
+.print-detail span { color: #64748b; }
+.print-detail strong { font-weight: 700; }
+.print-notes { margin-top: 30px; padding: 20px; background: #f7fafb; border: 1px solid #dbe7e7; border-radius: 8px; }
+.print-notes h2 { margin: 0 0 12px; font-size: 16px; }
+.print-notes p { margin: 0; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.print-document-footer { display: flex; flex-direction: column; gap: 6px; margin-top: 70px; padding-top: 15px; border-top: 1px solid #dbe3e8; color: #64748b; font-size: 11px; }
+
+@media (max-width: 900px) {
+  .record-card { flex-wrap: wrap; gap: 12px; }
+  .record-info { min-width: 180px; }
+  .record-date { margin-left: auto; }
+  .record-actions { width: 100%; margin-left: 0; justify-content: flex-start; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .print-preview-modal { padding: 10px; }
+  .print-document { min-height: auto; padding: 28px 22px; }
+  .print-detail { grid-template-columns: 1fr; gap: 5px; }
+  .print-document-header { align-items: flex-start; flex-direction: column; }
+  .print-document-header p { text-align: left; }
+}
+
+@media print {
+  @page { size: A4; margin: 15mm; }
+  body * { visibility: hidden !important; }
+  #medical-record-print, #medical-record-print * { visibility: visible !important; }
+  #medical-record-print {
+    position: absolute !important;
+    left: 0 !important; top: 0 !important;
+    width: 100% !important; min-height: 0 !important;
+    margin: 0 !important; padding: 0 !important;
+    box-shadow: none !important; border: 0 !important;
+    color: #000 !important; background: #fff !important;
+  }
+  .no-print { display: none !important; }
+  .print-preview-modal { width: 100% !important; max-height: none !important; overflow: visible !important; padding: 0 !important; background: #fff !important; }
+  .print-notes { background: #fff !important; break-inside: avoid; }
+  .print-detail { break-inside: avoid; }
+}
+
+/* Inline phone-number validation message */
+.field-error {
+  margin: 6px 0 0;
+  color: #d93025;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#doctor-phone[aria-invalid="true"] {
+  border-color: #d93025;
+}
+
+
+.records-toast {
+  position: fixed !important;
+  top: 100px !important;
+  right: 25px !important;
+  z-index: 999999 !important;
+
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px !important;
+
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 2px solid #059669 !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.records-toast.success {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border-color: #059669 !important;
+}
+
+.records-toast.delete {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #dc2626 !important;
+}
+
+.records-toast button {
+  background: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  cursor: pointer;
+}
+
