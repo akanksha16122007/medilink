@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const getStoredUser = () => JSON.parse(localStorage.getItem("user"));
 
 const Header = ({ darkMode, toggleTheme }) => {
+  const getStoredUser = () => JSON.parse(localStorage.getItem("user"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLogOut, setshowLogOut] = useState(false);
   const [user, setUser] = useState(getStoredUser);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+const [speechRate, setSpeechRate] = useState(0.9);
+
 
   useEffect(() => {
     setUser(getStoredUser());
@@ -27,12 +30,48 @@ const Header = ({ darkMode, toggleTheme }) => {
     };
   }, []);
 
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
     setshowLogOut(false);
     navigate("/login");
   };
+  const speakSelectedText=()=>{
+    const selectedText=String(window.getSelection()||"").trim();
+    if(!selectedText){
+      alert("Please select some text first");
+      return;
+
+    }
+    if(!("speechSynthesis" in window)){
+      alert("Text-to-speech is not supported by this browser");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const speech=new SpeechSynthesisUtterance(selectedText);
+   
+     speech.lang="en-IN";
+    speech.rate=Number(speechRate);
+    speech.pitch=1;
+    speech.volume=1;
+
+ window.speechSynthesis.speak(speech);
+  };
+  const pauseOrResume=()=>{
+    const synth=window.speechSynthesis;
+    if(synth.paused){
+      synth.resume();
+    }
+    else if(synth.speaking){
+      synth.pause();
+    }
+  }
+  const stopSpeaking = () => {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+};
 
   return (
     <header className="header">
@@ -50,6 +89,52 @@ const Header = ({ darkMode, toggleTheme }) => {
       {/* Navigation */}
       <nav className={menuOpen ? "nav active" : "nav"}>
         <i class="fa-solid fa-bell"></i>
+
+ <div className="voice-settings">
+  {/* <label htmlFor="speech-voice">Voice:</label>
+
+  <select
+    id="speech-voice"
+    value={selectedVoice}
+    onChange={(e) => setSelectedVoice(e.target.value)}
+  >
+    {voices.map((voice) => (
+      <option key={`${voice.name}-${voice.lang}`} value={voice.name}>
+        {voice.name} ({voice.lang})
+      </option>
+    ))}
+  </select> */}
+
+  <label htmlFor="speech-rate">Speed:</label>
+
+  <select
+    id="speech-rate"
+    value={speechRate}
+    onChange={(e) => setSpeechRate(Number(e.target.value))}
+  >
+    <option value={0.7}>Slow</option>
+    <option value={.9}>Normal</option>
+    <option value={1.25}>Fast</option>
+  </select>
+</div> 
+
+        <div className="speech-controls">
+          <button type="button" className="speech-btn" onClick={speakSelectedText} title="Read Selected Text Aloud">
+             <i className="fa-solid fa-volume-high"></i>
+            {" "}Read Selected Text
+          </button>
+          <button
+          type="button" className="
+          speech-btn" onClick={pauseOrResume}>
+             <i className="fa-solid fa-pause"></i> Pause / Resume
+   
+          </button>
+        <button type="button" className="speech-stop-btn" onClick={stopSpeaking}
+        title="Stop Speaking">
+           <i className="fa-solid fa-stop"></i>
+          {" "}Stop Speaking
+        </button>
+        </div>
 
         {/* Login / User */}
         {user ? (
