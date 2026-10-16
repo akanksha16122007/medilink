@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFolderOpen,
+  faFileCirclePlus,
+  faPlus,
+  faDownload,
+  faTrashCan
+} from "@fortawesome/free-solid-svg-icons";
 
 const STORAGE_KEY = "medilink_vault";
 
@@ -11,7 +19,23 @@ const categories = [
 ];
 
 export default function DocumentVault() {
+  // animated-icons logic
+  const [animate, setAnimate] = useState(false);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setAnimate(true);
+
+    setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
+
   // Load saved documents from localStorage.
+
   const [documents, setDocuments] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -202,7 +226,7 @@ export default function DocumentVault() {
 
       <header className="vault-heading">
         <div>
-          <h1>Document Vault 🗂️</h1>
+          <h1>Document Vault <FontAwesomeIcon icon={faFolderOpen} className="vault-icon" flip360={animate} /></h1>
           <p className="vault-subtitle">
             Organize your medical reports, prescriptions, and
             diagnostic record files in one place.
@@ -220,7 +244,7 @@ export default function DocumentVault() {
       <section className="vault-upload-panel">
         <div className="section-heading">
           <div>
-            <h2>Add a medical document</h2>
+            <h2>Add a medical document <FontAwesomeIcon icon={faFileCirclePlus} className="vault-icon" ></FontAwesomeIcon></h2>
             <p>Upload a file and assign it a record type.</p>
           </div>
         </div>
@@ -282,7 +306,7 @@ export default function DocumentVault() {
           </div>
 
           <button type="submit" className="vault-primary-btn">
-            Add to records
+          <FontAwesomeIcon icon={faPlus} className="vault-icon-light"></FontAwesomeIcon> Add to records
           </button>
         </form>
       </section>
@@ -290,7 +314,7 @@ export default function DocumentVault() {
       <section className="vault-library">
         <div className="section-heading library-heading">
           <div>
-            <h2>Saved documents</h2>
+            <h2>Saved documents <FontAwesomeIcon icon={faDownload} className="vault-icon" ></FontAwesomeIcon></h2>
             <p>Search, review, or remove your medical records.</p>
           </div>
 
@@ -385,7 +409,7 @@ export default function DocumentVault() {
                     onClick={() => handleDelete(document.id)}
                     aria-label={`Remove ${document.name}`}
                   >
-                    Remove
+                  <FontAwesomeIcon icon={faTrashCan} className="vault-icon-red"></FontAwesomeIcon>
                   </button>
                 </div>
               </article>
