@@ -40,7 +40,15 @@ function AppShell({ darkMode, toggleTheme }) {
               <Route path="/records" element={<Records />} />
               <Route path="/DocumentVault" element={<DocumentVault />} />
               <Route path="/HealthInsurance" element={<HealthInsurance />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route
+  path="/settings"
+  element={
+    <Settings
+      darkMode={darkMode}
+      toggleTheme={toggleTheme}
+    />
+  }
+/>
               <Route
                 path="/AppointmentPlanner"
                 element={<AppointmentPlanner />}
