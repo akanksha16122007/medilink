@@ -3,13 +3,21 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [isEditing, SetIsEditing] = useState(false);
-  const [personalDetails, setPersonalDetails] = useState({
-    name: "Akanksha Khurana",
-    gender: "Female",
-    age: "18 years",
-    location: "Chandigarh,India",
+  const [personalDetails, setPersonalDetails] = useState(() => {
+    const savedDetails = localStorage.getItem("personalDetails");
+    return savedDetails
+      ? JSON.parse(savedDetails)
+      : {
+          name: "Akanksha Khurana",
+          gender: "Female",
+          age: "18 years",
+          location: "Chandigarh,India",
+        };
   });
   const [personalFormData, setPersonalFormData] = useState(personalDetails);
+  useEffect(() => {
+    localStorage.setItem("personalDetails", JSON.stringify(personalDetails));
+  }, [personalDetails]);
   const handleChange = (e) => {
     setPersonalFormData({
       ...personalFormData,
@@ -27,17 +35,25 @@ const Profile = () => {
     SetIsEditing(false);
   };
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
-  const [personalInfo, setPersonalInfo] = useState({
-    name: "Akanksha Khurana",
-    dob: "16-12-2007",
-    gender: "Female",
-    phoneno: "6283722167",
-    email: "akankshakhurana01@gmail.com",
-    location: "Chandigarh,India",
-    height: "175cm",
-    weight: "50kg",
+  const [personalInfo, setPersonalInfo] = useState(() => {
+    const savedInfo = localStorage.getItem("personalInfo");
+    return savedInfo
+      ? JSON.parse(savedInfo)
+      : {
+          name: "Akanksha Khurana",
+          dob: "2007-12-16",
+          gender: "Female",
+          phoneno: "6283722167",
+          email: "akankshakhurana01@gmail.com",
+          location: "Chandigarh,India",
+          height: "175cm",
+          weight: "50kg",
+        };
   });
   const [personalInfoForm, setPersonalInfoForm] = useState(personalInfo);
+  useEffect(() => {
+    localStorage.setItem("personalInfo", JSON.stringify(personalInfo));
+  }, [personalInfo]);
   const handleChange1 = (e) => {
     setPersonalInfoForm({
       ...personalInfoForm,
@@ -56,16 +72,24 @@ const Profile = () => {
 
   const [isMedicalEditing, setIsMedicalEditing] = useState(false);
 
-  const [medicalInfo, setMedicalInfo] = useState({
-    bloodGroup: "O+",
-    allergies: "None",
-    chronicConditions: "None",
-    currentMedications: "None",
-    pastIllnesses: "None",
-    otherNotes: "-",
+  const [medicalInfo, setMedicalInfo] = useState(() => {
+    const savedMedicalInfo = localStorage.getItem("medicalInfo");
+    return savedMedicalInfo
+      ? JSON.parse(savedMedicalInfo)
+      : {
+          bloodGroup: "O+",
+          allergies: "None",
+          chronicConditions: "None",
+          currentMedications: "None",
+          pastIllnesses: "None",
+          otherNotes: "-",
+        };
   });
 
   const [medicalForm, setMedicalForm] = useState(medicalInfo);
+  useEffect(() => {
+    localStorage.setItem("medicalInfo", JSON.stringify(medicalInfo));
+  }, [medicalInfo]);
 
   const handleMedicalChange = (e) => {
     const { name, value } = e.target;
@@ -94,14 +118,22 @@ const Profile = () => {
 
   const [isEmergencyEditing, setIsEmergencyEditing] = useState(false);
 
-  const [emergencyInfo, setEmergencyInfo] = useState({
-    name: "Suresh Khurana",
-    phone: "8728074400",
-    relation: "Father",
-    address: "Chandigarh,India",
+  const [emergencyInfo, setEmergencyInfo] = useState(() => {
+    const savedEmergencyInfo = localStorage.getItem("emergencyInfo");
+    return savedEmergencyInfo
+      ? JSON.parse(savedEmergencyInfo)
+      : {
+          name: "Suresh Khurana",
+          phone: "8728074400",
+          relation: "Father",
+          address: "Chandigarh,India",
+        };
   });
 
   const [emergencyForm, setEmergencyForm] = useState(emergencyInfo);
+  useEffect(() => {
+    localStorage.setItem("emergencyInfo", JSON.stringify(emergencyInfo));
+  }, [emergencyInfo]);
 
   const handleEmergencyChange = (e) => {
     const { name, value } = e.target;
