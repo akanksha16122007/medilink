@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 const Sidebar = () => {
-  const [Open, setOpen] = useState(true);
+  const [Open, setOpen] = useState(() => {
+    const value = localStorage.getItem("sideBarOpen");
+    if (value === null) {
+      return true;
+    }
+    return JSON.parse(value);
+  });
   const handleClick = () => {
     setOpen(!Open);
+    localStorage.setItem("sideBarOpen", !Open);
   };
   return (
     <div className={Open ? "sidebar open" : "sidebar closed"}>

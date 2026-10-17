@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Sidebar from "./Components/Sidebar";
-
 import Home from "./Pagess/Home";
 import Login from "./Pagess/Login";
 import Profile from "./Pagess/Profile";
@@ -16,7 +15,8 @@ import DocumentVault from "./Pagess/DocumentVault";
 import HealthInsurance from "./Pagess/HealthInsurance";
 import AppointmentPlanner from "./Pagess/AppointmentPlanner";
 import Settings from "./Pagess/Settings";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AppShell({ darkMode, toggleTheme }) {
   const location = useLocation();
   const hideSidebar =
@@ -59,6 +59,7 @@ function AppShell({ darkMode, toggleTheme }) {
       </div>
 
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

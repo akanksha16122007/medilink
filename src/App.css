@@ -5251,65 +5251,138 @@ body {
   }
 }
 
-/*Sidebar*/
+/* =========================================
+   SIDEBAR
+========================================= */
+
 .sidebar {
-  border: 1px solid black;
-  border-radius: 0 12px 12px 0;
   width: 23%;
   flex-shrink: 0;
-  transition: width 0.3s ease;
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: #e6f4f1;
-  border-color: #b8ddd5;
-  box-shadow: 4px 0 12px rgba(15, 118, 110, 0.12);
   height: 100vh;
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  overflow: visible;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0 12px 12px 0;
+  box-shadow: 4px 0 12px var(--shadow);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  overscroll-behavior: contain;
 }
+
 .sidebar.closed {
   width: 70px;
 }
 
+/* =========================================
+   SIDEBAR LIST
+========================================= */
+
 .listItems {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
+
+.listItems li {
+  padding: 0;
+  margin: 10px;
+}
+
+/* =========================================
+   SIDEBAR LINKS
+========================================= */
+
 .listItems li a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
-  padding: 10px;
-  width: full;
+  gap: 12px;
+
+  width: 100%;
   box-sizing: border-box;
-  border-radius: 12px;
-}
-.listItems li {
   padding: 12px;
-  margin: 12px;
+
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
+
+/* Icons */
+
 .listItems li a i {
-  color: #0f766e;
+  color: var(--primary);
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
 }
+
+/* Hover */
+
 .listItems li a:hover {
-  background-color: #eaf2ff;
-  border: 1px solid black;
-  border-radius: 12px;
-  background-color: #bfe5dc;
+  background-color: var(--teal-light-2);
+  border-color: var(--teal-border);
+  color: var(--primary);
 }
+
+.listItems li a:hover i {
+  color: var(--primary-dark);
+}
+
+/* =========================================
+   MENU ICON
+========================================= */
+
+.listItems li.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 12px;
+  margin: 10px;
+
+  cursor: pointer;
+  color: var(--primary);
+  border-radius: 10px;
+
+  transition: background-color 0.2s ease;
+}
+
+.listItems li.menu-icon:hover {
+  background-color: var(--surface-alt);
+}
+
+.menu-icon i {
+  font-size: 20px;
+}
+
+/* =========================================
+   CLOSED SIDEBAR
+========================================= */
+
 .sidebar.closed .listItems li a {
   justify-content: center;
-  padding: 10px 0;
+  padding: 12px 0;
 }
+
 .sidebar.closed .listItems li a span {
   display: none;
+}
+
+.sidebar.closed .listItems li.menu-icon {
+  justify-content: center;
+  padding: 12px 0;
 }
 
 /* =========================================================
@@ -6409,6 +6482,606 @@ body {
   margin-left: 30px;
 }
 
+/* ===== PROFILE PAGE =====
+.profile {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  color: #294744;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== COMMON CARD STYLING ===== */
+/* .profile-card,
+.personal-details,
+.medical-info,
+.emergency-info {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #d9efec;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+} */
+
+/* ===== PROFILE CARD ===== */
+/* .profile-card {
+  width: 100%;
+  padding: 28px 32px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+} */
+
+/* Profile Image */
+/* .profile-img {
+  flex-shrink: 0;
+}
+
+.profile-img img {
+  display: block;
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  margin: 0;
+} */
+
+/* Profile Information */
+/* .profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-info h2 {
+  margin: 0 0 12px;
+  color: #205b53;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.profile-info p {
+  margin: 7px 0;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== PERSONAL DETAILS ===== */
+/* .personal-details {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.header-details,
+.header-medical,
+.header-emergency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-details h2,
+.header-medical h2,
+.header-emergency h2 {
+  margin: 0;
+  color: #205b53;
+  font-size: 21px;
+  font-weight: 600;
+} */
+
+/* Personal Details Layout */
+/* .body-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.body-details label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.body-details p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== MEDICAL INFORMATION ===== */
+/* .medical-info {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.body-medical {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.body-medical label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.body-medical p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== EMERGENCY CONTACT ===== */
+/* .emergency-info {
+  margin: 0;
+  padding: 28px 32px;
+}
+
+.emergency-info > div:last-child {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 4px;
+}
+
+.emergency-info label {
+  display: block;
+  margin-bottom: 5px;
+  color: #55716d;
+  font-size: 14px;
+}
+
+.emergency-info p {
+  margin: 0 0 18px;
+  color: #294744;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== BUTTONS ===== */
+/* .button,
+.header-details button,
+.header-medical button, */
+/* .header-emergency button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover,
+.header-details button:hover,
+.header-medical button:hover,
+.header-emergency button:hover {
+  background-color: #20675d;
+}
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-buttons .button {
+  margin-top: 0;
+}
+/* ===== EDIT PROFILE FORM ===== */
+/* .profile-info form,
+.body-details form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+} */
+
+/* .profile-info form label,
+.body-details form label {
+  font-size: 14px;
+  color: #456761;
+}
+
+.profile-info input,
+.profile-info select,
+.profile-info textarea,
+.body-details input,
+.body-details select,
+.body-details textarea {
+  width: 100%;
+  max-width: 380px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #b8d5cf;
+  border-radius: 7px;
+  background-color: #ffffff;
+  color: #294744;
+  font: inherit;
+}
+
+.profile-info textarea,
+.body-details textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+.profile-info input:focus,
+.profile-info select:focus,
+.profile-info textarea:focus,
+.body-details input:focus,
+.body-details select:focus,
+.body-details textarea:focus {
+  outline: 2px solid #70b8ac;
+  outline-offset: 1px;
+}
+.body-details form {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+}
+
+.body-details form input,
+.body-details form select,
+.body-details form textarea {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+} */
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* @media (max-width: 768px) {
+  .profile {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .profile-card,
+  .personal-details,
+  .medical-info,
+  .emergency-info {
+    padding: 22px 20px;
+  }
+
+  .profile-card {
+    gap: 20px;
+  }
+
+  .profile-img img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .body-details,
+  .body-medical,
+  .emergency-info > div:last-child {
+    column-gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile {
+    padding: 16px 12px;
+  }
+
+  .profile-card {
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .profile-img img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .profile-info h2 {
+    font-size: 20px;
+  }
+
+  .personal-details,
+  .medical-info,
+  .emergency-info {
+    padding: 20px 16px;
+  }
+
+  .body-details,
+  .body-medical,
+  .emergency-info > div:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .header-details h2,
+  .header-medical h2,
+  .header-emergency h2 {
+    font-size: 18px;
+  }
+} */
+/* Page background and text */
+/* .profile {
+  background-color: #ffffff;
+  color: #000000;
+} */
+
+/* All cards keep the teal background */
+/* .profile-card {
+  background-color: #d9efec;
+  color: #000000;
+}
+.personal-details,
+.medical-info,
+.emergency-info {
+  background-color: white;
+} */
+
+/* All headings */
+/* .profile-info h2,
+.header-details h2,
+.header-medical h2,
+.header-emergency h2 {
+  color: #000000;
+} */
+
+/* All details text */
+/* .profile-info p,
+.body-details p,
+.body-medical p,
+.emergency-info p {
+  color: #000000;
+} */
+
+/* Labels */
+/* .body-details label,
+.body-medical label,
+.emergency-info label,
+.profile-info form label {
+  color: #000000;
+} */
+
+/* ===== MEDICAL INFORMATION ===== */
+/* .medical-info {
+  width: 100%;
+  margin: 0;
+  padding: 28px 32px;
+  box-sizing: border-box;
+
+  color: #000000;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+}
+
+.header-medical {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-medical h2 {
+  margin: 0;
+  color: #000000;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.body-medical {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 8px;
+}
+
+.body-medical label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.body-medical p {
+  margin: 0 0 18px;
+  color: #000000;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== EMERGENCY CONTACT ===== */
+/* .emergency-info {
+  width: 100%;
+  margin: 0;
+  padding: 28px 32px;
+  box-sizing: border-box;
+
+  color: #000000;
+  border: 1px solid #c2ded9;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
+}
+
+.header-emergency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-emergency h2 {
+  margin: 0;
+  color: #000000;
+  font-size: 21px;
+  font-weight: 600;
+} */
+
+/* .body-emergency {
+  display: grid; */
+/* grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 8px;
+}
+
+.body-emergency label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.body-emergency p {
+  margin: 0 0 18px;
+  color: #000000;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+} */
+
+/* ===== BUTTONS ===== */
+/* .header-medical button,
+.header-emergency button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.header-medical button:hover,
+.header-emergency button:hover {
+  background-color: #20675d;
+}
+
+/* ===== EDIT FORMS ===== */
+/* .body-medical form,
+.body-emergency form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+} */
+
+/* .body-medical input,
+.body-medical textarea,
+.body-medical select,
+.body-emergency input,
+.body-emergency textarea,
+.body-emergency select {
+  width: 100%;
+  max-width: 500px;
+  padding: 11px 12px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #b8d5cf;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 14px;
+} */
+
+/* .body-medical textarea,
+.body-emergency textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.body-medical form button,
+.body-emergency form button {
+  padding: 10px 18px;
+  background-color: #287c70;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+} */
+/* 
+.body-medical form button:hover,
+.body-emergency form button:hover { */
+/* background-color: #20675d;
+}
+
+/* ===== RESPONSIVE ===== */
+/* @media (max-width: 768px) {
+  .medical-info,
+  .emergency-info {
+    padding: 22px 20px;
+  }
+
+  .body-medical,
+  .body-emergency {
+    grid-template-columns: 1fr;
+  }
+
+  .header-medical h2,
+  .header-emergency h2 {
+    font-size: 18px;
+  }
+} */
+
+/* .body-medical form,
+.body-emergency form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-column: 1 / -1 !important;
+  box-sizing: border-box !important;
+}
+
+.body-medical form label,
+.body-emergency form label {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}  */
+/* 
+.body-medical form input,
+.body-medical form textarea,
+.body-medical form select,
+.body-emergency form input,
+.body-emergency form textarea,
+.body-emergency form select {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.body-medical form .form-buttons,
+.body-emergency form .form-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 12px;
+  width: 100%;
+}
+*/
 /* ===== PROFILE PAGE ===== */
 .profile {
   max-width: 1400px;
@@ -6429,7 +7102,7 @@ body {
 .emergency-info {
   width: 100%;
   box-sizing: border-box;
-  background-color: #d9efec;
+  background-color: var(--teal-light);
   border: 1px solid #c2ded9;
   border-radius: 14px;
   box-shadow: 0 4px 14px rgba(32, 90, 82, 0.1);
@@ -6590,7 +7263,7 @@ body {
 .header-medical button,
 .header-emergency button {
   padding: 10px 18px;
-  background-color: #287c70;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -6603,7 +7276,7 @@ body {
 .header-details button:hover,
 .header-medical button:hover,
 .header-emergency button:hover {
-  background-color: #20675d;
+  background-color: var(--primary-dark);
 }
 .form-buttons {
   display: flex;
@@ -6643,7 +7316,7 @@ body {
   box-sizing: border-box;
   border: 1px solid #b8d5cf;
   border-radius: 7px;
-  background-color: #ffffff;
+  background-color: var(--input-bg);
   color: #294744;
   font: inherit;
 }
@@ -6747,19 +7420,19 @@ body {
 }
 /* Page background and text */
 .profile {
-  background-color: #ffffff;
+  background-color: var(--bg);
   color: #000000;
 }
 
 /* All cards keep the teal background */
 .profile-card {
-  background-color: #d9efec;
+  background-color: var(--teal-light);
   color: #000000;
 }
 .personal-details,
 .medical-info,
 .emergency-info {
-  background-color: white;
+  background-color: var(--surface);
 }
 
 /* All headings */
@@ -6890,7 +7563,7 @@ body {
 .header-medical button,
 .header-emergency button {
   padding: 10px 18px;
-  background-color: #287c70;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -6900,7 +7573,7 @@ body {
 
 .header-medical button:hover,
 .header-emergency button:hover {
-  background-color: #20675d;
+  background-color: var(--primary-dark);
 }
 
 /* ===== EDIT FORMS ===== */
@@ -6923,7 +7596,7 @@ body {
   max-width: 500px;
   padding: 11px 12px;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: var(--input-bg);
   color: #000000;
   border: 1px solid #b8d5cf;
   border-radius: 7px;
@@ -6940,7 +7613,7 @@ body {
 .body-medical form button,
 .body-emergency form button {
   padding: 10px 18px;
-  background-color: #287c70;
+  background-color: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -6950,7 +7623,7 @@ body {
 
 .body-medical form button:hover,
 .body-emergency form button:hover {
-  background-color: #20675d;
+  background-color: var(--primary-dark);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -7008,6 +7681,846 @@ body {
   gap: 12px;
   width: 100%;
 }
+/* ===== PROFILE DARK MODE TEXT VISIBILITY ===== */
+
+.profile {
+  color: var(--text);
+}
+
+.profile-info h2,
+.header-details h2,
+.header-medical h2,
+.header-emergency h2 {
+  color: var(--text);
+}
+
+.profile-info p,
+.body-details p,
+.body-medical p,
+.emergency-info p {
+  color: var(--text);
+}
+
+.body-details label,
+.body-medical label,
+.emergency-info label,
+.profile-info form label,
+.body-details form label {
+  color: var(--text-secondary);
+}
+/* =========================================================
+   APPOINTMENT PLANNER — MEDILINK
+========================================================= */
+
+.appointment-planner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-left: 52px;
+  padding: 24px 30px;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.appointment-planner * {
+  box-sizing: border-box;
+}
+
+/* ===== COMMON HEADINGS AND TEXT ===== */
+
+.appointment-planner h2 {
+  margin: 0 0 14px;
+  color: var(--primary);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.appointment-planner p {
+  margin: 8px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   HEADER — FULL WIDTH
+========================================================= */
+
+.header-div {
+  width: 100%;
+  margin: 0 0 22px;
+  padding: 26px 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+}
+
+.header-div h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+  color: var(--primary);
+}
+
+.header-div p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   CALENDAR + BOOK APPOINTMENT
+========================================================= */
+
+.planner-top {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 22px;
+  align-items: stretch;
+}
+
+.calendar,
+.book-appointment {
+  width: 100%;
+  min-width: 0;
+  min-height: 280px;
+  margin: 0;
+  padding: 22px;
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+}
+
+.calendar h2,
+.book-appointment h2 {
+  margin-bottom: 14px;
+}
+
+.book-appointment {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-appointment p {
+  margin: 0 0 14px;
+}
+
+/* ===== BOOK APPOINTMENT BUTTON ===== */
+
+.book-appointment > button {
+  width: 100%;
+  margin: auto 0 0;
+  padding: 13px 16px;
+  border: 1px solid var(--teal-border);
+  border-radius: 10px;
+  background-color: var(--teal-light-2);
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.book-appointment > button:hover {
+  background-color: var(--teal-light);
+}
+
+/* =========================================================
+   RECENT + UPCOMING APPOINTMENTS
+========================================================= */
+
+.planner-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  align-items: start;
+}
+
+.recent-appointment,
+.upcoming-appointment {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  justify-self: stretch;
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+}
+
+.recent-appointment h2,
+.upcoming-appointment h2 {
+  margin-bottom: 14px;
+  font-size: 21px;
+}
+
+/* =========================================================
+   APPOINTMENT LISTS
+   JSX list container: appointments-list
+   Individual card: appointment-card
+========================================================= */
+
+.appointments-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+  align-items: stretch;
+}
+
+.appointment-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--teal-border);
+  border-radius: 10px;
+  background-color: var(--bg);
+  overflow-wrap: anywhere;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.appointment-card:hover {
+  border-color: var(--teal-border);
+  box-shadow: 0 3px 10px var(--shadow);
+}
+
+/* ===== DOCTOR NAME ===== */
+
+.appointment-card h3 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* ===== APPOINTMENT DETAILS ===== */
+
+.appointment-card p {
+  margin: 5px 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   APPOINTMENT STATUS
+========================================================= */
+
+.status-completed,
+.status-cancelled,
+.status-missed {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-completed {
+  color: var(--primary-dark);
+  background-color: var(--teal-light);
+  border: 1px solid var(--teal-border);
+}
+
+.status-cancelled {
+  color: var(--danger);
+  background-color: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+}
+
+.status-missed {
+  color: #92400e;
+  background-color: #fef3c7;
+  border: 1px solid #fcd34d;
+}
+
+/* =========================================================
+   BOOKING MODAL OVERLAY
+========================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.45);
+  overflow-y: auto;
+}
+
+/* =========================================================
+   BOOKING MODAL
+========================================================= */
+
+.modal-content {
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 26px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px var(--shadow);
+}
+
+.modal-content h2 {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 25px;
+}
+
+.modal-content > p {
+  margin: 0 0 20px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   BOOKING FORM
+========================================================= */
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content form > label {
+  margin-top: 5px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== INPUTS AND DROPDOWNS ===== */
+
+.modal-content input:not([type="radio"]),
+.modal-content select {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  border: 1px solid var(--border-input);
+  border-radius: 10px;
+  background-color: var(--input-bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.modal-content input::placeholder {
+  color: var(--text-muted);
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  outline: 2px solid var(--teal-border);
+  outline-offset: 1px;
+  border-color: var(--primary);
+}
+
+/* ===== RADIO BUTTONS ===== */
+
+.modal-content form > label:has(input[type="radio"]) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.modal-content input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* =========================================================
+   MODAL BUTTONS
+========================================================= */
+
+.modal-content form button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 7px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-content form button[type="submit"] {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.modal-content form button[type="submit"]:hover {
+  background-color: var(--primary-dark);
+}
+
+.modal-content form button[type="button"] {
+  background-color: var(--teal-light-2);
+  color: var(--primary);
+  border: 1px solid var(--teal-border);
+}
+
+.modal-content form button[type="button"]:hover {
+  background-color: var(--teal-light);
+}
+
+/* =========================================================
+   TABLET RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 1000px) {
+  .appointment-planner {
+    padding: 20px;
+  }
+
+  .planner-top,
+  .planner-bottom {
+    gap: 14px;
+  }
+
+  .calendar,
+  .book-appointment,
+  .recent-appointment,
+  .upcoming-appointment {
+    padding: 16px;
+  }
+
+  .appointments-list {
+    gap: 8px;
+  }
+
+  .appointment-card {
+    padding: 10px;
+  }
+
+  .appointment-card h3 {
+    font-size: 14px;
+  }
+
+  .appointment-card p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 768px) {
+  .appointment-planner {
+    padding: 14px;
+  }
+
+  .header-div {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .header-div h2 {
+    font-size: 23px;
+  }
+
+  .header-div p {
+    font-size: 15px;
+  }
+
+  .planner-top,
+  .planner-bottom {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .planner-top {
+    margin-bottom: 16px;
+  }
+
+  .calendar,
+  .book-appointment {
+    min-height: auto;
+  }
+
+  .calendar,
+  .book-appointment,
+  .recent-appointment,
+  .upcoming-appointment {
+    padding: 18px;
+  }
+
+  .appointments-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .appointment-card {
+    padding: 12px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-content {
+    max-height: calc(100vh - 24px);
+    padding: 20px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .appointment-planner {
+    padding: 10px;
+  }
+
+  .header-div {
+    padding: 16px;
+  }
+
+  .header-div h2 {
+    font-size: 21px;
+  }
+
+  .calendar,
+  .book-appointment,
+  .recent-appointment,
+  .upcoming-appointment {
+    padding: 14px;
+  }
+
+  .calendar h2,
+  .book-appointment h2,
+  .recent-appointment h2,
+  .upcoming-appointment h2 {
+    font-size: 19px;
+  }
+
+  .appointments-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .appointment-card {
+    padding: 14px;
+  }
+
+  .appointment-card h3 {
+    font-size: 15px;
+  }
+
+  .appointment-card p {
+    font-size: 13px;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .modal-content h2 {
+    font-size: 22px;
+  }
+}
+.appointment-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* Upcoming badge */
+.upcoming-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 13px;
+  border-radius: 8px;
+  background-color: #e2f5ef;
+  color: #16785d;
+  border: 1px solid #b8e4d5;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Cancel button */
+.cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 1px solid #e5b8b8;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #c34242;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #c34242;
+  color: #fff;
+  border-color: #c34242;
+}
+
+.cancel-btn:focus-visible {
+  outline: 2px solid #c34242;
+  outline-offset: 3px;
+}
+
+.cancel-btn i {
+  font-size: 11px;
+}
+
+/* Main calendar */
+
+.custom-calendar {
+  width: 100%;
+  max-width: 340px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  background: var(--surface, #ffffff);
+  color: var(--text, #171717);
+
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+
+  font-family: inherit;
+}
+
+/* Header */
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.calendar-heading h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.calendar-heading p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: var(--text-secondary, #737373);
+}
+
+.calendar-navigation {
+  display: flex;
+  gap: 5px;
+}
+
+.calendar-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text, #171717);
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-nav-btn i {
+  font-size: 11px;
+}
+
+.calendar-nav-btn:hover {
+  background: var(--surface-alt, #f5f5f5);
+}
+
+/* Weekday headings */
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 8px;
+}
+
+.calendar-weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #737373);
+}
+
+/* Date buttons */
+
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--text, #171717);
+
+  font: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.calendar-day:hover {
+  background: var(--surface-alt, #f5f5f5);
+}
+
+.calendar-day.outside-month {
+  color: var(--text-secondary, #a3a3a3);
+  opacity: 0.65;
+}
+
+.calendar-day.today-day:not(.selected-day) {
+  border-color: var(--primary, #0f766e);
+  font-weight: 600;
+}
+
+.calendar-day.selected-day {
+  background: var(--primary, #0f766e);
+  color: #ffffff;
+  border-color: var(--primary, #0f766e);
+  font-weight: 600;
+}
+
+.calendar-day.selected-day:hover {
+  background: var(--primary-dark, #115e59);
+}
+
+.calendar-day:focus-visible,
+.calendar-nav-btn:focus-visible,
+.calendar-today-btn:focus-visible {
+  outline: 2px solid var(--primary, #0f766e);
+  outline-offset: 2px;
+}
+
+/* Footer */
+
+.calendar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  margin-top: 16px;
+  padding-top: 12px;
+
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+.calendar-today-btn {
+  padding: 6px 10px;
+
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--text, #171717);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.calendar-today-btn:hover {
+  background: var(--surface-alt, #f5f5f5);
+}
+
+.calendar-selected-date {
+  font-size: 12px;
+  color: var(--text-secondary, #737373);
+  text-align: right;
+}
+
+/* Small screens */
+
+@media (max-width: 380px) {
+  .custom-calendar {
+    padding: 12px;
+  }
+
+  .calendar-weekdays,
+  .calendar-grid {
+    gap: 2px;
+  }
+
+  .calendar-day {
+    font-size: 12px;
+  }
+}
 
 .voice-settings {
   display: flex;
@@ -7038,7 +8551,6 @@ body {
     max-width: 145px;
   }
 }
-
 
 /* ========================================
    MEDILINK SETTINGS PAGE
@@ -7118,11 +8630,7 @@ body {
   overflow: hidden;
   border: 1px solid var(--teal-border);
   border-radius: 16px;
-  background: linear-gradient(
-    115deg,
-    var(--teal-light),
-    var(--surface) 90%
-  );
+  background: linear-gradient(115deg, var(--teal-light), var(--surface) 90%);
 }
 
 .settings-avatar {
