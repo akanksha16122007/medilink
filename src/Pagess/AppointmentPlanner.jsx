@@ -133,7 +133,12 @@ const AppointmentPlanner = () => {
       );
     }
   }, []);
-  const [appointments, setAppointments] = useState(upcomingAppointments);
+  const [appointments, setAppointments] = useState(() => {
+    const savedUpcomingAppointments = localStorage.getItem("appointments");
+    return savedUpcomingAppointments
+      ? JSON.parse(savedUpcomingAppointments)
+      : upcomingAppointments;
+  });
   const handleCancel = (id) => {
     setAppointments((prev) =>
       prev.filter((appointment) => appointment.id !== id),
@@ -154,6 +159,9 @@ const AppointmentPlanner = () => {
     toast.success("Appointment Booked Successfully!");
     setShowModal(false);
   };
+  useEffect(() => {
+    localStorage.setItem("appointments", JSON.stringify(appointments));
+  }, [appointments]);
   const [showMorningSlots, setShowMorningSlots] = useState(false);
   const [showEveningSlots, setShowEveningSlots] = useState(false);
   const MorningSlots = () => {
