@@ -196,14 +196,15 @@ const AppointmentPlanner = () => {
     <div className="appointment-planner">
       <div className="header-div">
         <h2>
-          <i class="fa-solid fa-calendar"></i>&nbsp;Smart Appointment Planner
+          <i class="fa-solid fa-calendar"></i>&nbsp;&nbsp;Smart Appointment
+          Planner
         </h2>
         <p>Manage your healthcare visits in one place.</p>
       </div>
       <div className="planner-top">
         <div className="calendar">
           <h2>
-            <i class="fa-regular fa-calendar"></i>&nbsp;Calendar
+            <i class="fa-regular fa-calendar"></i>&nbsp;&nbsp;Calendar
           </h2>
           <Calendar
             onDateSelect={(date) => {
@@ -213,7 +214,7 @@ const AppointmentPlanner = () => {
         </div>
         <div className="book-appointment">
           <h2>Book New Appointment</h2>
-          <p>Choose a specialist,&nbsp;date and time.</p>
+          <p>Choose a specialist,&nbsp;&nbsp;date and time.</p>
           <button
             type="button"
             onClick={() => {
@@ -223,6 +224,37 @@ const AppointmentPlanner = () => {
           >
             + Book Appointment
           </button>
+          <div className="appointment-benefits">
+            <div className="benefit-item">
+              <div className="benefit-icon scheduling-icon">
+                <i className="fa-regular fa-calendar-check"></i>
+              </div>
+              <div className="benefit-content">
+                <h3>Flexible Scheduling</h3>
+                <p>Choose a date and time that works for you.</p>
+              </div>
+            </div>
+
+            <div className="benefit-item">
+              <div className="benefit-icon specialist-icon">
+                <i className="fa-solid fa-stethoscope"></i>
+              </div>
+              <div className="benefit-content">
+                <h3>Specialist Care</h3>
+                <p>Find the right specialist for your healthcare needs.</p>
+              </div>
+            </div>
+
+            <div className="benefit-item">
+              <div className="benefit-icon organized-icon">
+                <i className="fa-solid fa-clipboard-check"></i>
+              </div>
+              <div className="benefit-content">
+                <h3>Stay Organized</h3>
+                <p>Keep upcoming visits together in one place.</p>
+              </div>
+            </div>
+          </div>
           {showModal && (
             <div className="modal-overlay">
               <div className="modal-content">
@@ -315,7 +347,7 @@ const AppointmentPlanner = () => {
       <div className="planner-bottom">
         <div className="recent-appointment">
           <h2>
-            <i class="fa-regular fa-calendar-check"></i>&nbsp;Recent
+            <i class="fa-regular fa-calendar-check"></i>&nbsp;&nbsp;Recent
             Appointments
           </h2>
           <div className="appointments-list">
@@ -342,7 +374,7 @@ const AppointmentPlanner = () => {
         </div>
         <div className="upcoming-appointment">
           <h2>
-            <i class="fa-solid fa-arrow-trend-up"></i>&nbsp;Upcoming
+            <i class="fa-solid fa-arrow-trend-up"></i>&nbsp;&nbsp;Upcoming
             Appointments
           </h2>
           <div className="appointments-list">
