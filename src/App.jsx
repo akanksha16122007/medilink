@@ -17,6 +17,7 @@ import AppointmentPlanner from "./Pagess/AppointmentPlanner";
 import Settings from "./Pagess/Settings";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EmergencyHealthPage from "./Components/EmergencyHealthPage";
 function AppShell({ darkMode, toggleTheme }) {
   const location = useLocation();
   const hideSidebar =
@@ -40,15 +41,13 @@ function AppShell({ darkMode, toggleTheme }) {
               <Route path="/records" element={<Records />} />
               <Route path="/DocumentVault" element={<DocumentVault />} />
               <Route path="/HealthInsurance" element={<HealthInsurance />} />
+              <Route path="/emergency-id" element={<EmergencyHealthPage />} />
               <Route
-  path="/settings"
-  element={
-    <Settings
-      darkMode={darkMode}
-      toggleTheme={toggleTheme}
-    />
-  }
-/>
+                path="/settings"
+                element={
+                  <Settings darkMode={darkMode} toggleTheme={toggleTheme} />
+                }
+              />
               <Route
                 path="/AppointmentPlanner"
                 element={<AppointmentPlanner />}

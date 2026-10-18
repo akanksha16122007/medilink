@@ -9235,3 +9235,592 @@ html[data-reduced-motion="true"] *::after {
     gap: 7px;
   }
 }
+
+/* Emergency Health ID Main Card */
+.EmergencyHealthID {
+  max-width: 325px;
+  min-height: 530px;
+  margin: 25px auto;
+  padding: 24px 20px;
+  background: var(--surface);
+  border: 1px solid var(--teal-border);
+  border-radius: 15px;
+  box-shadow: 0 2px 12px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+/* Header */
+.header-id {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-id h1 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+/* QR Code */
+.qr-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background: var(--surface);
+  border: 2px solid var(--teal-border);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px var(--shadow);
+  margin-bottom: 18px;
+}
+
+/* QR Information */
+.qr-info {
+  text-align: center;
+  margin-bottom: 18px;
+  padding: 0 5px;
+}
+
+.qr-info p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Linked Profile Badge */
+.qr-link {
+  width: 100%;
+  background: var(--teal-light);
+  border: 1px solid var(--teal-border);
+  border-radius: 15px;
+  padding: 11px 8px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.qr-link p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--primary);
+  margin: 0;
+}
+
+.qr-link i {
+  font-size: 14px;
+}
+
+/* Buttons Container */
+.qr-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Common Button Styling */
+.qr-buttons button {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Download Button */
+.qr-buttons button:first-child {
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+.qr-buttons button:first-child:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Print Button */
+.qr-buttons button:last-child {
+  background: var(--surface);
+  color: var(--primary);
+  border: 2px solid var(--teal-border);
+}
+
+.qr-buttons button:last-child:hover {
+  background: var(--surface-alt);
+  border-color: var(--primary);
+}
+
+/* Icons */
+.qr-buttons button i {
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .EmergencyHealthID {
+    width: calc(100% - 30px);
+    max-width: 340px;
+    margin: 20px auto;
+    padding: 24px 18px;
+  }
+
+  .header-id h1 {
+    font-size: 18px;
+  }
+}
+/* =========================================
+   EMERGENCY HEALTH PAGE
+========================================= */
+
+.EmergencyHealthPage {
+  width: 100%;
+  max-width: 650px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 30px 24px 40px;
+
+  box-sizing: border-box;
+
+  background: var(--bg, #f8fcfc);
+  color: var(--text, #102a43);
+  font-family: inherit;
+}
+
+.EmergencyHealthPage,
+.EmergencyHealthPage * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.EmergencyHealthPage .header-page {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.EmergencyHealthPage .header-page h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin: 0 0 10px;
+
+  color: var(--text, #102a43);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+.EmergencyHealthPage .header-page h1 i {
+  color: var(--primary, #087f8c);
+  flex-shrink: 0;
+}
+
+.EmergencyHealthPage .header-page p {
+  margin: 0;
+
+  color: var(--text-secondary, #627d98);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   COMMON CARD STYLING
+========================================= */
+
+.EmergencyHealthPage .patient-details,
+.EmergencyHealthPage .critical-medical-info,
+.EmergencyHealthPage .emergency-contact,
+.EmergencyHealthPage .other-details {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 0 22px;
+  padding: 24px;
+
+  background: var(--surface, #ffffff);
+
+  border: 1px solid
+    color-mix(in srgb, var(--primary, #087f8c) 22%, var(--surface, #ffffff));
+
+  border-radius: 16px;
+
+  box-shadow: 0 5px 20px
+    color-mix(in srgb, var(--text, #102a43) 7%, transparent);
+}
+
+/* =========================================
+   PATIENT DETAILS
+========================================= */
+
+.EmergencyHealthPage .patient-details {
+  display: grid;
+
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+
+  column-gap: 20px;
+  row-gap: 5px;
+}
+
+.EmergencyHealthPage .patient-details h3 {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0 0 18px;
+  padding-bottom: 14px;
+
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--primary, #087f8c) 20%, var(--surface, #ffffff));
+
+  color: var(--text, #102a43);
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.EmergencyHealthPage .patient-details img {
+  grid-column: 1;
+  grid-row: 2 / 4;
+
+  display: block;
+
+  width: 82px;
+  height: 82px;
+  max-width: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 3px solid
+    color-mix(in srgb, var(--primary, #087f8c) 35%, var(--surface, #ffffff));
+
+  background: var(--surface-alt, #eef8f8);
+}
+
+.EmergencyHealthPage .patient-details h4 {
+  grid-column: 2;
+
+  min-width: 0;
+  margin: 0;
+
+  color: var(--text, #102a43);
+
+  font-size: 18px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.EmergencyHealthPage .patient-details p {
+  grid-column: 2;
+
+  min-width: 0;
+  margin: 3px 0 0;
+
+  color: var(--text-secondary, #627d98);
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.EmergencyHealthPage .critical-medical-info > h4:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.EmergencyHealthPage .emergency-contact h3,
+.EmergencyHealthPage .other-details h3 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0 0 20px;
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--primary, #087f8c) 20%, var(--surface, #ffffff));
+
+  color: var(--text, #102a43);
+
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.EmergencyHealthPage .emergency-contact h3 i,
+.EmergencyHealthPage .critical-medical-info h4 i,
+.EmergencyHealthPage .other-details h4 i {
+  color: var(--primary, #087f8c);
+  flex-shrink: 0;
+}
+
+/* =========================================
+   MEDICAL INFORMATION
+========================================= */
+
+.EmergencyHealthPage .critical-medical-info > h4,
+.EmergencyHealthPage .other-details > h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+
+  margin: 21px 0 8px;
+
+  color: var(--text, #102a43);
+
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.EmergencyHealthPage .critical-medical-info > h4:first-child {
+  margin-top: 0;
+}
+
+.EmergencyHealthPage .critical-medical-info > h4 i,
+.EmergencyHealthPage .other-details > h4 i {
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+/* Medical detail values */
+
+.EmergencyHealthPage .critical-medical-info > p,
+.EmergencyHealthPage .other-details > p {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 13px 15px;
+
+  border-radius: 9px;
+
+  border: 1px solid
+    color-mix(in srgb, var(--primary, #087f8c) 15%, var(--surface, #ffffff));
+
+  background: var(--surface-alt, #eef8f8);
+  color: var(--text, #102a43);
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* =========================================
+   EMERGENCY CONTACT
+========================================= */
+
+.EmergencyHealthPage .emergency-contact h4 {
+  margin: 18px 0 6px;
+
+  color: var(--text-secondary, #627d98);
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.EmergencyHealthPage .emergency-contact > h4:first-of-type {
+  margin-top: 0;
+}
+
+.EmergencyHealthPage .emergency-contact > p {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 12px 14px;
+
+  background: var(--surface-alt, #eef8f8);
+  border-radius: 9px;
+
+  color: var(--text, #102a43);
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* =========================================
+   CALL EMERGENCY CONTACT BUTTON
+========================================= */
+
+.EmergencyHealthPage .emergency-contact button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 46px;
+
+  margin: 20px 0;
+  padding: 12px 18px;
+
+  border: 1px solid var(--primary, #087f8c);
+  border-radius: 10px;
+
+  background: var(--primary, #087f8c);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.5;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.EmergencyHealthPage .emergency-contact button:hover {
+  background: var(--primary-hover, #066770);
+  transform: translateY(-1px);
+}
+
+.EmergencyHealthPage .emergency-contact button:focus-visible {
+  outline: 2px solid var(--primary, #087f8c);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   OTHER MEDICAL DETAILS
+========================================= */
+
+.EmergencyHealthPage .other-details > h4:first-of-type {
+  margin-top: 0;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+  .EmergencyHealthPage {
+    width: 100%;
+    max-width: 100%;
+    padding: 22px 14px 30px;
+  }
+
+  .EmergencyHealthPage .header-page {
+    margin-bottom: 22px;
+  }
+
+  .EmergencyHealthPage .header-page h1 {
+    gap: 9px;
+    font-size: 24px;
+  }
+
+  .EmergencyHealthPage .header-page p {
+    font-size: 13px;
+  }
+
+  .EmergencyHealthPage .patient-details,
+  .EmergencyHealthPage .critical-medical-info,
+  .EmergencyHealthPage .emergency-contact,
+  .EmergencyHealthPage .other-details {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+    margin-bottom: 17px;
+
+    border-radius: 13px;
+  }
+
+  .EmergencyHealthPage .patient-details {
+    grid-template-columns: 68px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+
+  .EmergencyHealthPage .patient-details img {
+    width: 66px;
+    height: 66px;
+  }
+
+  .EmergencyHealthPage .patient-details h3,
+  .EmergencyHealthPage .emergency-contact h3,
+  .EmergencyHealthPage .other-details h3 {
+    font-size: 17px;
+  }
+
+  .EmergencyHealthPage .patient-details h4 {
+    font-size: 16px;
+  }
+
+  .EmergencyHealthPage .critical-medical-info > h4,
+  .EmergencyHealthPage .other-details > h4 {
+    font-size: 14px;
+  }
+
+  .EmergencyHealthPage .critical-medical-info > p,
+  .EmergencyHealthPage .other-details > p,
+  .EmergencyHealthPage .emergency-contact > p {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .EmergencyHealthPage .emergency-contact button {
+    font-size: 13px;
+  }
+}

@@ -13,6 +13,7 @@
     "react": "^19.2.8",
     "react-calendar": "^6.0.1",
     "react-dom": "^19.2.8",
+    "react-qr-code": "^2.2.0",
     "react-router-dom": "^6.30.6",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.1.0",
