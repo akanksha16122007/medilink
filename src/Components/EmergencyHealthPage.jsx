@@ -11,6 +11,10 @@ const EmergencyHealthPage = () => {
   const personalDetails = getSavedData("personalDetails");
   const medicalInfo = getSavedData("medicalInfo");
   const emergencyInfo = getSavedData("emergencyInfo");
+  const handleCall = () => {
+    if (!emergencyInfo.phone) return;
+    window.location.href = `tel:${emergencyInfo.phone}`;
+  };
   return (
     <div className="EmergencyHealthPage">
       <div className="header-page">
@@ -51,7 +55,7 @@ const EmergencyHealthPage = () => {
         <p>
           {emergencyInfo.relation} · {emergencyInfo.phone}
         </p>
-        <button>
+        <button type="button" onClick={handleCall}>
           <i class="fa-solid fa-phone"></i> Call Emergency Contact
         </button>
         <h4>Address</h4>
