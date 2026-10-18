@@ -12130,3 +12130,12 @@ html[data-reduced-motion="true"] *::after {
     font-size: 13px;
   }
 }
+/* Add space below the second navbar */
+.header-tools-bar {
+  margin-bottom: 32px;
+}
+
+/* Add space above the Records page heading */
+.records-page h1 {
+  margin-top: 20px;
+}
