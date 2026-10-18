@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div className={Open ? "sidebar open" : "sidebar closed"}>
       <ul className="listItems">
         <li onClick={handleClick} className="menu-icon">
-          <i class="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars desktop-menu-icon"></i>
         </li>
         <li>
           <Link to="/">

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -120,11 +119,6 @@ const Header = ({ darkMode, toggleTheme }) => {
         </button>
 
         <nav className={menuOpen ? "nav active" : "nav"}>
-          <Link to="/" onClick={closeMenu}>Home</Link>
-          <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
-          <Link to="/records" onClick={closeMenu}>Records</Link>
-          <Link to="/profile" onClick={closeMenu}>Profile</Link>
-
           <i
             className="fa-solid fa-bell"
             aria-label="Notifications"
@@ -196,9 +190,7 @@ const Header = ({ darkMode, toggleTheme }) => {
           <select
             id="speech-rate"
             value={speechRate}
-            onChange={(event) =>
-              setSpeechRate(Number(event.target.value))
-            }
+            onChange={(event) => setSpeechRate(Number(event.target.value))}
           >
             <option value={0.7}>Slow</option>
             <option value={0.9}>Normal</option>
@@ -213,8 +205,8 @@ const Header = ({ darkMode, toggleTheme }) => {
             onClick={speakSelectedText}
             title="Read Selected Text Aloud"
           >
-            <i className="fa-solid fa-volume-high" aria-hidden="true" />
-            {" "}Read Selected Text
+            <i className="fa-solid fa-volume-high" aria-hidden="true" /> Read
+            Selected Text
           </button>
 
           <button
@@ -223,8 +215,8 @@ const Header = ({ darkMode, toggleTheme }) => {
             onClick={pauseOrResume}
             title="Pause or Resume Speech"
           >
-            <i className="fa-solid fa-pause" aria-hidden="true" />
-            {" "}Pause / Resume
+            <i className="fa-solid fa-pause" aria-hidden="true" /> Pause /
+            Resume
           </button>
 
           <button
@@ -233,8 +225,7 @@ const Header = ({ darkMode, toggleTheme }) => {
             onClick={stopSpeaking}
             title="Stop Speaking"
           >
-            <i className="fa-solid fa-stop" aria-hidden="true" />
-            {" "}Stop Speaking
+            <i className="fa-solid fa-stop" aria-hidden="true" /> Stop Speaking
           </button>
         </div>
       </div>

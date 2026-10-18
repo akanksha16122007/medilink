@@ -147,6 +147,9 @@ const AppointmentPlanner = () => {
 
   const handleBooking = (e) => {
     e.preventDefault();
+    if (!time) {
+      toast.error("Please select a time slot!");
+    }
     const newAppointment = {
       id: Date.now(),
       doctor: "Dr. Riya Sharma",
@@ -167,28 +170,124 @@ const AppointmentPlanner = () => {
   const MorningSlots = () => {
     return (
       <div>
-        <button>8:00 AM</button>
-        <button>8:30 AM</button>
-        <button>9:00 AM</button>
-        <button>9:30 AM</button>
-        <button>10:00 AM</button>
-        <button>10:30 AM</button>
-        <button>11:00 AM</button>
-        <button>11:30 AM</button>
+        <button
+          type="button"
+          className={time === "8:00 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("8:00 AM")}
+        >
+          8:00 AM
+        </button>
+        <button
+          type="button"
+          className={time === "8:30 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("8:30 AM")}
+        >
+          8:30 AM
+        </button>
+        <button
+          type="button"
+          className={time === "9:00 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("9:00 AM")}
+        >
+          9:00 AM
+        </button>
+        <button
+          type="button"
+          className={time === "9:30 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("9:30 AM")}
+        >
+          9:30 AM
+        </button>
+        <button
+          type="button"
+          className={time === "10:00 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("10:00 AM")}
+        >
+          10:00 AM
+        </button>
+        <button
+          type="button"
+          className={time === "10:30 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("10:30 AM")}
+        >
+          10:30 AM
+        </button>
+        <button
+          type="button"
+          className={time === "11:00 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("11:00 AM")}
+        >
+          11:00 AM
+        </button>
+        <button
+          type="button"
+          className={time === "11:30 AM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("11:30 AM")}
+        >
+          11:30 AM
+        </button>
       </div>
     );
   };
   const EveningSlots = () => {
     return (
       <div>
-        <button>4:00 PM</button>
-        <button>4:30 PM</button>
-        <button>5:00 PM</button>
-        <button>5:30 PM</button>
-        <button>6:00 PM</button>
-        <button>6:30 PM</button>
-        <button>7:00 PM</button>
-        <button>7:30 PM</button>
+        <button
+          type="button"
+          className={time === "4:00 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("4:00 PM")}
+        >
+          4:00 PM
+        </button>
+        <button
+          type="button"
+          className={time === "4:30 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("4:30 PM")}
+        >
+          4:30 PM
+        </button>
+        <button
+          type="button"
+          className={time === "5:00 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("5:00 PM")}
+        >
+          5:00 PM
+        </button>
+        <button
+          type="button"
+          className={time === "5:30 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("5:30 PM")}
+        >
+          5:30 PM
+        </button>
+        <button
+          type="button"
+          className={time === "6:00 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("6:00 PM")}
+        >
+          6:00 PM
+        </button>
+        <button
+          type="button"
+          className={time === "6:30 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("6:30 PM")}
+        >
+          6:30 PM
+        </button>
+        <button
+          type="button"
+          className={time === "7:00 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("7:00 PM")}
+        >
+          7:00 PM
+        </button>
+        <button
+          type="button"
+          className={time === "7:30 PM" ? "selected-time-slot" : ""}
+          onClick={() => setTime("7:30 PM")}
+        >
+          7:30 PM
+        </button>
       </div>
     );
   };
@@ -297,21 +396,36 @@ const AppointmentPlanner = () => {
                     onChange={(e) => setDate(e.target.value)}
                   />
                   <label>Choose a time slot</label>
-                  <button
-                    type="button"
-                    onClick={() => setShowMorningSlots(true)}
-                  >
-                    Morning
-                  </button>
-                  {showMorningSlots && <MorningSlots />}
-                  <button
-                    type="button"
-                    onClick={() => setShowEveningSlots(true)}
-                  >
-                    Evening
-                  </button>
-                  {showEveningSlots && <EveningSlots />}
-
+                  <div className="time-accordion-container">
+                    <div className="time-accordion">
+                      <button
+                        type="button"
+                        onClick={() => setShowMorningSlots(!showMorningSlots)}
+                      >
+                        <i class="fa-solid fa-sun"></i> Morning{" "}
+                        {showMorningSlots ? (
+                          <i class="fa-solid fa-angle-down"></i>
+                        ) : (
+                          <i class="fa-solid fa-angle-up"></i>
+                        )}
+                      </button>
+                      {showMorningSlots && <MorningSlots />}
+                    </div>
+                    <div className="time-accordion">
+                      <button
+                        type="button"
+                        onClick={() => setShowEveningSlots(!showEveningSlots)}
+                      >
+                        <i class="fa-solid fa-moon"></i> Evening{" "}
+                        {showEveningSlots ? (
+                          <i class="fa-solid fa-angle-down"></i>
+                        ) : (
+                          <i class="fa-solid fa-angle-up"></i>
+                        )}
+                      </button>
+                      {showEveningSlots && <EveningSlots />}
+                    </div>
+                  </div>
                   <label>Appointment Type</label>
                   <label>
                     <input

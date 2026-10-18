@@ -5380,7 +5380,6 @@ body {
   display: none;
 }
 
-
 .sidebar.closed .listItems li.menu-icon {
   justify-content: center;
   padding: 12px 0;
@@ -8676,7 +8675,247 @@ body {
     font-size: 12px;
   }
 }
+/* ===== TIME SLOT ACCORDION ===== */
 
+/* Morning & Evening headers side by side */
+.modal-content form > label:has(+ button) {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun),
+.modal-content form > button[type="button"]:has(.fa-moon) {
+  width: calc(50% - 8px);
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+  padding: 14px 16px;
+  margin: 0 0 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--teal-border);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.06);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) {
+  margin-right: 12px;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) .fa-sun,
+.modal-content form > button[type="button"]:has(.fa-moon) .fa-moon {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.modal-content form > button[type="button"]:has(.fa-angle-down),
+.modal-content form > button[type="button"]:has(.fa-angle-up) {
+  position: relative;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun):hover,
+.modal-content form > button[type="button"]:has(.fa-moon):hover {
+  background: var(--surface-alt);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.12);
+}
+
+/* Expanded time slots */
+.modal-content form > button[type="button"]:has(.fa-sun) + div,
+.modal-content form > button[type="button"]:has(.fa-moon) + div {
+  width: calc(50% - 8px);
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px;
+  margin: 0 0 14px;
+  vertical-align: top;
+  background: var(--surface-alt);
+  border: 1px solid var(--teal-border);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) + div {
+  margin-right: 12px;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) + div button,
+.modal-content form > button[type="button"]:has(.fa-moon) + div button {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 4px;
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--teal-border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) + div button:hover,
+.modal-content form > button[type="button"]:has(.fa-moon) + div button:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* Mobile layout */
+@media (max-width: 520px) {
+  .modal-content form > button[type="button"]:has(.fa-sun),
+  .modal-content form > button[type="button"]:has(.fa-moon),
+  .modal-content form > button[type="button"]:has(.fa-sun) + div,
+  .modal-content form > button[type="button"]:has(.fa-moon) + div {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+.modal-content form > button[type="button"]:has(.fa-sun),
+.modal-content form > button[type="button"]:has(.fa-moon) {
+  display: inline-flex;
+  width: calc(50% - 6px);
+  box-sizing: border-box;
+}
+
+.modal-content form > button[type="button"]:has(.fa-sun) {
+  margin-right: 8px;
+}
+
+@media (max-width: 520px) {
+  .modal-content form > button[type="button"]:has(.fa-sun),
+  .modal-content form > button[type="button"]:has(.fa-moon) {
+    width: calc(50% - 5px);
+  }
+}
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form > button:has(.fa-sun),
+.modal-content form > button:has(.fa-moon) {
+  display: inline-flex !important;
+  width: calc(50% - 6px) !important;
+  flex: 0 0 calc(50% - 6px);
+  box-sizing: border-box;
+}
+
+.modal-content form > button:has(.fa-sun) {
+  margin-right: 12px;
+}
+
+.modal-content form > button:has(.fa-moon) {
+  margin-top: -66px;
+  margin-left: calc(50% + 0px);
+}
+.modal-content form > button:has(.fa-sun),
+.modal-content form > button:has(.fa-moon) {
+  display: inline-flex !important;
+  width: calc(50% - 6px) !important;
+  margin: 0 0 12px !important;
+  vertical-align: top;
+}
+
+.modal-content form > button:has(.fa-sun) {
+  margin-right: 8px !important;
+}
+
+.modal-content form > button:has(.fa-moon) {
+  position: relative;
+  left: 0;
+}
+.time-accordion-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  align-items: start;
+}
+
+.time-accordion {
+  min-width: 0;
+  border: 1px solid var(--teal-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.time-accordion > button {
+  width: 100% !important;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px;
+  margin: 0 !important;
+  border: none;
+  border-radius: 0;
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.time-accordion > button i {
+  color: var(--primary);
+}
+
+.time-accordion > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+.time-accordion > div button {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 9px 4px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--teal-border);
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.time-accordion > div button:hover {
+  background: var(--surface-alt);
+  border-color: var(--primary);
+}
+
+@media (max-width: 480px) {
+  .time-accordion-container {
+    grid-template-columns: 1fr;
+  }
+}
+.time-accordion > button {
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.time-accordion > button i:last-child {
+  margin-left: auto;
+}
+.time-accordion > div button.selected-time-slot {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
+}
+/*Medical Glossary*/
 .voice-settings {
   display: flex;
   align-items: center;
@@ -9826,9 +10065,6 @@ html[data-reduced-motion="true"] *::after {
   }
 }
 
-
-
-
 /* Health Insurance page */
 .health-insurance-page {
   --insurance-card-text: #ffffff;
@@ -9886,7 +10122,9 @@ html[data-reduced-motion="true"] *::after {
   background: var(--primary);
   color: #ffffff;
   font-weight: 700;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .insurance-primary-button:hover {
@@ -9954,7 +10192,6 @@ html[data-reduced-motion="true"] *::after {
   font-size: 13px;
   line-height: 1.5;
 }
-
 
 .health-insurance-page .insurance-toast svg {
   flex: 0 0 auto;
@@ -10081,7 +10318,8 @@ html[data-reduced-motion="true"] *::after {
   align-items: center;
   gap: 12px;
   min-height: 49px;
-  border-top: 1px solid color-mix(in srgb, var(--insurance-card-text) 25%, transparent);
+  border-top: 1px solid
+    color-mix(in srgb, var(--insurance-card-text) 25%, transparent);
   font-size: 13px;
 }
 
@@ -10202,7 +10440,8 @@ html[data-reduced-motion="true"] *::after {
   justify-content: center;
 }
 
-.policy-information-empty > p:not(.insurance-eyebrow):not(.insurance-storage-note) {
+.policy-information-empty
+  > p:not(.insurance-eyebrow):not(.insurance-storage-note) {
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -10319,8 +10558,8 @@ html[data-reduced-motion="true"] *::after {
     padding: 20px 14px;
   }
   .policy-cards-grid {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+  }
 
   .insurance-page-heading {
     align-items: flex-start;
@@ -10706,7 +10945,6 @@ html[data-reduced-motion="true"] *::after {
 
 .health-insurance-page .policy-number-toggle i {
   font-size: 18px;
-
 }
 .policy-information-empty,
 .policy-list-empty {

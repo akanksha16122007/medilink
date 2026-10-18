@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EmergencyHealthID from "../Components/EmergencyHealthID";
-import EmergencyHealthPage from "../Components/EmergencyHealthPage";
 const Profile = () => {
   const [isEditing, SetIsEditing] = useState(false);
   const [personalDetails, setPersonalDetails] = useState(() => {
@@ -9,10 +8,10 @@ const Profile = () => {
     return savedDetails
       ? JSON.parse(savedDetails)
       : {
-          name: "Akanksha Khurana",
-          gender: "Female",
-          age: "18 years",
-          location: "Chandigarh,India",
+          name: "Not Added",
+          gender: "Not Added",
+          age: "Not Added",
+          location: "Not Added",
         };
   });
   const [personalFormData, setPersonalFormData] = useState(personalDetails);
@@ -41,14 +40,14 @@ const Profile = () => {
     return savedInfo
       ? JSON.parse(savedInfo)
       : {
-          name: "Akanksha Khurana",
-          dob: "2007-12-16",
-          gender: "Female",
-          phoneno: "6283722167",
-          email: "akankshakhurana01@gmail.com",
-          location: "Chandigarh,India",
-          height: "175cm",
-          weight: "50kg",
+          name: "Not Added",
+          dob: "Not Added",
+          gender: "Not Added",
+          phoneno: "Not Added",
+          email: "Not Added",
+          location: "Not Added",
+          height: "Not Added",
+          weight: "Not Added",
         };
   });
   const [personalInfoForm, setPersonalInfoForm] = useState(personalInfo);
@@ -78,12 +77,12 @@ const Profile = () => {
     return savedMedicalInfo
       ? JSON.parse(savedMedicalInfo)
       : {
-          bloodGroup: "O+",
-          allergies: "None",
-          chronicConditions: "None",
-          currentMedications: "None",
-          pastIllnesses: "None",
-          otherNotes: "-",
+          bloodGroup: "Not Added",
+          allergies: "Not Added",
+          chronicConditions: "Not Added",
+          currentMedications: "Not Added",
+          pastIllnesses: "Not Added",
+          otherNotes: "Not Added",
         };
   });
 
@@ -124,10 +123,10 @@ const Profile = () => {
     return savedEmergencyInfo
       ? JSON.parse(savedEmergencyInfo)
       : {
-          name: "Suresh Khurana",
-          phone: "8728074400",
-          relation: "Father",
-          address: "Chandigarh,India",
+          name: "Not Added",
+          phone: "Not Added",
+          relation: "Not Added",
+          address: "Not Added",
         };
   });
 
