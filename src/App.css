@@ -10821,3 +10821,1312 @@ html[data-reduced-motion="true"] *::after {
   font-size: 11px;
   font-weight: 400;
 }
+
+/* ========================================
+   MEDILINK MEDICAL GLOSSARY
+======================================== */
+
+.glossary-page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1400px;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 42px 40px 64px;
+  color: #173447;
+  background: transparent;
+  font-family: inherit;
+}
+
+.glossary-page *,
+.glossary-page *::before,
+.glossary-page *::after {
+  box-sizing: border-box;
+}
+
+.glossary-page .glossary-heading {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  position: static;
+  width: 100%;
+  height: auto;
+  margin: 0 0 28px;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.glossary-page .glossary-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  color: #ffffff;
+  background: #00777b;
+  font-size: 21px;
+}
+
+.glossary-page .glossary-heading h1 {
+  margin: 0 0 10px;
+  color: #123044;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+
+.glossary-page .glossary-heading p {
+  margin: 0;
+  color: #647985;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.glossary-page .glossary-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+  max-width: 650px;
+  min-height: 54px;
+  margin: 0 0 30px;
+  padding: 0 18px;
+  border: 1px solid #d4e3e7;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #00777b;
+  box-shadow: 0 3px 12px rgba(20, 65, 75, 0.035);
+}
+
+.glossary-page .glossary-search input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #173447;
+  font: inherit;
+  font-size: 15px;
+  box-shadow: none;
+}
+
+.glossary-page .glossary-search input:focus {
+  outline: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.glossary-page .glossary-search input::placeholder {
+  color: #8a9ba4;
+}
+
+.glossary-page .glossary-count {
+  margin: 0 0 18px;
+  color: #657b86;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.glossary-page .glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.glossary-page button.glossary-term-card {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  min-width: 0;
+  min-height: 104px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #dce8eb;
+  border-radius: 15px;
+  background: #ffffff;
+  color: #173447;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(20, 65, 75, 0.035);
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.glossary-page button.glossary-term-card:hover {
+  border-color: #70bfc0;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0, 109, 115, 0.09);
+  transform: translateY(-3px);
+}
+
+.glossary-page button.glossary-term-card:focus-visible {
+  outline: 3px solid rgba(0, 119, 123, 0.25);
+  outline-offset: 3px;
+}
+
+.glossary-page .term-card-icon {
+  display: flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: #e8f6f5;
+  color: #00777b;
+  font-size: 20px;
+}
+
+.glossary-page .term-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.glossary-page .term-card-content strong {
+  color: #173447;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.glossary-page .term-card-content small {
+  color: #71848e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.glossary-page .term-card-arrow {
+  display: flex;
+  flex: 0 0 30px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f0f8f8;
+  color: #00777b;
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.glossary-page .glossary-term-card:hover .term-card-arrow {
+  transform: translateX(3px);
+}
+
+.glossary-page .glossary-empty {
+  grid-column: 1 / -1;
+  padding: 45px 20px;
+  border: 1px dashed #cbdde1;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.glossary-page .glossary-empty h3 {
+  margin: 0 0 8px;
+  color: #173447;
+}
+
+.glossary-page .glossary-empty p {
+  margin: 0;
+  color: #71848e;
+}
+
+/* Popup overlay */
+
+.glossary-overlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 24px;
+  background: rgba(10, 28, 39, 0.62);
+  backdrop-filter: blur(4px);
+}
+
+.glossary-overlay .glossary-modal {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  margin: auto;
+  padding: 32px;
+  border: 1px solid #e0eaed;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #173447;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+.glossary-overlay .glossary-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #f0f6f7;
+  color: #385766;
+  cursor: pointer;
+}
+
+.glossary-overlay .glossary-modal h2 {
+  margin: 0 45px 6px 0;
+  color: #123044;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.glossary-overlay .modal-intro {
+  margin: 0 0 24px;
+  color: #71848e;
+  font-size: 14px;
+}
+
+.glossary-overlay .glossary-levels {
+  display: flex;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.glossary-overlay button.level-button {
+  flex: 1;
+  padding: 11px 12px;
+  border: 1px solid #dce7e9;
+  border-radius: 10px;
+  background: #f7fafa;
+  color: #526b77;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.glossary-overlay button.level-button.active {
+  border-color: #00777b;
+  background: #e5f5f4;
+  color: #00696d;
+}
+
+.glossary-overlay .glossary-definition {
+  padding: 19px;
+  border: 1px solid #dcebea;
+  border-radius: 13px;
+  background: #f3fafa;
+}
+
+.glossary-overlay .definition-label,
+.glossary-overlay .visual-eyebrow {
+  color: #00777b;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.glossary-overlay .glossary-definition p {
+  margin: 9px 0 0;
+  color: #294653;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.glossary-overlay .visual-section {
+  margin-top: 26px;
+}
+
+.glossary-overlay .visual-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.glossary-overlay .visual-heading h3 {
+  margin: 5px 0 0;
+  color: #173447;
+  font-size: 20px;
+}
+
+.glossary-overlay .step-counter {
+  color: #71848e;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.glossary-overlay .visual-progress {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.glossary-overlay .visual-progress span {
+  flex: 1;
+  height: 5px;
+  border-radius: 99px;
+  background: #e2ebed;
+}
+
+.glossary-overlay .visual-progress span.progress-filled {
+  background: #008589;
+}
+
+.glossary-overlay .visual-step {
+  padding: 24px 18px;
+  border: 1px solid #e0eaed;
+  border-radius: 15px;
+  background: #fbfdfd;
+  text-align: center;
+}
+
+.glossary-overlay .visual-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  border-radius: 18px;
+  background: #e5f5f4;
+  color: #00777b;
+  font-size: 26px;
+}
+
+.glossary-overlay .visual-step h4 {
+  margin: 0 0 8px;
+  color: #173447;
+  font-size: 18px;
+}
+
+.glossary-overlay .visual-step p {
+  max-width: 440px;
+  margin: 0 auto;
+  color: #617783;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.glossary-overlay .visual-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.glossary-overlay button.visual-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid #d8e5e7;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #315260;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.glossary-overlay button.visual-nav-button.next-button {
+  border-color: #00777b;
+  background: #00777b;
+  color: #ffffff;
+}
+
+.glossary-overlay button.visual-nav-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.glossary-overlay .glossary-disclaimer {
+  margin: 22px 0 0;
+  color: #7a8c94;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Dark theme */
+
+.App.dark .glossary-page {
+  color: #e3eef2;
+}
+
+.App.dark .glossary-page .glossary-heading h1,
+.App.dark .glossary-page .term-card-content strong {
+  color: #e5f2f5;
+}
+
+.App.dark .glossary-page .glossary-heading p,
+.App.dark .glossary-page .glossary-count,
+.App.dark .glossary-page .term-card-content small {
+  color: #a6bbc4;
+}
+
+.App.dark .glossary-page .glossary-search,
+.App.dark .glossary-page button.glossary-term-card {
+  border-color: #2b444e;
+  background: #17262e;
+  color: #e3eef2;
+}
+
+.App.dark .glossary-page .glossary-search input {
+  color: #e3eef2;
+}
+
+.App.dark .glossary-page .term-card-icon,
+.App.dark .glossary-page .term-card-arrow {
+  background: #203b41;
+  color: #68d0ca;
+}
+
+.App.dark .glossary-page button.glossary-term-card:hover {
+  border-color: #4ba8a8;
+  background: #1b3038;
+}
+
+.App.dark .glossary-page .glossary-empty {
+  border-color: #35515b;
+}
+
+.App.dark .glossary-page .glossary-empty h3 {
+  color: #e3eef2;
+}
+
+.App.dark .glossary-overlay .glossary-modal {
+  border-color: #314851;
+  background: #17262e;
+  color: #e3eef2;
+}
+
+.App.dark .glossary-overlay .glossary-modal h2,
+.App.dark .glossary-overlay .visual-heading h3,
+.App.dark .glossary-overlay .visual-step h4 {
+  color: #e3eef2;
+}
+
+.App.dark .glossary-overlay .glossary-definition,
+.App.dark .glossary-overlay .visual-step {
+  border-color: #314851;
+  background: #1c3038;
+}
+
+.App.dark .glossary-overlay .glossary-definition p,
+.App.dark .glossary-overlay .visual-step p {
+  color: #c0d1d7;
+}
+
+.App.dark .glossary-overlay button.level-button,
+.App.dark .glossary-overlay button.visual-nav-button,
+.App.dark .glossary-overlay .glossary-close {
+  border-color: #354f58;
+  background: #20343d;
+  color: #d7e7eb;
+}
+
+.App.dark .glossary-overlay button.level-button.active {
+  border-color: #54b8b5;
+  background: #244849;
+  color: #a5efea;
+}
+
+.App.dark .glossary-overlay button.visual-nav-button.next-button {
+  border-color: #008589;
+  background: #008589;
+  color: #ffffff;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1100px) {
+  .glossary-page {
+    padding: 34px 26px 50px;
+  }
+
+  .glossary-page .glossary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .glossary-page {
+    padding: 26px 16px 40px;
+  }
+
+  .glossary-page .glossary-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .glossary-page button.glossary-term-card {
+    min-height: 88px;
+    padding: 15px;
+  }
+
+  .glossary-overlay {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .glossary-overlay .glossary-modal {
+    max-height: calc(100vh - 24px);
+    padding: 24px 18px;
+    border-radius: 17px;
+  }
+
+  .glossary-overlay .glossary-modal h2 {
+    font-size: 24px;
+  }
+
+  .glossary-overlay .visual-navigation {
+    flex-direction: column-reverse;
+  }
+
+  .glossary-overlay button.visual-nav-button {
+    width: 100%;
+  }
+}
+
+
+/* Main header wrapper */
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  background: var(--surface, #ffffff);
+  z-index: 100;
+}
+
+/* First row: existing navbar */
+.header-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 28px;
+  width: 100%;
+  min-height: 70px;
+  box-sizing: border-box;
+  padding: 0 24px;
+  background: var(--surface, #ffffff);
+  border-bottom: 1px solid var(--border, #dce8eb);
+}
+
+/* Logo stays on the left */
+.header-main-row > .logo {
+  flex-shrink: 0;
+}
+
+/* Navigation stays on the same row */
+.header-main-row > .nav {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 28px;
+}
+
+/* Keep the navigation links together */
+.header-main-row > .nav > a {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Push the bell to the right */
+.header-main-row > .nav > .fa-bell {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Keep profile beside the bell */
+.header-main-row > .nav > .user-info {
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+/* Login stays at the right when there is no user */
+.header-main-row > .nav > .login-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Second row: glossary and speech controls */
+.header-tools-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 24px;
+  background: var(--surface, #ffffff);
+  border-bottom: 1px solid var(--border, #dce8eb);
+}
+
+/* Medical Glossary button */
+.header-tools-bar .glossary-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--primary, #007d80);
+  border-radius: 8px;
+  color: var(--primary, #007d80);
+  background: transparent;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Speech speed and controls */
+.header-tools-bar .voice-settings,
+.header-tools-bar .speech-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-tools-bar .voice-settings {
+  flex-shrink: 0;
+}
+
+.header-tools-bar .voice-settings select {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--border, #dce8eb);
+  border-radius: 8px;
+  background: var(--surface, #ffffff);
+  color: var(--text, #142b3b);
+  cursor: pointer;
+}
+
+.header-tools-bar .speech-controls {
+  flex-wrap: wrap;
+}
+
+.header-tools-bar .speech-controls button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Tablet layout */
+@media (max-width: 900px) {
+  .header-main-row {
+    gap: 16px;
+    padding: 10px 16px;
+  }
+
+  .header-main-row > .nav {
+    gap: 16px;
+  }
+
+  .header-tools-bar {
+    padding: 10px 16px;
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .header-main-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header-main-row > .menu-btn {
+    display: block;
+  }
+
+  .header-main-row > .nav {
+    display: none;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+  }
+
+  .header-main-row > .nav.active {
+    display: flex;
+  }
+
+  .header-tools-bar {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .header-tools-bar .glossary-nav-btn {
+    width: fit-content;
+  }
+
+  .header-tools-bar .speech-controls {
+    width: 100%;
+  }
+
+  .header-tools-bar .speech-controls button {
+    flex: 1;
+    white-space: normal;
+  }
+}
+
+/* Medical Glossary page */
+.glossary-page {
+  position: relative !important;
+  top: auto !important;
+  margin-top: 0 !important;
+  padding: 36px 34px 48px !important;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Keep the icon and title together */
+.glossary-page .glossary-heading {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  column-gap: 12px !important;
+  row-gap: 12px !important;
+
+  width: 100% !important;
+  margin: 0 auto 42px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Stop the icon from floating above the heading */
+.glossary-page .glossary-icon {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Title sits beside the icon */
+.glossary-page .glossary-heading h1 {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: clamp(30px, 3vw, 42px) !important;
+  line-height: 1.2 !important;
+}
+
+/* Description sits underneath the title and icon */
+.glossary-page .glossary-heading p {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  line-height: 1.6 !important;
+  font-size: 17px !important;
+}
+
+@media (max-width: 600px) {
+  .glossary-page {
+    padding: 28px 16px 36px !important;
+  }
+
+  .glossary-page .glossary-heading h1 {
+    font-size: 28px !important;
+  }
+
+  .glossary-page .glossary-heading p {
+    font-size: 15px !important;
+  }
+}
+
+
+/* Final fix: move glossary content below the second toolbar */
+.glossary-page {
+  margin-top: 0 !important;
+  padding-top: 110px !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+/* Keep the complete heading visible */
+.glossary-page .glossary-heading {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: relative !important;
+  z-index: 1;
+}
+
+/* Keep the icon visible and aligned */
+.glossary-page .glossary-icon {
+  position: static !important;
+  transform: none !important;
+  flex-shrink: 0;
+}
+
+/* Avoid clipping the heading on smaller screens */
+@media (max-width: 600px) {
+  .glossary-page {
+    padding-top: 40px !important;
+  }
+}
+
+/* Move the glossary heading and icon to the left */
+.glossary-page .glossary-heading {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  column-gap: 12px !important;
+  row-gap: 10px !important;
+
+  width: 100% !important;
+  margin: 0 0 42px !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+/* Keep the glossary icon on the left */
+.glossary-page .glossary-icon {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Keep the title beside the icon */
+.glossary-page .glossary-heading h1 {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: clamp(30px, 3vw, 42px) !important;
+  line-height: 1.2 !important;
+  text-align: left !important;
+}
+
+/* Put the description below, aligned to the left */
+.glossary-page .glossary-heading p {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  line-height: 1.6 !important;
+  font-size: 17px !important;
+}
+
+@media (max-width: 600px) {
+  .glossary-page .glossary-heading h1 {
+    font-size: 28px !important;
+  }
+
+  .glossary-page .glossary-heading p {
+    font-size: 15px !important;
+  }
+}
+/* Term of the Day Banner - Left Aligned */
+.term-of-the-day-banner {
+  background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
+  border: 1px solid #b2f5ea;
+  border-radius: 16px;
+  padding: 1.25rem;
+  max-width: 460px; /* Limits width so it doesn't stretch awkwardly across the whole screen */
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-bottom: 1.5rem; /* Spacing before the search bar */
+}
+
+.term-of-the-day-banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.15);
+  border-color: #0d9488;
+}
+
+.totd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #0d9488;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.totd-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.totd-icon {
+  background-color: #ffffff;
+  color: #0d9488;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.totd-text h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.totd-category {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.totd-text p {
+  margin: 0.4rem 0 0 0;
+  font-size: 0.85rem;
+  color: #334155;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.totd-action-btn {
+  margin-top: 0.75rem;
+  background: none;
+  border: none;
+  color: #0d9488;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0;
+}.glossary-top-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.glossary-heading {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0;
+}
+
+.term-of-the-day-banner {
+  flex: 1;
+  min-width: 320px;
+  max-width: 450px;
+  background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
+  border: 1px solid #b2f5ea;
+  border-radius: 16px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-bottom: 0;
+}
+
+.term-of-the-day-banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.15);
+  border-color: #0d9488;
+}/* Card Grid Layout */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* Individual Term Card Styling */
+.glossary-term-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  /* Top accent line color (Teal default, or change per category) */
+  border-top: 4px solid #0d9488; 
+  border-radius: 14px;
+  padding: 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  width: 100%;
+}
+
+/* Hover Animation & Glow */
+.glossary-term-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 22px rgba(13, 148, 136, 0.12);
+  border-color: #cbd5e1;
+  border-top-color: #0d9488;
+}
+
+/* Difficulty Badge (Top Right of Card) */
+.card-difficulty-badge {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* Easy Badge Style (Soft Green) */
+.card-difficulty-badge.easy {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+/* 3-Step Visual Badge Style (Soft Coral/Pink or Blue) */
+.card-difficulty-badge.visual {
+  background-color: #ffe4e6;
+  color: #9f1239;
+}
+
+/* Card Icon Box */
+.term-card-icon {
+  background-color: #f0fdfa;
+  color: #0d9488;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+/* Card Text Content */
+.term-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.term-card-content strong {
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+
+.term-card-content small {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Arrow Icon */
+.term-card-arrow {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.glossary-term-card:hover .term-card-arrow {
+  transform: translateX(3px);
+  color: #0d9488;
+}
+
+/* ===== MediLink Teal Speech Controls ===== */
+
+.header-tools-bar .speech-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Common button styling */
+.header-tools-bar .speech-controls .speech-btn,
+.header-tools-bar .speech-controls .speech-stop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 16px;
+  border: 1px solid var(--primary, #007d80);
+  border-radius: 9px;
+  background: var(--primary, #007d80);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Read Selected Text */
+.header-tools-bar .speech-controls .speech-btn:first-child {
+  background: var(--primary, #007d80);
+  color: #ffffff;
+}
+
+/* Pause / Resume: outlined teal style */
+.header-tools-bar .speech-controls .speech-btn:nth-child(2) {
+  background: var(--surface, #ffffff);
+  color: var(--primary, #007d80);
+}
+
+/* Stop Speaking: subtle red accent */
+.header-tools-bar .speech-controls .speech-stop-btn {
+  background: var(--surface, #ffffff);
+  color: #c0393b;
+  border-color: #e6b8b8;
+}
+
+/* Hover effects */
+.header-tools-bar .speech-controls .speech-btn:first-child:hover {
+  background: #005f62;
+  border-color: #005f62;
+  box-shadow: 0 4px 12px rgba(0, 109, 115, 0.2);
+  transform: translateY(-1px);
+}
+
+.header-tools-bar .speech-controls .speech-btn:nth-child(2):hover {
+  background: var(--primary, #007d80);
+  color: #ffffff;
+}
+
+.header-tools-bar .speech-controls .speech-stop-btn:hover {
+  background: #c0393b;
+  color: #ffffff;
+  border-color: #c0393b;
+}
+
+/* Keyboard accessibility */
+.header-tools-bar .speech-controls button:focus-visible {
+  outline: 3px solid #80cbc4;
+  outline-offset: 3px;
+}
+
+/* Button icons */
+.header-tools-bar .speech-controls button i {
+  font-size: 14px;
+}
+
+/* Press feedback */
+.header-tools-bar .speech-controls button:active {
+  transform: scale(0.98);
+}
+
+/* Dark mode */
+.App.dark .header-tools-bar .speech-controls .speech-btn:nth-child(2),
+.App.dark .header-tools-bar .speech-controls .speech-stop-btn {
+  background: var(--surface, #17252d);
+}
+
+.App.dark .header-tools-bar .speech-controls .speech-btn:nth-child(2):hover {
+  background: var(--primary, #20b8b1);
+  color: #ffffff;
+}
+
+.App.dark .header-tools-bar .speech-controls .speech-stop-btn:hover {
+  background: #c0393b;
+  color: #ffffff;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .header-tools-bar .speech-controls {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .header-tools-bar .speech-controls button {
+    flex: 1 1 auto;
+    white-space: normal;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
