@@ -357,7 +357,12 @@ const AppointmentPlanner = () => {
           {showModal && (
             <div className="modal-overlay">
               <div className="modal-content">
-                <h2>Book New Appointment</h2>
+                <div className="close">
+                  <h2>Book New Appointment</h2>
+                  <button type="button" onClick={() => setShowModal(false)}>
+                    <i class="fa-solid fa-x"></i>
+                  </button>
+                </div>
                 <p>Schedule your next doctor visit.</p>
                 <form onSubmit={handleBooking}>
                   <label>Patient Name</label>
@@ -449,9 +454,6 @@ const AppointmentPlanner = () => {
                     Online consultation
                   </label>
                   <button type="submit">Book Appointment</button>
-                  <button type="button" onClick={() => setShowModal(false)}>
-                    Close <i class="fa-solid fa-square-xmark"></i>
-                  </button>
                 </form>
               </div>
             </div>

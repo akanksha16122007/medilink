@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import HomeShimmer from "../Components/ShimmerUI";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <HomeShimmer />;
+  }
   return (
     <main className="home-page">
       {/* HERO SECTION */}
