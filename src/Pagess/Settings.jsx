@@ -75,10 +75,10 @@ const Settings = ({ darkMode, toggleTheme }) => {
           </div>
 
           <h1>
-            Settings
+            Settings { }
             <FontAwesomeIcon
               icon={faGear}
-              className="settings-main-icon"
+              className="vault-icon" spin
             />
           </h1>
 
