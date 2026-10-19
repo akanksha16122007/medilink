@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -5,7 +6,18 @@ import {
   faFileCirclePlus,
   faPlus,
   faDownload,
-  faTrashCan
+  faTrashCan,
+  faMagnifyingGlass,
+  faClock,
+  faFilePdf,
+  faImage,
+  faXmark,
+  faFileLines,
+  faCloudArrowUp,
+  faCircleCheck,
+  faCircleExclamation,
+  faEye,
+  faFileArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const STORAGE_KEY = "medilink_vault";
@@ -19,26 +31,10 @@ const categories = [
 ];
 
 export default function DocumentVault() {
-  // animated-icons logic
-  const [animate, setAnimate] = useState(false);
-
-useEffect(() => {
-  const interval = setInterval(() => {
-    setAnimate(true);
-
-    setTimeout(() => {
-      setAnimate(false);
-    }, 1000);
-  }, 5000);
-
-  return () => clearInterval(interval);
-}, []);
-
-  // Load saved documents from localStorage.
-
   const [documents, setDocuments] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      return Array.isArray(saved) ? saved : [];
     } catch {
       return [];
     }
@@ -51,17 +47,47 @@ useEffect(() => {
   const [filter, setFilter] = useState("All");
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [toast, setToast] = useState(null);
+  const [animate, setAnimate] = useState(false);
 
-  // Automatically hide toast notifications after 3 seconds.
+  // Animate the heading icon at regular intervals.
+  useEffect(() => {
+    let timeout;
+
+    const interval = setInterval(() => {
+      setAnimate(true);
+
+      timeout = setTimeout(() => {
+        setAnimate(false);
+      }, 900);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  // Automatically hide notifications.
   useEffect(() => {
     if (!toast) return;
 
-    const timer = setTimeout(() => {
-      setToast(null);
-    }, 3000);
-
+    const timer = setTimeout(() => setToast(null), 3000);
     return () => clearTimeout(timer);
   }, [toast]);
+
+  // Close the preview when Escape is pressed.
+  useEffect(() => {
+    if (!selectedDoc) return;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setSelectedDoc(null);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedDoc]);
 
   function showToast(text, type = "success") {
     setToast({ text, type });
@@ -69,9 +95,12 @@ useEffect(() => {
 
   // Validate and read the selected file.
   function handleFileChange(event) {
-    const chosenFile = event.target.files[0];
+    const chosenFile = event.target.files?.[0];
 
-    if (!chosenFile) return;
+    if (!chosenFile) {
+      setFile(null);
+      return;
+    }
 
     const allowedTypes = [
       "image/jpeg",
@@ -80,16 +109,16 @@ useEffect(() => {
     ];
 
     if (!allowedTypes.includes(chosenFile.type)) {
-      showToast("Please select a JPG, PNG, or PDF file.", "error");
-      event.target.value = "";
+      showToast("Choose a JPG, PNG, or PDF file.", "error");
       setFile(null);
+      event.target.value = "";
       return;
     }
 
     if (chosenFile.size > 1.5 * 1024 * 1024) {
-      showToast("File size must not exceed 1.5 MB.", "error");
-      event.target.value = "";
+      showToast("The file must not exceed 1.5 MB.", "error");
       setFile(null);
+      event.target.value = "";
       return;
     }
 
@@ -104,14 +133,15 @@ useEffect(() => {
     };
 
     reader.onerror = () => {
-      showToast("Unable to read this file. Please try again.", "error");
       setFile(null);
+      event.target.value = "";
+      showToast("Unable to read the file. Please try again.", "error");
     };
 
     reader.readAsDataURL(chosenFile);
   }
 
-  // Add a new medical document.
+  // Save a new document.
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -133,7 +163,6 @@ useEffect(() => {
     const updatedDocuments = [newDocument, ...documents];
 
     try {
-      // Save before showing the success notification.
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(updatedDocuments)
@@ -143,9 +172,9 @@ useEffect(() => {
       setDocName("");
       setCategory("Lab Report");
       setFile(null);
-      event.target.reset();
+      event.currentTarget.reset();
 
-      showToast("Medical document added successfully.");
+      showToast("Document added successfully.");
     } catch {
       showToast(
         "Unable to save the document. Try a smaller file.",
@@ -154,21 +183,22 @@ useEffect(() => {
     }
   }
 
-  // Search by document name and filter by category.
-  const filteredDocuments = documents.filter((document) => {
-    const term = search.toLowerCase();
+  // Search by name, category, or filename.
+  const filteredDocuments = documents.filter((doc) => {
+    const term = search.trim().toLowerCase();
 
     const matchesSearch =
-      document.name.toLowerCase().includes(term) ||
-      document.category.toLowerCase().includes(term);
+      doc.name.toLowerCase().includes(term) ||
+      doc.category.toLowerCase().includes(term) ||
+      doc.fileName.toLowerCase().includes(term);
 
     const matchesCategory =
-      filter === "All" || document.category === filter;
+      filter === "All" || doc.category === filter;
 
     return matchesSearch && matchesCategory;
   });
 
-  // Remove a document.
+  // Delete a document.
   function handleDelete(id) {
     const confirmed = window.confirm(
       "Are you sure you want to remove this medical document?"
@@ -177,7 +207,7 @@ useEffect(() => {
     if (!confirmed) return;
 
     const updatedDocuments = documents.filter(
-      (document) => document.id !== id
+      (doc) => doc.id !== id
     );
 
     try {
@@ -188,30 +218,56 @@ useEffect(() => {
 
       setDocuments(updatedDocuments);
 
-      if (selectedDoc && selectedDoc.id === id) {
+      if (selectedDoc?.id === id) {
         setSelectedDoc(null);
       }
 
-      showToast("Medical document removed successfully.");
+      showToast("Document removed successfully.");
     } catch {
-      showToast("Unable to remove the document. Please try again.", "error");
+      showToast("Unable to remove the document.", "error");
     }
+  }
+
+  // Download a saved document.
+  function handleDownload(doc) {
+    const link = window.document.createElement("a");
+    link.href = doc.dataUrl;
+    link.download = doc.fileName;
+    link.style.display = "none";
+
+    window.document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
+  function getFileIcon(doc) {
+    return doc.fileType === "application/pdf" ? faFilePdf : faImage;
+  }
+
+  function formatFileSize(dataUrl) {
+    if (!dataUrl) return "";
+
+    const base64 = dataUrl.split(",")[1] || "";
+    const bytes = Math.max(0, Math.floor((base64.length * 3) / 4));
+
+    if (bytes < 1024) return `${bytes} B`;
+    return `${(bytes / 1024).toFixed(0)} KB`;
   }
 
   return (
     <main className="vault-page">
-      {/* Temporary success and error notifications */}
+      {/* Notifications */}
       {toast && (
         <div
-          className={`vault-toast ${toast.type}`}
+          className={`vault-toast vault-toast-${toast.type}`}
           role={toast.type === "error" ? "alert" : "status"}
           aria-live={toast.type === "error" ? "assertive" : "polite"}
         >
-          <span className="vault-toast-icon" aria-hidden="true">
-            {toast.type === "success" ? "✓" : "!"}
-          </span>
+          <FontAwesomeIcon
+            icon={toast.type === "error" ? faCircleExclamation : faCircleCheck}
+          />
 
-          <p>{toast.text}</p>
+          <span>{toast.text}</span>
 
           <button
             type="button"
@@ -219,33 +275,48 @@ useEffect(() => {
             onClick={() => setToast(null)}
             aria-label="Dismiss notification"
           >
-            ×
+            <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
       )}
 
+      {/* Page header */}
       <header className="vault-heading">
-        <div>
-          <h1>Document Vault <FontAwesomeIcon icon={faFolderOpen} className="vault-icon" flip360={animate} /></h1>
+        <div className="vault-heading-icon">
+          <FontAwesomeIcon icon={faFolderOpen} flip360={animate} />
+        </div>
+
+        <div className="vault-heading-copy">
+          <p className="vault-eyebrow">YOUR HEALTH RECORDS</p>
+          <h1>Document Vault</h1>
           <p className="vault-subtitle">
-            Organize your medical reports, prescriptions, and
-            diagnostic record files in one place.
+            Keep your medical documents organized and easy to access.
           </p>
         </div>
       </header>
 
+      {/* Storage information */}
       <div className="vault-notice">
-        <span className="notice-icon" aria-hidden="true">i</span>
-        <p>
-          Your medical documents are securely stored in this browser, keeping your health records organized and easily accessible on this device.
-        </p>
+        <span className="vault-notice-icon" aria-hidden="true">i</span>
+        <div>
+          <strong>Your records, organized.</strong>
+          <p>
+            Documents are saved in this browser and remain available
+            on this device.
+          </p>
+        </div>
       </div>
 
-      <section className="vault-upload-panel">
-        <div className="section-heading">
+      {/* Upload section */}
+      <section className="vault-panel">
+        <div className="vault-section-heading">
+          <div className="vault-section-icon">
+            <FontAwesomeIcon icon={faFileCirclePlus} />
+          </div>
+
           <div>
-            <h2>Add a medical document <FontAwesomeIcon icon={faFileCirclePlus} className="vault-icon" ></FontAwesomeIcon></h2>
-            <p>Upload a file and assign it a record type.</p>
+            <h2>Add a medical document</h2>
+            <p>Enter the document details and select a file to upload.</p>
           </div>
         </div>
 
@@ -256,7 +327,7 @@ useEffect(() => {
               <input
                 id="docName"
                 type="text"
-                placeholder="e.g. Complete Blood Count Report"
+                placeholder="e.g. Complete Blood Count"
                 value={docName}
                 onChange={(event) => setDocName(event.target.value)}
                 maxLength={100}
@@ -281,61 +352,104 @@ useEffect(() => {
           </div>
 
           <div className="vault-field">
-            <label htmlFor="docFile">Choose a document</label>
+            <label htmlFor="docFile">Document file</label>
 
             <div className="vault-file-box">
+              <div className="vault-upload-symbol">
+                <FontAwesomeIcon icon={faCloudArrowUp} />
+              </div>
+
+              <div className="vault-file-content">
+                <label className="vault-file-label" htmlFor="docFile">
+                  {file ? "Choose a different file" : "Select a document"}
+                </label>
+
+                <p>JPG, PNG or PDF · Maximum file size 1.5 MB</p>
+
+                {file && (
+                  <div className="vault-selected-file">
+                    <FontAwesomeIcon icon={getFileIcon(file)} />
+                    <span title={file.name}>{file.name}</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFile(null);
+                        const input = window.document.getElementById("docFile");
+                        if (input) input.value = "";
+                      }}
+                      aria-label="Remove selected file"
+                    >
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <input
                 id="docFile"
+                className="vault-file-input"
                 type="file"
                 accept=".jpg,.jpeg,.png,.pdf"
                 onChange={handleFileChange}
                 required
               />
-
-              <p>
-                Accepted formats: JPG, PNG, and PDF.
-                Maximum size: 1.5 MB.
-              </p>
-
-              {file && (
-                <p className="selected-file">
-                  Selected file: {file.name}
-                </p>
-              )}
             </div>
           </div>
 
-          <button type="submit" className="vault-primary-btn">
-          <FontAwesomeIcon icon={faPlus} className="vault-icon-light"></FontAwesomeIcon> Add to records
-          </button>
+          <div className="vault-form-footer">
+            <p className="vault-form-hint">
+              <FontAwesomeIcon icon={faFileLines} />
+              Only JPG, PNG and PDF files are supported.
+            </p>
+
+            <button type="submit" className="vault-primary-btn">
+              <FontAwesomeIcon icon={faPlus} />
+              Add to records
+            </button>
+          </div>
         </form>
       </section>
 
-      <section className="vault-library">
-        <div className="section-heading library-heading">
-          <div>
-            <h2>Saved documents <FontAwesomeIcon icon={faDownload} className="vault-icon" ></FontAwesomeIcon></h2>
-            <p>Search, review, or remove your medical records.</p>
+      {/* Document library */}
+      <section className="vault-panel vault-library">
+        <div className="vault-library-heading">
+          <div className="vault-section-heading">
+            <div className="vault-section-icon">
+              <FontAwesomeIcon icon={faFolderOpen} />
+            </div>
+
+            <div>
+              <h2>Saved documents</h2>
+              <p>Search, view, download, or remove your records.</p>
+            </div>
           </div>
 
           <div className="vault-count">
             <strong>{documents.length}</strong>
-            <span>
-              {documents.length === 1 ? "document" : "documents"}
-            </span>
+            <span>{documents.length === 1 ? "document" : "documents"}</span>
           </div>
         </div>
 
         <div className="vault-toolbar">
           <div className="vault-search">
-            <span aria-hidden="true">⌕</span>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
             <input
               type="search"
               aria-label="Search medical documents"
-              placeholder="Search by name or record type..."
+              placeholder="Search documents..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
+
+            {search && (
+              <button
+                type="button"
+                aria-label="Clear search"
+                onClick={() => setSearch("")}
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            )}
           </div>
 
           <select
@@ -345,7 +459,6 @@ useEffect(() => {
             onChange={(event) => setFilter(event.target.value)}
           >
             <option value="All">All record types</option>
-
             {categories.map((item) => (
               <option key={item} value={item}>
                 {item}
@@ -354,62 +467,102 @@ useEffect(() => {
           </select>
         </div>
 
+        <div className="vault-results-line">
+          <span>
+            {filteredDocuments.length}{" "}
+            {filteredDocuments.length === 1 ? "result" : "results"}
+          </span>
+        </div>
+
         {filteredDocuments.length === 0 ? (
           <div className="vault-empty">
-            <div className="empty-icon" aria-hidden="true">▤</div>
+            <div className="vault-empty-icon">
+              <FontAwesomeIcon icon={faFolderOpen} />
+            </div>
 
             <h3>
               {documents.length === 0
-                ? "No medical documents yet"
+                ? "Your document library is empty"
                 : "No matching documents"}
             </h3>
 
             <p>
               {documents.length === 0
-                ? "Documents you add will appear here."
-                : "Try another search term or record type."}
+                ? "Add your first medical document using the form above."
+                : "Try another search term or choose a different record type."}
             </p>
+
+            {documents.length > 0 && (search || filter !== "All") && (
+              <button
+                type="button"
+                className="vault-secondary-btn"
+                onClick={() => {
+                  setSearch("");
+                  setFilter("All");
+                }}
+              >
+                Clear filters
+              </button>
+            )}
           </div>
         ) : (
           <div className="vault-grid">
-            {filteredDocuments.map((document) => (
-              <article className="vault-card" key={document.id}>
+            {filteredDocuments.map((doc) => (
+              <article className="vault-card" key={doc.id}>
                 <div className="vault-card-top">
-                  <div className="document-icon">
-                    {document.fileType === "application/pdf"
-                      ? "PDF"
-                      : "IMG"}
+                  <div className="vault-document-icon">
+                    <FontAwesomeIcon icon={getFileIcon(doc)} />
                   </div>
 
-                  <span className="document-category">
-                    {document.category}
+                  <span className="vault-category">
+                    {doc.category}
                   </span>
                 </div>
 
-                <h3 title={document.name}>{document.name}</h3>
-                <p className="document-filename">{document.fileName}</p>
+                <h3 className="vault-card-title" title={doc.name}>
+                  {doc.name}
+                </h3>
 
-                <p className="document-date">
-                  <span aria-hidden="true">◷</span>
-                  {" "}Added on {document.date}
+                <p className="vault-filename" title={doc.fileName}>
+                  {doc.fileName}
                 </p>
+
+                <div className="vault-card-meta">
+                  <span>
+                    <FontAwesomeIcon icon={faClock} />
+                    {doc.date}
+                  </span>
+                  <span>{formatFileSize(doc.dataUrl)}</span>
+                </div>
 
                 <div className="vault-card-actions">
                   <button
                     type="button"
                     className="vault-view-btn"
-                    onClick={() => setSelectedDoc(document)}
+                    onClick={() => setSelectedDoc(doc)}
                   >
-                    View document
+                    <FontAwesomeIcon icon={faEye} />
+                    View
                   </button>
 
                   <button
                     type="button"
-                    className="vault-delete-btn"
-                    onClick={() => handleDelete(document.id)}
-                    aria-label={`Remove ${document.name}`}
+                    className="vault-icon-btn"
+                    onClick={() => handleDownload(doc)}
+                    title="Download document"
+                    aria-label={`Download ${doc.name}`}
                   >
-                  <FontAwesomeIcon icon={faTrashCan} className="vault-icon-red"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faDownload} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="vault-icon-btn vault-delete-btn"
+                    onClick={() => handleDelete(doc.id)}
+                    title="Delete document"
+                    aria-label={`Delete ${doc.name}`}
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} />
                   </button>
                 </div>
               </article>
@@ -428,23 +581,37 @@ useEffect(() => {
             className="vault-modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="preview-title"
+            aria-labelledby="vault-preview-title"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="vault-modal-heading">
-              <div>
-                <p className="vault-eyebrow">DOCUMENT DETAILS</p>
-                <h2 id="preview-title">{selectedDoc.name}</h2>
+            <header className="vault-modal-header">
+              <div className="vault-modal-file-icon">
+                <FontAwesomeIcon icon={getFileIcon(selectedDoc)} />
+              </div>
+
+              <div className="vault-modal-title">
+                <p className="vault-eyebrow">DOCUMENT PREVIEW</p>
+                <h2 id="vault-preview-title">{selectedDoc.name}</h2>
+                <p>{selectedDoc.category} · {selectedDoc.date}</p>
               </div>
 
               <button
                 type="button"
-                className="vault-close-btn"
-                aria-label="Close document preview"
+                className="vault-modal-close"
                 onClick={() => setSelectedDoc(null)}
+                aria-label="Close document preview"
               >
-                ×
+                <FontAwesomeIcon icon={faXmark} />
               </button>
+            </header>
+
+            <div className="vault-preview-details">
+              <span title={selectedDoc.fileName}>
+                <FontAwesomeIcon icon={faFileLines} />
+                {selectedDoc.fileName}
+              </span>
+
+              <span>{formatFileSize(selectedDoc.dataUrl)}</span>
             </div>
 
             <div className="vault-preview-content">
@@ -462,6 +629,25 @@ useEffect(() => {
                 />
               )}
             </div>
+
+            <footer className="vault-modal-footer">
+              <button
+                type="button"
+                className="vault-secondary-btn"
+                onClick={() => setSelectedDoc(null)}
+              >
+                Close preview
+              </button>
+
+              <button
+                type="button"
+                className="vault-primary-btn"
+                onClick={() => handleDownload(selectedDoc)}
+              >
+                <FontAwesomeIcon icon={faFileArrowDown} />
+                Download
+              </button>
+            </footer>
           </section>
         </div>
       )}
