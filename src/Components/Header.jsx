@@ -103,7 +103,6 @@ const Header = ({ darkMode, toggleTheme }) => {
 
   return (
     <header className="header">
-      {/* MAIN NAVBAR */}
       <div className="header-main-row">
         <Link to="/" className="logo" onClick={closeMenu}>
           <span className="logo-icon">✚</span>
@@ -121,6 +120,14 @@ const Header = ({ darkMode, toggleTheme }) => {
         </button>
 
         <nav className={menuOpen ? "nav active" : "nav"}>
+          {/* Notification bell comes first */}
+          <i
+            className="fa-solid fa-bell"
+            aria-label="Notifications"
+            role="img"
+          />
+
+          {/* Medical Glossary comes immediately after the bell */}
           <Link
             to="/medical-glossary"
             className="glossary-nav-btn"
@@ -144,12 +151,6 @@ const Header = ({ darkMode, toggleTheme }) => {
             />
             <span>Medical Glossary</span>
           </Link>
-
-          <i
-            className="fa-solid fa-bell"
-            aria-label="Notifications"
-            role="img"
-          />
 
           {user ? (
             <div className="user-info">
@@ -200,7 +201,7 @@ const Header = ({ darkMode, toggleTheme }) => {
         </nav>
       </div>
 
-      {/* FLOATING SPEECH CONTROLS */}
+      {/* Floating speech controls */}
       <div className="speech-floating-container">
         <button
           type="button"

@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
@@ -18,27 +19,31 @@ function MedicalGlossary() {
   const [selectedTerm, setSelectedTerm] = useState(null);
   const [level, setLevel] = useState("easy");
   const [stepIndex, setStepIndex] = useState(0);
-const navigate = useNavigate();
 
-const handleClose = () => {
-  const returnPath = sessionStorage.getItem("glossaryReturnPath");
-  const scrollY = sessionStorage.getItem("glossaryScrollY");
+  const navigate = useNavigate();
 
-  if (returnPath) {
-    navigate(returnPath, {
-      state: { restoreScrollY: Number(scrollY || 0) }
-    });
-  } else {
-    navigate(-1);
-  }
-};
+  const handleClose = () => {
+    const returnPath = sessionStorage.getItem("glossaryReturnPath");
+    const scrollY = sessionStorage.getItem("glossaryScrollY");
+
+    if (returnPath) {
+      navigate(returnPath, {
+        state: { restoreScrollY: Number(scrollY || 0) }
+      });
+    } else {
+      navigate(-1);
+    }
+  };
+
   const termOfTheDay = useMemo(() => {
     if (!medicalGlossary || medicalGlossary.length === 0) return null;
+
     const now = new Date();
     const start = new Date(now.getFullYear(), 0, 0);
     const diff = now - start;
     const oneDay = 1000 * 60 * 60 * 24;
     const dayOfYear = Math.floor(diff / oneDay);
+
     return medicalGlossary[dayOfYear % medicalGlossary.length];
   }, []);
 
@@ -64,19 +69,16 @@ const handleClose = () => {
 
   return (
     <main className="glossary-page">
-      <div className="glossary-wrapper">
       <button
-  type="button"
-  className="glossary-close-btn"
-  onClick={handleClose}
-  aria-label="Close Medical Glossary"
->
-  ✕ Close
-</button>
-</div>
-      {/* Top Layout: Heading on Left, Term of the Day on Right */}
-      <div className="glossary-top-layout">        
-        {/* Left Side: Main Heading */}
+        type="button"
+        className="glossary-close-btn"
+        onClick={handleClose}
+        aria-label="Close Medical Glossary"
+      >
+        <FontAwesomeIcon icon={faXmark} /> Close
+      </button>
+
+      <div className="glossary-top-layout">
         <div className="glossary-heading">
           <span className="glossary-icon">
             <FontAwesomeIcon icon={faBookMedical} />
@@ -88,31 +90,45 @@ const handleClose = () => {
           </div>
         </div>
 
-        {/* Right Side: Term of the Day Banner */}
         {termOfTheDay && (
-          <div className="term-of-the-day-banner" 
-            onClick={() => openTerm(termOfTheDay)}            role="button"
+          <div
+            className="term-of-the-day-banner"
+            onClick={() => openTerm(termOfTheDay)}
+            role="button"
             tabIndex={0}
           >
             <div className="totd-badge">
               <FontAwesomeIcon icon={faStar} /> Term of the Day
             </div>
+
             <div className="totd-content">
               <div className="totd-icon">
-                <FontAwesomeIcon icon={termOfTheDay.icon || faLightbulb} />
+                <FontAwesomeIcon
+                  icon={termOfTheDay.icon || faLightbulb}
+                />
               </div>
+
               <div className="totd-text">
                 <h3>{termOfTheDay.name}</h3>
-                <span className="totd-category">{termOfTheDay.category}</span>
+                <span className="totd-category">
+                  {termOfTheDay.category}
+                </span>
                 <p>{termOfTheDay.easy || termOfTheDay.definition}</p>
               </div>
             </div>
-            <button className="totd-action-btn" type="button">
+
+            <button
+              className="totd-action-btn"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                openTerm(termOfTheDay);
+              }}
+            >
               Learn More <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
         )}
-
       </div>
 
       <div className="glossary-search">
@@ -162,7 +178,6 @@ const handleClose = () => {
         )}
       </section>
 
-      {/* Modal View */}
       {selectedTerm && (
         <div className="glossary-overlay" onClick={closePopup}>
           <section
@@ -211,7 +226,9 @@ const handleClose = () => {
               <div className="visual-section">
                 <div className="visual-heading">
                   <div>
-                    <span className="visual-eyebrow">LEARN VISUALLY</span>
+                    <span className="visual-eyebrow">
+                      LEARN VISUALLY
+                    </span>
                     <h3>How it works</h3>
                   </div>
 

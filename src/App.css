@@ -12687,7 +12687,7 @@ html[data-reduced-motion="true"] *::after {
 .term-of-the-day-banner {
   background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
   border: 1px solid #b2f5ea;
-  margin-top: 100px;
+  margin-top: 30px;
   border-radius: 16px;
   padding: 1.25rem;
   max-width: 460px; /* Limits width so it doesn't stretch awkwardly across the whole screen */
@@ -13045,9 +13045,7 @@ html[data-reduced-motion="true"] *::after {
 }
 
 /* Add space above the Records page heading */
-.records-page h1 {
-  margin-top: 20px;
-}
+
 .glossary-close-btn {
   display: flex !important;
   align-items: center;
@@ -13114,7 +13112,8 @@ html[data-reduced-motion="true"] *::after {
 }
 
 .glossary-page .glossary-heading p {
-  margin-top: 2px !important;
+  position: relative;
+  margin-top: 0px !important;
   margin-bottom: 0 !important;
 }
 
@@ -13124,7 +13123,7 @@ html[data-reduced-motion="true"] *::after {
 }
 .glossary-close-btn {
   position: relative;
-  top: 80px;
+  top: 15px;
   right: 25px;
   z-index: 9999;
 
@@ -14519,8 +14518,85 @@ html[data-reduced-motion="true"] *::after {
   margin-right: 4px;
   flex-shrink: 0;
 }
+
+.glossary-page {
+  padding-top: 20px;
+  margin-top: 0;
+}
+.glossary-page h1 {
+  margin-top: 0;
+}
+.glossary-page {
+  padding: 10px 64px 40px;
+}
+.glossary-page {
+  padding: 0 64px 40px;
+  margin-top: 0;
+}
+
+.glossary-page h1 {
+  margin-top: 0;
+}
+.header-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-main-row > .nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.header-main-row > .nav > .fa-bell {
+  order: 1;
+  margin: 0;
+}
+
 .header-main-row > .nav > .glossary-nav-btn {
-  position: relative;
-  left: 1090px;
+  order: 2;
+  position: static;
+  left: auto;
+  margin: 0;
   flex-shrink: 0;
+}
+
+.header-main-row > .nav > .user-info,
+.header-main-row > .nav > .login-btn {
+  order: 3;
+}
+.header-main-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-main-row > .nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-left: auto;
+  flex: 1;
+}
+
+.header-main-row > .nav > .fa-bell {
+  order: 1;
+}
+
+.header-main-row > .nav > .glossary-nav-btn {
+  order: 2;
+  position: static;
+  left: auto;
+  margin: 0;
+}
+
+.header-main-row > .nav > .user-info,
+.header-main-row > .nav > .login-btn {
+  order: 3;
 }
