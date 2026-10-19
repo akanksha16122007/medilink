@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ const Header = ({ darkMode, toggleTheme }) => {
   const [showLogOut, setShowLogOut] = useState(false);
   const [user, setUser] = useState(getStoredUser);
   const [speechRate, setSpeechRate] = useState(0.9);
+  const [showSpeechTools, setShowSpeechTools] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,7 +103,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
   return (
     <header className="header">
-      {/* ORIGINAL NAVBAR — preserve its existing classes */}
+      {/* MAIN NAVBAR */}
       <div className="header-main-row">
         <Link to="/" className="logo" onClick={closeMenu}>
           <span className="logo-icon">✚</span>
@@ -119,6 +121,30 @@ const Header = ({ darkMode, toggleTheme }) => {
         </button>
 
         <nav className={menuOpen ? "nav active" : "nav"}>
+          <Link
+            to="/medical-glossary"
+            className="glossary-nav-btn"
+            onClick={() => {
+              sessionStorage.setItem(
+                "glossaryReturnPath",
+                location.pathname + location.search
+              );
+
+              sessionStorage.setItem(
+                "glossaryScrollY",
+                String(window.scrollY)
+              );
+
+              closeMenu();
+            }}
+          >
+            <i
+              className="fa-solid fa-book-medical"
+              aria-hidden="true"
+            />
+            <span>Medical Glossary</span>
+          </Link>
+
           <i
             className="fa-solid fa-bell"
             aria-label="Notifications"
@@ -174,74 +200,98 @@ const Header = ({ darkMode, toggleTheme }) => {
         </nav>
       </div>
 
+      {/* FLOATING SPEECH CONTROLS */}
+      <div className="speech-floating-container">
+        <button
+          type="button"
+          className="speech-floating-btn"
+          onClick={() =>
+            setShowSpeechTools((previous) => !previous)
+          }
+          aria-label={
+            showSpeechTools
+              ? "Close speech controls"
+              : "Open speech controls"
+          }
+          aria-expanded={showSpeechTools}
+          title="Text-to-speech controls"
+        >
+          <i
+            className={
+              showSpeechTools
+                ? "fa-solid fa-xmark"
+                : "fa-solid fa-volume-high"
+            }
+            aria-hidden="true"
+          />
+        </button>
 
-{/* NEW SECOND BAR — below the original navbar */}
-<div className="header-tools-bar">
-  <Link
-    to="/medical-glossary"
-    className="glossary-nav-btn"
-    onClick={() => {
-      sessionStorage.setItem(
-        "glossaryReturnPath",
-        location.pathname + location.search
-      );
+        {showSpeechTools && (
+          <div className="speech-floating-panel">
+            <div className="speech-panel-heading">
+              <div>
+                <strong>Read Aloud</strong>
+                <span>Accessibility tools</span>
+              </div>
 
-      sessionStorage.setItem(
-        "glossaryScrollY",
-        String(window.scrollY)
-      );
+              <button
+                type="button"
+                className="speech-panel-close"
+                onClick={() => setShowSpeechTools(false)}
+                aria-label="Close speech panel"
+              >
+                ✕
+              </button>
+            </div>
 
-      closeMenu();
-    }}
-  >
-    <i className="fa-solid fa-book-medical" aria-hidden="true" />
-    <span>Medical Glossary</span>
-  </Link>
+            <div className="voice-settings">
+              <label htmlFor="speech-rate">Reading speed</label>
+              <select
+                id="speech-rate"
+                value={speechRate}
+                onChange={(event) =>
+                  setSpeechRate(Number(event.target.value))
+                }
+              >
+                <option value={0.7}>Slow</option>
+                <option value={0.9}>Normal</option>
+                <option value={1.25}>Fast</option>
+              </select>
+            </div>
 
-  <div className="voice-settings">
-    <label htmlFor="speech-rate">Speed:</label>
-    <select
-      id="speech-rate"
-      value={speechRate}
-      onChange={(event) => setSpeechRate(Number(event.target.value))}
-    >
-      <option value={0.7}>Slow</option>
-      <option value={0.9}>Normal</option>
-      <option value={1.25}>Fast</option>
-    </select>
-  </div>
+            <button
+              type="button"
+              className="speech-btn"
+              onClick={speakSelectedText}
+              title="Read Selected Text Aloud"
+            >
+              <i className="fa-solid fa-volume-high" aria-hidden="true" />
+              Read Selected Text
+            </button>
 
-  <div className="speech-controls">
-    <button
-      type="button"
-      className="speech-btn"
-      onClick={speakSelectedText}
-      title="Read Selected Text Aloud"
-    >
-      <i className="fa-solid fa-volume-high" aria-hidden="true" /> Read
-      Selected Text
-    </button>
+            <button
+              type="button"
+              className="speech-btn"
+              onClick={pauseOrResume}
+              title="Pause or Resume Speech"
+            >
+              <i className="fa-solid fa-pause" aria-hidden="true" />
+              Pause / Resume
+            </button>
 
-    <button
-      type="button"
-      className="speech-btn"
-      onClick={pauseOrResume}
-      title="Pause or Resume Speech"
-    >
-      <i className="fa-solid fa-pause" aria-hidden="true" /> Pause / Resume
-    </button>
-
-    <button
-      type="button"
-      className="speech-stop-btn"
-      onClick={stopSpeaking}
-      title="Stop Speaking"
-    >
-      <i className="fa-solid fa-stop" aria-hidden="true" /> Stop Speaking
-    </button>
-  </div>
-</div>
-</header>
+            <button
+              type="button"
+              className="speech-stop-btn"
+              onClick={stopSpeaking}
+              title="Stop Speaking"
+            >
+              <i className="fa-solid fa-stop" aria-hidden="true" />
+              Stop Speaking
+            </button>
+          </div>
+        )}
+      </div>
+    </header>
   );
 };
 
