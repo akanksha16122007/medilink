@@ -9886,41 +9886,6 @@ body {
 }
 
 /* =========================================
-   GLOBAL FONT SIZE PREFERENCE
-========================================= */
-
-html[data-font-size="small"] {
-  --font-scale: 0.9;
-}
-
-html[data-font-size="medium"] {
-  --font-scale: 1;
-}
-
-html[data-font-size="large"] {
-  --font-scale: 1.1;
-}
-
-html[data-font-size] .settings-page h1 {
-  font-size: calc(34px * var(--font-scale));
-}
-
-html[data-font-size] .settings-page h2 {
-  font-size: calc(17px * var(--font-scale));
-}
-
-html[data-font-size] .settings-page h3 {
-  font-size: calc(14px * var(--font-scale));
-}
-
-html[data-font-size] .settings-page p,
-html[data-font-size] .settings-page a,
-html[data-font-size] .settings-page button,
-html[data-font-size] .settings-page .settings-info-label {
-  font-size: calc(1em * var(--font-scale));
-}
-
-/* =========================================
    REDUCED MOTION
    Supports the class toggled by the JSX.
 ========================================= */

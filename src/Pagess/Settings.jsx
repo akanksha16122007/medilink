@@ -13,32 +13,35 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const getSavedReducedMotion = () => {
+  try {
+    return localStorage.getItem("medilinkReducedMotion") === "true";
+  } catch {
+    return false;
+  }
+};
+
 const Settings = ({ darkMode, toggleTheme }) => {
   const navigate = useNavigate();
-
-  const [fontSize, setFontSize] = useState(
-    localStorage.getItem("medilinkFontSize") || "medium"
-  );
-
   const [reducedMotion, setReducedMotion] = useState(
-    localStorage.getItem("medilinkReducedMotion") === "true"
+    getSavedReducedMotion
   );
 
-  useEffect(() => {
-    document.documentElement.dataset.fontSize = fontSize;
-    localStorage.setItem("medilinkFontSize", fontSize);
-  }, [fontSize]);
-
+  // Apply reduced motion globally and persist the preference.
   useEffect(() => {
     document.documentElement.classList.toggle(
       "reduce-motion",
       reducedMotion
     );
 
-    localStorage.setItem(
-      "medilinkReducedMotion",
-      String(reducedMotion)
-    );
+    try {
+      localStorage.setItem(
+        "medilinkReducedMotion",
+        String(reducedMotion)
+      );
+    } catch {
+      // The setting still applies for the current session.
+    }
   }, [reducedMotion]);
 
   const handleReset = () => {
@@ -47,8 +50,6 @@ const Settings = ({ darkMode, toggleTheme }) => {
     );
 
     if (!confirmed) return;
-
-    setFontSize("medium");
     setReducedMotion(false);
 
     if (darkMode) {
@@ -66,17 +67,22 @@ const Settings = ({ darkMode, toggleTheme }) => {
   };
 
   return (
-    <div className="settings-page">
+    <main className="settings-page">
       <div className="settings-content">
         <header className="settings-header">
           <div className="settings-eyebrow">
             <span>PERSONAL PREFERENCES</span>
           </div>
 
-          <h1>Settings <FontAwesomeIcon icon={faGear} spin className="vault-icon"/></h1>
-          <p>
-            Customize your MediLink experience to suit your needs.
-          </p>
+          <h1>
+            Settings
+            <FontAwesomeIcon
+              icon={faGear}
+              className="settings-main-icon"
+            />
+          </h1>
+
+          <p>Customize your MediLink experience to suit your needs.</p>
         </header>
 
         {/* Profile */}
@@ -125,42 +131,6 @@ const Settings = ({ darkMode, toggleTheme }) => {
               <span />
             </button>
           </div>
-
-          <div className="settings-option">
-            <div className="settings-option-info">
-              <h3>Font Size</h3>
-              <p>Adjust the text size for better readability.</p>
-            </div>
-
-            <div className="settings-size-control">
-              <button
-                type="button"
-                className={fontSize === "small" ? "selected" : ""}
-                aria-pressed={fontSize === "small"}
-                onClick={() => setFontSize("small")}
-              >
-                Small
-              </button>
-
-              <button
-                type="button"
-                className={fontSize === "medium" ? "selected" : ""}
-                aria-pressed={fontSize === "medium"}
-                onClick={() => setFontSize("medium")}
-              >
-                Medium
-              </button>
-
-              <button
-                type="button"
-                className={fontSize === "large" ? "selected" : ""}
-                aria-pressed={fontSize === "large"}
-                onClick={() => setFontSize("large")}
-              >
-                Large
-              </button>
-            </div>
-          </div>
         </section>
 
         {/* Accessibility */}
@@ -176,7 +146,6 @@ const Settings = ({ darkMode, toggleTheme }) => {
             </div>
           </div>
 
-          {/* Reading Assistance */}
           <div className="settings-option">
             <div className="settings-option-info">
               <div className="settings-option-title">
@@ -189,8 +158,7 @@ const Settings = ({ darkMode, toggleTheme }) => {
 
               <p>
                 Use the reading toolbar to listen to selected text,
-                pause or resume speech, stop playback, and adjust
-                reading speed.
+                control playback, and adjust reading speed.
               </p>
             </div>
 
@@ -198,30 +166,28 @@ const Settings = ({ darkMode, toggleTheme }) => {
               Available in toolbar
             </span>
           </div>
-{/* Medical Glossary */}
-<div className="settings-option">
-  <div className="settings-option-info">
-    <div className="settings-option-title">
-      <FontAwesomeIcon
-        icon={faBookMedical}
-        className="settings-inline-icon"
-      />
-      <h3>Medical Glossary</h3>
-    </div>
 
-    <p>
-      Explore simple explanations of medical terms, health
-      conditions, and common healthcare terminology to better
-      understand your health information.
-    </p>
-  </div>
+          <div className="settings-option">
+            <div className="settings-option-info">
+              <div className="settings-option-title">
+                <FontAwesomeIcon
+                  icon={faBookMedical}
+                  className="settings-inline-icon"
+                />
+                <h3>Medical Glossary</h3>
+              </div>
 
-  <span className="settings-info-label">
-    Available in Resources
-  </span>
-</div>
+              <p>
+                Explore simple explanations of medical terms, health
+                conditions, and common healthcare terminology.
+              </p>
+            </div>
 
-          {/* Reduced Motion */}
+            <span className="settings-info-label">
+              Available in Resources
+            </span>
+          </div>
+
           <div className="settings-option">
             <div className="settings-option-info">
               <h3>Reduced Motion</h3>
@@ -239,14 +205,16 @@ const Settings = ({ darkMode, toggleTheme }) => {
               role="switch"
               aria-checked={reducedMotion}
               aria-label="Toggle reduced motion"
-              onClick={() => setReducedMotion((previous) => !previous)}
+              onClick={() =>
+                setReducedMotion((previous) => !previous)
+              }
             >
               <span />
             </button>
           </div>
         </section>
 
-        {/* Reset Settings */}
+        {/* Reset */}
         <section className="settings-reset-card">
           <div className="settings-reset-icon">
             <FontAwesomeIcon icon={faRotateLeft} />
@@ -277,9 +245,7 @@ const Settings = ({ darkMode, toggleTheme }) => {
 
           <div className="settings-logout-content">
             <h3>Sign Out</h3>
-            <p>
-              Sign out of your MediLink account on this device.
-            </p>
+            <p>Sign out of your MediLink account on this device.</p>
           </div>
 
           <button
@@ -296,7 +262,7 @@ const Settings = ({ darkMode, toggleTheme }) => {
           <p>MediLink · Your health, connected.</p>
         </footer>
       </div>
-    </div>
+    </main>
   );
 };
 
