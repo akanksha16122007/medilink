@@ -11086,6 +11086,7 @@ html[data-reduced-motion="true"] *::after {
   display: flex;
   align-items: center;
   justify-content:center;
+  top:10px;
   position: static;
   width: 100%;
   height: auto;
@@ -11134,7 +11135,8 @@ html[data-reduced-motion="true"] *::after {
   width: 100%;
   max-width: 650px;
   min-height: 54px;
-  margin: 0 0 30px;
+  margin-top: 0 !important;
+  
   padding: 0 18px;
   border: 1px solid #d4e3e7;
   border-radius: 13px;
@@ -11865,7 +11867,7 @@ html[data-reduced-motion="true"] *::after {
   row-gap: 12px !important;
 
   width: 100% !important;
-  margin: 0 auto 42px !important;
+  margin-top: 0 !important;
   padding: 0 !important;
   text-align: center !important;
 }
@@ -12020,6 +12022,7 @@ html[data-reduced-motion="true"] *::after {
 .term-of-the-day-banner {
   background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
   border: 1px solid #b2f5ea;
+margin-top: 100px;
   border-radius: 16px;
   padding: 1.25rem;
   max-width: 460px; /* Limits width so it doesn't stretch awkwardly across the whole screen */
@@ -12028,7 +12031,8 @@ html[data-reduced-motion="true"] *::after {
   transition: all 0.25s ease-in-out;
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  margin-bottom: 1.5rem; /* Spacing before the search bar */
+  margin-bottom: -1rem; 
+  transform: translateY(-12px);/* Spacing before the search bar */
 }
 
 .term-of-the-day-banner:hover {
@@ -12127,8 +12131,8 @@ html[data-reduced-motion="true"] *::after {
 
 .term-of-the-day-banner {
   flex: 1;
-  min-width: 320px;
-  max-width: 450px;
+  min-width: 300px;
+  max-width: 600px;
   background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
   border: 1px solid #b2f5ea;
   border-radius: 16px;
@@ -12377,3 +12381,98 @@ html[data-reduced-motion="true"] *::after {
 .records-page h1 {
   margin-top: 20px;
 }
+.glossary-close-btn {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  margin-left: auto !important;
+  margin-right:0 !important;
+  margin-bottom: 16px !important;
+  width:fit-content;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+
+.glossary-close-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.glossary-close-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+.glossary-wrapper{
+  display: flex !important;
+  justify-content: flex-end !important;
+  width:100% !important;
+  box-sizing:border;
+}
+.glossary-page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.glossary-page .glossary-wrapper {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.glossary-page .glossary-top-layout {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.glossary-page .glossary-heading {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.glossary-page .glossary-top-layout {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  row-gap: 8px !important;
+}
+
+.glossary-page .glossary-heading h1 {
+  margin-bottom: 0 !important;
+}
+
+.glossary-page .glossary-heading p {
+  margin-top: 2px !important;
+  margin-bottom: 0 !important;
+}
+
+.glossary-page .glossary-search {
+  margin-top: -60px !important;
+  margin-bottom: 20px;
+}
+.glossary-close-btn {
+  position: relative;
+  top: 80px;
+  right: 25px;
+  z-index: 9999;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px 16px;
+  background: var(--primary, #006d73);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  visibility: visible;
+  opacity: 1;
+}
+

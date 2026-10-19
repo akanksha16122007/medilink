@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
   faBookMedical,
   faMagnifyingGlass,
@@ -17,7 +18,20 @@ function MedicalGlossary() {
   const [selectedTerm, setSelectedTerm] = useState(null);
   const [level, setLevel] = useState("easy");
   const [stepIndex, setStepIndex] = useState(0);
+const navigate = useNavigate();
 
+const handleClose = () => {
+  const returnPath = sessionStorage.getItem("glossaryReturnPath");
+  const scrollY = sessionStorage.getItem("glossaryScrollY");
+
+  if (returnPath) {
+    navigate(returnPath, {
+      state: { restoreScrollY: Number(scrollY || 0) }
+    });
+  } else {
+    navigate(-1);
+  }
+};
   const termOfTheDay = useMemo(() => {
     if (!medicalGlossary || medicalGlossary.length === 0) return null;
     const now = new Date();
@@ -50,6 +64,16 @@ function MedicalGlossary() {
 
   return (
     <main className="glossary-page">
+      <div className="glossary-wrapper">
+      <button
+  type="button"
+  className="glossary-close-btn"
+  onClick={handleClose}
+  aria-label="Close Medical Glossary"
+>
+  ✕ Close
+</button>
+</div>
       {/* Top Layout: Heading on Left, Term of the Day on Right */}
       <div className="glossary-top-layout">        
         {/* Left Side: Main Heading */}
