@@ -1,66 +1,49 @@
+
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import {faGear} from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  faGear,
+  faRightFromBracket,
+  faUser,
+  faPalette,
+  faUniversalAccess,
+  faRotateLeft,
+  faVolumeHigh,
+  faBookMedical,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const FONT_SIZES = ["small", "medium", "large"];
+const Settings = ({ darkMode, toggleTheme }) => {
+  const navigate = useNavigate();
 
-const getSavedFontSize = () => {
-  try {
-    const savedSize = localStorage.getItem("medilinkFontSize");
-    return FONT_SIZES.includes(savedSize) ? savedSize : "medium";
-  } catch {
-    return "medium";
-  }
-};
+  const [fontSize, setFontSize] = useState(
+    localStorage.getItem("medilinkFontSize") || "medium"
+  );
 
-const getSavedReducedMotion = () => {
-  try {
-    return localStorage.getItem("medilinkReducedMotion") === "true";
-  } catch {
-    return false;
-  }
-};
-
-const Settings = ({ darkMode = false, toggleTheme }) => {
-  const [fontSize, setFontSize] = useState(getSavedFontSize);
   const [reducedMotion, setReducedMotion] = useState(
-    getSavedReducedMotion
+    localStorage.getItem("medilinkReducedMotion") === "true"
   );
 
   useEffect(() => {
     document.documentElement.dataset.fontSize = fontSize;
-
-    try {
-      localStorage.setItem("medilinkFontSize", fontSize);
-    } catch {
-      // Continue if browser storage is unavailable.
-    }
+    localStorage.setItem("medilinkFontSize", fontSize);
   }, [fontSize]);
 
   useEffect(() => {
-    document.documentElement.dataset.reducedMotion =
-      String(reducedMotion);
+    document.documentElement.classList.toggle(
+      "reduce-motion",
+      reducedMotion
+    );
 
-    try {
-      localStorage.setItem(
-        "medilinkReducedMotion",
-        String(reducedMotion)
-      );
-    } catch {
-      // Continue if browser storage is unavailable.
-    }
+    localStorage.setItem(
+      "medilinkReducedMotion",
+      String(reducedMotion)
+    );
   }, [reducedMotion]);
 
-  const handleFontSizeChange = (size) => {
-    if (FONT_SIZES.includes(size)) {
-      setFontSize(size);
-    }
-  };
-
-  const resetSettings = () => {
+  const handleReset = () => {
     const confirmed = window.confirm(
-      "Restore the default MediLink appearance and accessibility settings?"
+      "Reset your appearance and accessibility settings to their defaults?"
     );
 
     if (!confirmed) return;
@@ -68,269 +51,252 @@ const Settings = ({ darkMode = false, toggleTheme }) => {
     setFontSize("medium");
     setReducedMotion(false);
 
-    if (darkMode && toggleTheme) {
+    if (darkMode) {
       toggleTheme();
     }
   };
+
+  const handleLogout = () => {
+    const confirmed = window.confirm("Are you sure you want to log out?");
+
+    if (!confirmed) return;
+
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
-    <main className="settings-page">
-      <header className="settings-header">
-        <div>
-          <p className="settings-eyebrow">
-            YOUR ACCOUNT / PREFERENCES
-          </p>
+    <div className="settings-page">
+      <div className="settings-content">
+        <header className="settings-header">
+          <div className="settings-eyebrow">
+            <span>PERSONAL PREFERENCES</span>
+          </div>
 
-          <h1>Settings <FontAwesomeIcon icon={faGear} className="vault-icon" spin></FontAwesomeIcon></h1>
-
-          <p className="settings-subtitle">
-            Make MediLink more comfortable for you.
-          </p>
-        </div>
-
-        <div className="settings-save-status">
-          <span className="settings-status-dot" />
-          Saved automatically
-        </div>
-      </header>
-
-      <section className="settings-profile-card">
-        <div className="settings-avatar">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-            alt="Profile avatar"
-          />
-        </div>
-
-        <div className="settings-profile-content">
-          <span className="settings-profile-label">
-            YOUR HEALTH, YOUR SPACE
-          </span>
-
-          <h2>Personalize your experience</h2>
-
+          <h1>Settings <FontAwesomeIcon icon={faGear} spin className="vault-icon"/></h1>
           <p>
-            Keep your personal details, medical information, and emergency
-            contact organized in one place.
+            Customize your MediLink experience to suit your needs.
           </p>
+        </header>
 
-          <Link to="/profile" className="settings-profile-link">
-            View profile <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-
-        <div
-          className="settings-profile-symbol"
-          aria-hidden="true"
-        >
-          +
-        </div>
-      </section>
-
-      <section className="settings-section">
-        <div className="settings-section-heading">
-          <div
-            className="settings-section-icon"
-            aria-hidden="true"
-          >
-            ◐
+        {/* Profile */}
+        <Link to="/profile" className="settings-profile-card">
+          <div className="settings-profile-icon">
+            <FontAwesomeIcon icon={faUser} />
           </div>
 
-          <div>
-            <h2>Appearance</h2>
-            <p>
-              Set up the look and readability of your workspace.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Color theme</h3>
-            <p>
-              Choose the interface that feels right for you.
-            </p>
+          <div className="settings-profile-info">
+            <h3>Profile Settings</h3>
+            <p>View and manage your personal information.</p>
           </div>
 
-          <div className="settings-option-control">
-            <span className="settings-current-value">
-              {darkMode ? "Dark" : "Light"}
-            </span>
+          <span className="settings-arrow" aria-hidden="true">
+            →
+          </span>
+        </Link>
+
+        {/* Appearance */}
+        <section className="settings-section">
+          <div className="settings-section-heading">
+            <div className="settings-section-icon">
+              <FontAwesomeIcon icon={faPalette} />
+            </div>
+
+            <div>
+              <h2>Appearance</h2>
+              <p>Personalize how MediLink looks.</p>
+            </div>
+          </div>
+
+          <div className="settings-option">
+            <div className="settings-option-info">
+              <h3>Dark Mode</h3>
+              <p>Switch between light and dark themes.</p>
+            </div>
 
             <button
               type="button"
+              className={`settings-switch ${darkMode ? "active" : ""}`}
               role="switch"
-              aria-label="Dark theme"
               aria-checked={Boolean(darkMode)}
-              className={`settings-switch ${
-                darkMode ? "active" : ""
-              }`}
+              aria-label="Toggle dark mode"
               onClick={toggleTheme}
-              disabled={!toggleTheme}
             >
-              <span className="settings-switch-thumb" />
+              <span />
             </button>
           </div>
-        </div>
 
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Website text size</h3>
-            <p>
-              Adjust text across MediLink for more comfortable reading.
-            </p>
-          </div>
+          <div className="settings-option">
+            <div className="settings-option-info">
+              <h3>Font Size</h3>
+              <p>Adjust the text size for better readability.</p>
+            </div>
 
-          <div
-            className="settings-size-control"
-            role="group"
-            aria-label="Website text size"
-          >
-            {FONT_SIZES.map((size) => (
+            <div className="settings-size-control">
               <button
-                key={size}
                 type="button"
-                aria-pressed={fontSize === size}
-                className={
-                  fontSize === size ? "selected" : ""
-                }
-                onClick={() => handleFontSizeChange(size)}
+                className={fontSize === "small" ? "selected" : ""}
+                aria-pressed={fontSize === "small"}
+                onClick={() => setFontSize("small")}
               >
-                {size.charAt(0).toUpperCase() + size.slice(1)}
+                Small
               </button>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="settings-section">
-        <div className="settings-section-heading">
-          <div
-            className="settings-section-icon"
-            aria-hidden="true"
-          >
-            Aa
+              <button
+                type="button"
+                className={fontSize === "medium" ? "selected" : ""}
+                aria-pressed={fontSize === "medium"}
+                onClick={() => setFontSize("medium")}
+              >
+                Medium
+              </button>
+
+              <button
+                type="button"
+                className={fontSize === "large" ? "selected" : ""}
+                aria-pressed={fontSize === "large"}
+                onClick={() => setFontSize("large")}
+              >
+                Large
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Accessibility */}
+        <section className="settings-section">
+          <div className="settings-section-heading">
+            <div className="settings-section-icon">
+              <FontAwesomeIcon icon={faUniversalAccess} />
+            </div>
+
+            <div>
+              <h2>Accessibility</h2>
+              <p>Make MediLink more comfortable to use.</p>
+            </div>
           </div>
 
-          <div>
-            <h2>Reading Assistance</h2>
+          {/* Reading Assistance */}
+          <div className="settings-option">
+            <div className="settings-option-info">
+              <div className="settings-option-title">
+                <FontAwesomeIcon
+                  icon={faVolumeHigh}
+                  className="settings-inline-icon"
+                />
+                <h3>Reading Assistance</h3>
+              </div>
+
+              <p>
+                Use the reading toolbar to listen to selected text,
+                pause or resume speech, stop playback, and adjust
+                reading speed.
+              </p>
+            </div>
+
+            <span className="settings-info-label">
+              Available in toolbar
+            </span>
+          </div>
+{/* Medical Glossary */}
+<div className="settings-option">
+  <div className="settings-option-info">
+    <div className="settings-option-title">
+      <FontAwesomeIcon
+        icon={faBookMedical}
+        className="settings-inline-icon"
+      />
+      <h3>Medical Glossary</h3>
+    </div>
+
+    <p>
+      Explore simple explanations of medical terms, health
+      conditions, and common healthcare terminology to better
+      understand your health information.
+    </p>
+  </div>
+
+  <span className="settings-info-label">
+    Available in Resources
+  </span>
+</div>
+
+          {/* Reduced Motion */}
+          <div className="settings-option">
+            <div className="settings-option-info">
+              <h3>Reduced Motion</h3>
+              <p>
+                Minimize animations and transitions throughout the
+                application where supported.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className={`settings-switch ${
+                reducedMotion ? "active" : ""
+              }`}
+              role="switch"
+              aria-checked={reducedMotion}
+              aria-label="Toggle reduced motion"
+              onClick={() => setReducedMotion((previous) => !previous)}
+            >
+              <span />
+            </button>
+          </div>
+        </section>
+
+        {/* Reset Settings */}
+        <section className="settings-reset-card">
+          <div className="settings-reset-icon">
+            <FontAwesomeIcon icon={faRotateLeft} />
+          </div>
+
+          <div className="settings-reset-content">
+            <h3>Reset Settings</h3>
             <p>
-              Listen to health information using MediLink's
-              text-to-speech feature.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Read Selected Text</h3>
-            <p>
-              Select text on the page and click Read Selected Text
-              in the top toolbar to hear it aloud.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Pause / Resume</h3>
-            <p>
-              Pause the current speech or resume listening whenever
-              you are ready.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Stop Speaking</h3>
-            <p>
-              Stop the current audio playback whenever you need to.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Speech Speed</h3>
-            <p>
-              Choose Slow, Normal, or Fast using the Speed selector
-              in the top toolbar.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="settings-section">
-        <div className="settings-section-heading">
-          <div
-            className="settings-section-icon"
-            aria-hidden="true"
-          >
-            ◎
-          </div>
-
-          <div>
-            <h2>Accessibility</h2>
-            <p>
-              Choose options that support your comfort.
-            </p>
-          </div>
-        </div>
-
-        <div className="settings-option">
-          <div className="settings-option-text">
-            <h3>Reduce motion</h3>
-            <p>
-              Minimize interface animations and transitions.
+              Restore appearance and accessibility preferences to
+              their default values.
             </p>
           </div>
 
           <button
             type="button"
-            role="switch"
-            aria-label="Reduce motion"
-            aria-checked={reducedMotion}
-            className={`settings-switch ${
-              reducedMotion ? "active" : ""
-            }`}
-            onClick={() =>
-              setReducedMotion((previous) => !previous)
-            }
+            className="settings-reset-button"
+            onClick={handleReset}
           >
-            <span className="settings-switch-thumb" />
+            Reset
           </button>
-        </div>
-      </section>
+        </section>
 
-      <section className="settings-reset-card">
-        <div
-          className="settings-reset-icon"
-          aria-hidden="true"
-        >
-          ↺
-        </div>
+        {/* Logout */}
+        <section className="settings-logout-card">
+          <div className="settings-logout-symbol">
+            <FontAwesomeIcon icon={faRightFromBracket} />
+          </div>
 
-        <div className="settings-reset-content">
-          <h2>Restore default preferences</h2>
-          <p>
-            Return to the default theme, medium text, and normal motion.
-          </p>
-        </div>
+          <div className="settings-logout-content">
+            <h3>Sign Out</h3>
+            <p>
+              Sign out of your MediLink account on this device.
+            </p>
+          </div>
 
-        <button
-          type="button"
-          className="settings-reset-button"
-          onClick={resetSettings}
-        >
-          Reset settings
-        </button>
-      </section>
+          <button
+            type="button"
+            className="settings-logout-button"
+            onClick={handleLogout}
+          >
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            <span>Logout</span>
+          </button>
+        </section>
 
-      <footer className="settings-footer">
-        <span className="settings-footer-brand">MediLink</span>
-        <span>Personal health management</span>
-      </footer>
-    </main>
+        <footer className="settings-footer">
+          <p>MediLink · Your health, connected.</p>
+        </footer>
+      </div>
+    </div>
   );
 };
 
