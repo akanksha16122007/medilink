@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 const EmergencyHealthPage = () => {
   const getSavedData = (key) => {
     const saveData = localStorage.getItem(key);
@@ -15,6 +16,15 @@ const EmergencyHealthPage = () => {
     if (!emergencyInfo.phone) return;
     window.location.href = `tel:${emergencyInfo.phone}`;
   };
+  useEffect(() => {
+    if (window.location.search.includes("print=true")) {
+      const timer = setTimeout(() => {
+        window.print();
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
   return (
     <div className="EmergencyHealthPage">
       <div className="header-page">

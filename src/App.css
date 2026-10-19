@@ -9559,6 +9559,17 @@ html[data-reduced-motion="true"] *::after {
 .qr-link i {
   font-size: 14px;
 }
+.qr-link a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
 
 /* Buttons Container */
 .qr-buttons {
@@ -10065,6 +10076,53 @@ html[data-reduced-motion="true"] *::after {
   }
 }
 
+@media print {
+  /* Hide header, sidebar and footer */
+  header,
+  aside,
+  nav,
+  footer,
+  .header,
+  .sidebar,
+  .footer,
+  .Header,
+  .Sidebar,
+  .Footer {
+    display: none !important;
+  }
+
+  /* Show the emergency health page */
+  body * {
+    visibility: visible !important;
+  }
+
+  .EmergencyHealthPage {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    color: black !important;
+    background: white !important;
+  }
+
+  .EmergencyHealthPage * {
+    visibility: visible !important;
+    color: black !important;
+  }
+
+  /* Hide interactive buttons */
+  .EmergencyHealthPage button {
+    display: none !important;
+  }
+
+  @page {
+    margin: 12mm;
+  }
+}
 /* Health Insurance page */
 .health-insurance-page {
   --insurance-card-text: #ffffff;
@@ -11085,8 +11143,12 @@ html[data-reduced-motion="true"] *::after {
 .glossary-page .glossary-heading {
   display: flex;
   align-items: center;
-  justify-content:center;
-  top:10px;
+
+  justify-content: center;
+  top: 10px;
+
+  justify-content: center;
+
   position: static;
   width: 100%;
   height: auto;
@@ -11136,7 +11198,7 @@ html[data-reduced-motion="true"] *::after {
   max-width: 650px;
   min-height: 54px;
   margin-top: 0 !important;
-  
+
   padding: 0 18px;
   border: 1px solid #d4e3e7;
   border-radius: 13px;
@@ -11204,7 +11266,8 @@ html[data-reduced-motion="true"] *::after {
   font: inherit;
   cursor: pointer;
   box-shadow: 0 3px 12px rgba(20, 65, 75, 0.035);
-  transition: border-color 0.2s ease,
+  transition:
+    border-color 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.2s ease;
 }
@@ -11659,7 +11722,6 @@ html[data-reduced-motion="true"] *::after {
   }
 }
 
-
 /* Main header wrapper */
 .header {
   display: flex;
@@ -11922,7 +11984,6 @@ html[data-reduced-motion="true"] *::after {
   }
 }
 
-
 /* Final fix: move glossary content below the second toolbar */
 .glossary-page {
   margin-top: 0 !important;
@@ -12022,7 +12083,7 @@ html[data-reduced-motion="true"] *::after {
 .term-of-the-day-banner {
   background: linear-gradient(135deg, #e6f4f1 0%, #f0fdfa 100%);
   border: 1px solid #b2f5ea;
-margin-top: 100px;
+  margin-top: 100px;
   border-radius: 16px;
   padding: 1.25rem;
   max-width: 460px; /* Limits width so it doesn't stretch awkwardly across the whole screen */
@@ -12031,8 +12092,8 @@ margin-top: 100px;
   transition: all 0.25s ease-in-out;
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  margin-bottom: -1rem; 
-  transform: translateY(-12px);/* Spacing before the search bar */
+  margin-bottom: -1rem;
+  transform: translateY(-12px); /* Spacing before the search bar */
 }
 
 .term-of-the-day-banner:hover {
@@ -12111,7 +12172,8 @@ margin-top: 100px;
   gap: 0.4rem;
   cursor: pointer;
   padding: 0;
-}.glossary-top-layout {
+}
+.glossary-top-layout {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12147,7 +12209,7 @@ margin-top: 100px;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(13, 148, 136, 0.15);
   border-color: #0d9488;
-}/* Card Grid Layout */
+} /* Card Grid Layout */
 .glossary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -12164,7 +12226,7 @@ margin-top: 100px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   /* Top accent line color (Teal default, or change per category) */
-  border-top: 4px solid #0d9488; 
+  border-top: 4px solid #0d9488;
   border-radius: 14px;
   padding: 1.25rem;
   text-align: left;
@@ -12387,9 +12449,9 @@ margin-top: 100px;
   gap: 8px;
   padding: 9px 16px;
   margin-left: auto !important;
-  margin-right:0 !important;
+  margin-right: 0 !important;
   margin-bottom: 16px !important;
-  width:fit-content;
+  width: fit-content;
   background: transparent;
   color: var(--primary);
   border: 1px solid var(--primary);
@@ -12397,9 +12459,10 @@ margin-top: 100px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
-
 
 .glossary-close-btn:hover {
   background: var(--primary);
@@ -12410,11 +12473,11 @@ margin-top: 100px;
   outline: 3px solid var(--primary);
   outline-offset: 3px;
 }
-.glossary-wrapper{
+.glossary-wrapper {
   display: flex !important;
   justify-content: flex-end !important;
-  width:100% !important;
-  box-sizing:border;
+  width: 100% !important;
+  box-sizing: border;
 }
 .glossary-page {
   padding-top: 0 !important;
@@ -12475,4 +12538,3 @@ margin-top: 100px;
   visibility: visible;
   opacity: 1;
 }
-

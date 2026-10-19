@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import EmergencyHealthID from "../Components/EmergencyHealthID";
 const Profile = () => {
   const [isEditing, SetIsEditing] = useState(false);
   const [personalDetails, setPersonalDetails] = useState(() => {

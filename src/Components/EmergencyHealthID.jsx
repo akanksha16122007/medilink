@@ -1,8 +1,30 @@
-import React from "react";
 import QRCode from "react-qr-code";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import EmergencyHealthPage from "./EmergencyHealthPage";
+
 const EmergencyHealthID = () => {
+  const handleDownloadQR = () => {
+    const svg = document.querySelector(".qr-code svg");
+    if (!svg) return;
+
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const link = document.createElement("a");
+      link.download = "Emergency-Health-ID-QR.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    };
+
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgData);
+  };
   return (
     <div className="EmergencyHealthID">
       <div className="header-id">
@@ -16,14 +38,20 @@ const EmergencyHealthID = () => {
       </div>
       <div className="qr-link">
         <p>
-          <i class="fa-solid fa-link"></i> Linked to your secure Health Profile
+          <Link to="/profile">
+            <i className="fa-solid fa-link"></i>
+            Linked to your secure Health Profile
+          </Link>
         </p>
       </div>
       <div className="qr-buttons">
-        <button type="button">
+        <button type="button" onClick={handleDownloadQR}>
           <i class="fa-solid fa-circle-arrow-down"></i> Download QR Code
         </button>
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => window.open("/emergency-id?print=true", "_blank")}
+        >
           <i class="fa-solid fa-print"></i> Print ID
         </button>
       </div>
