@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = ({ darkMode, toggleTheme }) => {
   const getStoredUser = () => {
@@ -12,18 +11,15 @@ const Header = ({ darkMode, toggleTheme }) => {
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLogOut, setShowLogOut] = useState(false);
   const [user, setUser] = useState(getStoredUser);
   const [speechRate, setSpeechRate] = useState(0.9);
   const [showSpeechTools, setShowSpeechTools] = useState(false);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     setUser(getStoredUser());
     setMenuOpen(false);
-    setShowLogOut(false);
   }, [location]);
 
   useEffect(() => {
@@ -39,14 +35,6 @@ const Header = ({ darkMode, toggleTheme }) => {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    setShowLogOut(false);
-    closeMenu();
-    navigate("/login");
-  };
 
   const speakSelectedText = () => {
     const selectedText = String(window.getSelection() || "").trim();
@@ -90,17 +78,6 @@ const Header = ({ darkMode, toggleTheme }) => {
     }
   };
 
-  const toggleProfileMenu = () => {
-    setShowLogOut((previous) => !previous);
-  };
-
-  const handleProfileKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      toggleProfileMenu();
-    }
-  };
-
   return (
     <header className="header">
       <div className="header-main-row">
@@ -120,14 +97,14 @@ const Header = ({ darkMode, toggleTheme }) => {
         </button>
 
         <nav className={menuOpen ? "nav active" : "nav"}>
-          {/* Notification bell comes first */}
+          {/* Notification bell */}
           <i
             className="fa-solid fa-bell"
             aria-label="Notifications"
             role="img"
           />
 
-          {/* Medical Glossary comes immediately after the bell */}
+          {/* Medical Glossary */}
           <Link
             to="/medical-glossary"
             className="glossary-nav-btn"
@@ -154,14 +131,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
           {user ? (
             <div className="user-info">
-              <div
-                className="profile-section"
-                onClick={toggleProfileMenu}
-                onKeyDown={handleProfileKeyDown}
-                role="button"
-                tabIndex={0}
-                aria-expanded={showLogOut}
-              >
+              <div className="profile-section">
                 <img
                   src={
                     user?.profilePic ||
@@ -172,29 +142,13 @@ const Header = ({ darkMode, toggleTheme }) => {
                 />
                 <span>{user.name}</span>
               </div>
-
-              {showLogOut && (
-                <div className="logout-menu">
-                  <button type="button" onClick={handleLogout}>
-                    <i
-                      className="fa-solid fa-arrow-right-from-bracket"
-                      aria-hidden="true"
-                    />{" "}
-                    Logout
-                  </button>
-
-                  <button
-                    type="button"
-                    className="theme-menu-btn"
-                    onClick={toggleTheme}
-                  >
-                    {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                  </button>
-                </div>
-              )}
             </div>
           ) : (
-            <Link to="/login" className="login-btn" onClick={closeMenu}>
+            <Link
+              to="/login"
+              className="login-btn"
+              onClick={closeMenu}
+            >
               Login
             </Link>
           )}
@@ -266,7 +220,10 @@ const Header = ({ darkMode, toggleTheme }) => {
               onClick={speakSelectedText}
               title="Read Selected Text Aloud"
             >
-              <i className="fa-solid fa-volume-high" aria-hidden="true" />
+              <i
+                className="fa-solid fa-volume-high"
+                aria-hidden="true"
+              />
               Read Selected Text
             </button>
 
@@ -276,7 +233,10 @@ const Header = ({ darkMode, toggleTheme }) => {
               onClick={pauseOrResume}
               title="Pause or Resume Speech"
             >
-              <i className="fa-solid fa-pause" aria-hidden="true" />
+              <i
+                className="fa-solid fa-pause"
+                aria-hidden="true"
+              />
               Pause / Resume
             </button>
 
@@ -286,7 +246,10 @@ const Header = ({ darkMode, toggleTheme }) => {
               onClick={stopSpeaking}
               title="Stop Speaking"
             >
-              <i className="fa-solid fa-stop" aria-hidden="true" />
+              <i
+                className="fa-solid fa-stop"
+                aria-hidden="true"
+              />
               Stop Speaking
             </button>
           </div>
