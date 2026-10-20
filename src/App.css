@@ -6897,6 +6897,92 @@ body {
 .logo-icon {
   margin-left: 30px;
 }
+/* Slightly Increased Document Vault Font Sizes */
+
+.vault-page .vault-eyebrow {
+  font-size: 11px;
+}
+
+.vault-page .vault-heading h1 {
+  font-size: clamp(27px, 3vw, 34px);
+}
+
+.vault-page .vault-subtitle {
+  font-size: 15px;
+}
+
+.vault-page .vault-notice strong {
+  font-size: 14px;
+}
+
+.vault-page .vault-notice p {
+  font-size: 14px;
+}
+
+.vault-page .vault-section-heading h2 {
+  font-size: 20px;
+}
+
+.vault-page .vault-section-heading p {
+  font-size: 14px;
+}
+
+.vault-page .vault-field > label {
+  font-size: 14px;
+}
+
+.vault-page .vault-field input:not([type="file"]),
+.vault-page .vault-field select {
+  font-size: 14px;
+}
+
+.vault-page .vault-file-label {
+  font-size: 14px;
+}
+
+.vault-page .vault-file-content > p {
+  font-size: 13px;
+}
+
+.vault-page .vault-selected-file {
+  font-size: 13px;
+}
+
+.vault-page .vault-form-hint {
+  font-size: 12px;
+}
+
+.vault-page .vault-primary-btn,
+.vault-page .vault-secondary-btn {
+  font-size: 13px;
+}
+
+.vault-page .vault-count strong {
+  font-size: 21px;
+}
+
+.vault-page .vault-count span {
+  font-size: 12px;
+}
+
+.vault-page .vault-search input {
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .vault-page .vault-heading h1 {
+    font-size: 27px;
+  }
+
+  .vault-page .vault-subtitle {
+    font-size: 14px;
+  }
+
+  .vault-page .vault-section-heading h2 {
+    font-size: 18px;
+  }
+}
 
 /* ===== PROFILE PAGE =====
 .profile {
