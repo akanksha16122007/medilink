@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -163,7 +162,7 @@ const Settings = ({ darkMode, toggleTheme }) => {
             </div>
 
             <span className="settings-info-label">
-              Available in toolbar
+              Tap the speaker icon
             </span>
           </div>
 
@@ -184,7 +183,7 @@ const Settings = ({ darkMode, toggleTheme }) => {
             </div>
 
             <span className="settings-info-label">
-              Available in Resources
+              Available in toolbar
             </span>
           </div>
 

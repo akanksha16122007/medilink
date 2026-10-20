@@ -10080,6 +10080,91 @@ html[data-reduced-motion="true"] *::after {
   }
 }
 
+/* Slightly Increased Settings Font Sizes */
+
+.settings-page .settings-eyebrow {
+  font-size: 12px;
+}
+
+.settings-page .settings-header h1 {
+  font-size: 36px;
+}
+
+.settings-page .settings-header p {
+  font-size: 15px;
+}
+
+.settings-page .settings-profile-info h3 {
+  font-size: 16px;
+}
+
+.settings-page .settings-profile-info p {
+  font-size: 14px;
+}
+
+.settings-page .settings-section-heading h2 {
+  font-size: 18px;
+}
+
+.settings-page .settings-section-heading p {
+  font-size: 13px;
+}
+
+.settings-page .settings-option-info h3 {
+  font-size: 15px;
+}
+
+.settings-page .settings-option-info p {
+  font-size: 13px;
+}
+
+.settings-page .settings-info-label {
+  font-size: 12px;
+}
+
+.settings-page .settings-size-control button {
+  font-size: 12px;
+}
+
+.settings-page .settings-reset-content h3,
+.settings-page .settings-logout-content h3 {
+  font-size: 15px;
+}
+
+.settings-page .settings-reset-content p,
+.settings-page .settings-logout-content p {
+  font-size: 13px;
+}
+
+.settings-page .settings-reset-button,
+.settings-page .settings-logout-button {
+  font-size: 13px;
+}
+
+.settings-page .settings-footer p {
+  font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .settings-page .settings-header h1 {
+    font-size: 29px;
+  }
+
+  .settings-page .settings-header p {
+    font-size: 14px;
+  }
+
+  .settings-page .settings-profile-info h3 {
+    font-size: 15px;
+  }
+
+  .settings-page .settings-profile-info p,
+  .settings-page .settings-option-info p {
+    font-size: 13px;
+  }
+}
+
 /* Emergency Health ID Main Card */
 .EmergencyHealthID {
   max-width: 325px;
