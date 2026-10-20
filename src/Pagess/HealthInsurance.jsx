@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { faEye, faEyeSlash, faCircleInfo , faFileShield, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faCircleInfo , faFileShield, faFolderOpen,faXmark,} from "@fortawesome/free-solid-svg-icons";
 const STORAGE_KEY = "medilinkHealthPolicy";
 
 const EMPTY_POLICY = {
@@ -155,6 +155,10 @@ const HealthInsurance = () => {
     toastTimerRef.current = window.setTimeout(() => {
       setToast("");
     }, 3000);
+  };
+  const dismissToast = () => {
+  window.clearTimeout(toastTimerRef.current);
+  setToast("");
   };
 
   useEffect(() => {
@@ -418,6 +422,15 @@ const HealthInsurance = () => {
         <div className="insurance-toast" role="status" aria-live="polite">
           <FontAwesomeIcon icon={faCircleInfo} />
           <span>{toast}</span>
+          <button
+            className="insurance-toast-close"
+            type="button"
+            onClick={dismissToast}
+            aria-label="Dismiss notification"
+            title="Dismiss notification"
+          >
+            <FontAwesomeIcon icon={faXmark} aria-hidden="true" />
+          </button>
         </div>
       )}
 
