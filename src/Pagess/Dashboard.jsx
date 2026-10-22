@@ -1068,51 +1068,57 @@ const removeMedicationTime = (index) => {
     onClick={() => setShowEmergencyIdModal(false)}
   >
     <section
-      className="emergency-id-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="emergency-id-modal-title"
-      onClick={(event) => event.stopPropagation()}
+  className="emergency-id-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="emergency-id-modal-title"
+  onClick={(event) => event.stopPropagation()}
+>
+  <button
+    type="button"
+    className="emergency-id-modal-close"
+    onClick={() => setShowEmergencyIdModal(false)}
+    aria-label="Close Emergency Health ID"
+  >
+    <i className="fa-solid fa-xmark" aria-hidden="true" />
+  </button>
+
+  <h3 id="emergency-id-modal-title">
+    Your Emergency Health ID
+  </h3>
+
+  <div className="emergency-id-modal-qr">
+    <QRCode
+      size={220}
+      value={`${window.location.origin}/emergency-id`}
+    />
+  </div>
+
+  <p className="emergency-id-modal-description">
+    Scan this QR Code to view your Emergency Health ID
+  </p>
+
+  <Link to="/profile" className="emergency-id-profile-link">
+    <i className="fa-solid fa-link" aria-hidden="true" />
+    <span>Linked to your secure Health Profile</span>
+  </Link>
+
+  <div className="emergency-id-modal-actions">
+    <button type="button" onClick={handleDownloadEmergencyQR}>
+      <i className="fa-solid fa-circle-arrow-down" aria-hidden="true" />
+      Download QR Code
+    </button>
+
+    <button
+      type="button"
+      className="emergency-id-print-button"
+      onClick={handlePrintEmergencyId}
     >
-      <div className="emergency-id-modal-header">
-        <div>
-          <p className="section-eyebrow">EMERGENCY ACCESS</p>
-          <h3 id="emergency-id-modal-title">Emergency Health ID</h3>
-        </div>
-
-        <button
-          type="button"
-          className="emergency-id-modal-close"
-          onClick={() => setShowEmergencyIdModal(false)}
-          aria-label="Close Emergency Health ID"
-        >
-          <i className="fa-solid fa-xmark" aria-hidden="true" />
-        </button>
-      </div>
-
-      <p className="emergency-id-modal-description">
-        Scan this QR code to open your Emergency Health ID.
-      </p>
-
-      <div className="emergency-id-modal-qr">
-        <QRCode
-          size={200}
-          value={`${window.location.origin}/emergency-id`}
-        />
-      </div>
-
-      <div className="emergency-id-modal-actions">
-        <button type="button" onClick={handlePrintEmergencyId}>
-          <i className="fa-solid fa-print" aria-hidden="true" />
-          Print ID
-        </button>
-
-        <button type="button" onClick={handleDownloadEmergencyQR}>
-          <i className="fa-solid fa-download" aria-hidden="true" />
-          Download QR
-        </button>
-      </div>
-    </section>
+      <i className="fa-solid fa-print" aria-hidden="true" />
+      Print ID
+    </button>
+  </div>
+</section>
   </div>
 )}
       {showMedicationModal && (
