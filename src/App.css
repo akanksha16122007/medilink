@@ -16227,3 +16227,29 @@ html[data-reduced-motion="true"] *::after {
   padding:20px;
   box-sizing: border-box;
 }
+
+/* Medical Glossary page */
+.glossary-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* Medical Records page */
+.records-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* Prevent wide content from pushing the page */
+.glossary-page img,
+.records-page img,
+.glossary-page input,
+.records-page input,
+.glossary-page table,
+.records-page table {
+  max-width: 100%;
+}
