@@ -16217,3 +16217,7 @@ html[data-reduced-motion="true"] *::after {
 .emergency-id-modal-actions {
   gap: 10px;
 }
+.records-page {
+  margin-left: 250px;
+  padding: 20px;
+}
