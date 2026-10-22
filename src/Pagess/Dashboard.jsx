@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StatCard from "../Components/StatCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import QRCode from "react-qr-code";
 import {faPlus,faXmark,faPenToSquare,faTrashCan,faClock,faPills,faBell,faCapsules,faFileMedical,faCalendarCheck,faShieldHalved,faHospital,faUserCheck} from "@fortawesome/free-solid-svg-icons";
 
   const createEmptyDoseTime = () => ({
@@ -199,6 +200,41 @@ const [medicationForm, setMedicationForm] = useState({
   times: [createEmptyDoseTime()],
   reminderEnabled: false,
 });
+const [showEmergencyIdModal, setShowEmergencyIdModal] = useState(false);
+
+const handleDownloadEmergencyQR = () => {
+  const svg = document.querySelector(".emergency-id-modal-qr svg");
+  if (!svg) return;
+
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const image = new Image();
+
+  image.onload = () => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    canvas.width = 300;
+    canvas.height = 300;
+    context.drawImage(image, 0, 0, 300, 300);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.download = "Emergency-Health-ID-QR.png";
+    downloadLink.href = canvas.toDataURL("image/png");
+    downloadLink.click();
+  };
+
+  image.src =
+    "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgData);
+};
+
+const handlePrintEmergencyId = () => {
+  window.open(
+    `${window.location.origin}/emergency-id?print=true`,
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
 
 useEffect(() => {
   const refreshProfileStatus = () => {
@@ -588,7 +624,22 @@ const removeMedicationTime = (index) => {
           variant="prescriptions"
         />
       </div>
+      <section className="dashboard-panel emergency-quick-access">
+  <div>
+    <p className="section-eyebrow">EMERGENCY ACCESS</p>
+    <h3>Emergency Health ID</h3>
+    <p>Open your QR code and essential emergency health information.</p>
+  </div>
 
+  <button
+    type="button"
+    className="emergency-id-open-button"
+    onClick={() => setShowEmergencyIdModal(true)}
+  >
+    <i className="fa-solid fa-qrcode" aria-hidden="true" />
+    Emergency Health ID
+  </button>
+</section>
       <div className="dashboard-main-grid">
         <div className="dashboard-left-column">
           <section className="dashboard-panel current-medications-panel">
@@ -1011,6 +1062,59 @@ const removeMedicationTime = (index) => {
           View profile →
         </Link>
       </section>
+      {showEmergencyIdModal && (
+  <div
+    className="emergency-id-modal-overlay"
+    onClick={() => setShowEmergencyIdModal(false)}
+  >
+    <section
+      className="emergency-id-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="emergency-id-modal-title"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <div className="emergency-id-modal-header">
+        <div>
+          <p className="section-eyebrow">EMERGENCY ACCESS</p>
+          <h3 id="emergency-id-modal-title">Emergency Health ID</h3>
+        </div>
+
+        <button
+          type="button"
+          className="emergency-id-modal-close"
+          onClick={() => setShowEmergencyIdModal(false)}
+          aria-label="Close Emergency Health ID"
+        >
+          <i className="fa-solid fa-xmark" aria-hidden="true" />
+        </button>
+      </div>
+
+      <p className="emergency-id-modal-description">
+        Scan this QR code to open your Emergency Health ID.
+      </p>
+
+      <div className="emergency-id-modal-qr">
+        <QRCode
+          size={200}
+          value={`${window.location.origin}/emergency-id`}
+        />
+      </div>
+
+      <div className="emergency-id-modal-actions">
+        <button type="button" onClick={handlePrintEmergencyId}>
+          <i className="fa-solid fa-print" aria-hidden="true" />
+          Print ID
+        </button>
+
+        <button type="button" onClick={handleDownloadEmergencyQR}>
+          <i className="fa-solid fa-download" aria-hidden="true" />
+          Download QR
+        </button>
+      </div>
+    </section>
+  </div>
+)}
       {showMedicationModal && (
         <div className="medication-modal-overlay">
           <section

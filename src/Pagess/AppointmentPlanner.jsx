@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Calendar from "../Components/Calendar";
 const AppointmentPlanner = () => {
@@ -8,6 +9,9 @@ const AppointmentPlanner = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [type, setType] = useState("");
+  const location = useLocation();
+  const appointmentCardRefs = useRef({});
+  const [highlightedAppointmentId, setHighlightedAppointmentId] = useState(null);
   /**Upcoming Appointments */
   const upcomingAppointments = [
     {
@@ -139,6 +143,37 @@ const AppointmentPlanner = () => {
       ? JSON.parse(savedUpcomingAppointments)
       : upcomingAppointments;
   });
+   useEffect(() => {
+    const appointmentId = new URLSearchParams(location.search).get(
+      "appointmentId"
+    );
+
+    if (!appointmentId) return;
+
+    const appointmentExists = appointments.some(
+      (appointment) => String(appointment.id) === appointmentId
+    );
+
+    if (!appointmentExists) return;
+
+    setHighlightedAppointmentId(appointmentId);
+
+    const scrollTimer = window.setTimeout(() => {
+      appointmentCardRefs.current[appointmentId]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 100);
+
+    const highlightTimer = window.setTimeout(() => {
+      setHighlightedAppointmentId(null);
+    }, 3200);
+
+    return () => {
+      window.clearTimeout(scrollTimer);
+      window.clearTimeout(highlightTimer);
+    };
+  }, [location.search, appointments]);
   const handleCancel = (id) => {
     setAppointments((prev) =>
       prev.filter((appointment) => appointment.id !== id),
@@ -149,6 +184,7 @@ const AppointmentPlanner = () => {
     e.preventDefault();
     if (!time) {
       toast.error("Please select a time slot!");
+      return;
     }
     const newAppointment = {
       id: Date.now(),
@@ -497,7 +533,17 @@ const AppointmentPlanner = () => {
           </h2>
           <div className="appointments-list">
             {appointments.map((appointment) => (
-              <div className="appointment-card" key={appointment.id}>
+              <div
+                className={
+                  String(highlightedAppointmentId) === String(appointment.id)
+                    ? "appointment-card appointment-card-highlight"
+                    : "appointment-card"
+                }
+                key={appointment.id}
+                ref={(element) => {
+                  appointmentCardRefs.current[String(appointment.id)] = element;
+                }}
+              >
                 <h3>{appointment.doctor}</h3>
                 <p>
                   {appointment.specialist} · {appointment.date},{" "}
