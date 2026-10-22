@@ -366,11 +366,12 @@ const AppointmentPlanner = () => {
                 <p>Schedule your next doctor visit.</p>
                 <form onSubmit={handleBooking}>
                   <label>Patient Name</label>
-                  <input type="text" placeholder="Enter your name" />
+                  <input type="text" placeholder="Enter your name" required />
                   <label>Specialist</label>
                   <select
                     value={specialist}
                     onChange={(e) => setSpecialist(e.target.value)}
+                    required
                   >
                     <option>Select specialist</option>
                     <option>General Physician</option>
@@ -399,6 +400,7 @@ const AppointmentPlanner = () => {
                     placeholder="Select date..."
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
+                    required
                   />
                   <label>Choose a time slot</label>
                   <div className="time-accordion-container">

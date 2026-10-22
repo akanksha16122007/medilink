@@ -1,6 +1,5 @@
 import QRCode from "react-qr-code";
 import { useLocation, Link } from "react-router-dom";
-import EmergencyHealthPage from "./EmergencyHealthPage";
 
 const EmergencyHealthID = () => {
   const handleDownloadQR = () => {
