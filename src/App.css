@@ -16218,6 +16218,10 @@ html[data-reduced-motion="true"] *::after {
   gap: 10px;
 }
 .records-page {
-  margin-left: 250px;
+  margin-left: 150px;
   padding: 20px;
+}
+.glossary-page{
+  margin: 150px;
+  padding:20px;
 }
