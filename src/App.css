@@ -13284,9 +13284,9 @@ html[data-reduced-motion="true"] *::after {
   gap: 8px;
   min-height: 40px;
   padding: 10px 16px;
-  border: 1px solid var(--primary, #007d80);
+  border: 1px solid var(--primary, #4DB6AC);
   border-radius: 9px;
-  background: var(--primary, #007d80);
+  background: var(--primary, #4DB6AC);
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
@@ -13302,14 +13302,14 @@ html[data-reduced-motion="true"] *::after {
 
 /* Read Selected Text */
 .header-tools-bar .speech-controls .speech-btn:first-child {
-  background: var(--primary, #007d80);
+  background: var(--primary, #4DB6AC);
   color: #ffffff;
 }
 
 /* Pause / Resume: outlined teal style */
 .header-tools-bar .speech-controls .speech-btn:nth-child(2) {
   background: var(--surface, #ffffff);
-  color: var(--primary, #007d80);
+  color: var(--primary, #4DB6AC);
 }
 
 /* Stop Speaking: subtle red accent */
@@ -15656,6 +15656,42 @@ html[data-reduced-motion="true"] *::after {
   margin-right: 0.55rem;
   vertical-align: -0.05em;
 }
+
+/* Floating speaker icon - lighter teal */
+.header .speech-floating-container .speech-floating-btn {
+  background: #4DB6AC !important;
+  border-color: #4DB6AC !important;
+  color: #ffffff !important;
+}
+
+/* Hover effect */
+.header .speech-floating-container .speech-floating-btn:hover {
+  background: #80CBC4 !important;
+  border-color: #80CBC4 !important;
+  color: #004D40 !important;
+}
+
+/* Read Selected Text */
+.header .speech-floating-panel .speech-btn:first-of-type {
+  background: #4DB6AC !important;
+  border-color: #4DB6AC !important;
+  color: #ffffff !important;
+}
+
+/* Pause / Resume */
+.header .speech-floating-panel .speech-btn:nth-of-type(2) {
+  background: #E0F2F1 !important;
+  border-color: #80CBC4 !important;
+  color: #00796B !important;
+}
+
+/* Stop Speaking */
+.header .speech-floating-panel .speech-stop-btn {
+  background: #ffffff !important;
+  border-color: #E6B8B8 !important;
+  color: #C0393B !important;
+}
+
 
 /* Header notification bell and dropdown */
 .notification-menu {
