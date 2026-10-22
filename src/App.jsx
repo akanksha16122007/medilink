@@ -1,6 +1,17 @@
+
 import "./App.css";
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import React, {
+  createContext,
+  useContext,
+  useState
+} from "react";
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -24,7 +35,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EmergencyHealthPage from "./Components/EmergencyHealthPage";
 
-function AppShell({ darkMode, toggleTheme }) {
+// Create Context
+export const ThemeContext = createContext();
+
+function AppShell() {
+  const { darkMode, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
 
   const hideSidebar =
@@ -33,18 +48,19 @@ function AppShell({ darkMode, toggleTheme }) {
 
   return (
     <>
-      <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+      <Header
+        darkMode={darkMode}
+        toggleTheme={toggleTheme}
+      />
 
       <div className="app-layout">
         {!hideSidebar && <Sidebar />}
 
         <div className="app-content">
           <Routes>
-            {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
 
-            {/* Protected routes */}
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
@@ -60,7 +76,11 @@ function AppShell({ darkMode, toggleTheme }) {
                 path="/HealthInsurance"
                 element={<HealthInsurance />}
               />
-              <Route path="/emergency-id" element={<EmergencyHealthPage />} />
+
+              <Route
+                path="/emergency-id"
+                element={<EmergencyHealthPage />}
+              />
 
               <Route
                 path="/medical-glossary"
@@ -70,9 +90,13 @@ function AppShell({ darkMode, toggleTheme }) {
               <Route
                 path="/settings"
                 element={
-                  <Settings darkMode={darkMode} toggleTheme={toggleTheme} />
+                  <Settings
+                    darkMode={darkMode}
+                    toggleTheme={toggleTheme}
+                  />
                 }
               />
+
               <Route
                 path="/AppointmentPlanner"
                 element={<AppointmentPlanner />}
@@ -100,14 +124,15 @@ function App() {
   };
 
   return (
-    <div className={darkMode ? "App dark" : "App"}>
-      <BrowserRouter>
-        <AppShell
-          darkMode={darkMode}
-          toggleTheme={toggleTheme}
-        />
-      </BrowserRouter>
-    </div>
+    <ThemeContext.Provider
+      value={{ darkMode, toggleTheme }}
+    >
+      <div className={darkMode ? "App dark" : "App"}>
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
