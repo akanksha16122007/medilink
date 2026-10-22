@@ -16253,3 +16253,38 @@ html[data-reduced-motion="true"] *::after {
 .records-page table {
   max-width: 100%;
 }
+
+
+/* Stop unwanted horizontal scrolling */
+html,
+body,
+#root,
+.App {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+/* Keep page content within the viewport */
+main,
+.glossary-page,
+.records-page {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent wide flex and grid children from expanding pages */
+main *,
+.glossary-page *,
+.records-page * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Make images and form fields responsive */
+img,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
