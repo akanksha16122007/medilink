@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Notifications from "./Notifications";
 
 const Header = ({ darkMode, toggleTheme }) => {
   const getStoredUser = () => {
@@ -98,11 +99,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
         <nav className={menuOpen ? "nav active" : "nav"}>
           {/* Notification bell */}
-          <i
-            className="fa-solid fa-bell"
-            aria-label="Notifications"
-            role="img"
-          />
+          <Notifications />
 
           {/* Medical Glossary */}
           <Link
