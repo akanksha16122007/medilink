@@ -16220,8 +16220,10 @@ html[data-reduced-motion="true"] *::after {
 .records-page {
   margin-left: 150px;
   padding: 20px;
+  box-sizing: border-box;
 }
 .glossary-page{
   margin: 100px;
   padding:20px;
+  box-sizing: border-box;
 }
