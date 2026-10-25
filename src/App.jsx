@@ -1,4 +1,3 @@
-
 import "./App.css";
 import React, {
   createContext,
@@ -28,6 +27,7 @@ import DocumentVault from "./Pagess/DocumentVault";
 import HealthInsurance from "./Pagess/HealthInsurance";
 import AppointmentPlanner from "./Pagess/AppointmentPlanner";
 import Settings from "./Pagess/Settings";
+import NotFound from "./Components/NotFound"; // Imported 404 Page
 
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 
@@ -42,9 +42,28 @@ function AppShell() {
   const { darkMode, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
 
+  // Valid defined paths in the application
+  const validPaths = [
+    "/",
+    "/login",
+    "/signup",
+    "/profile",
+    "/dashboard",
+    "/records",
+    "/DocumentVault",
+    "/HealthInsurance",
+    "/emergency-id",
+    "/medical-glossary",
+    "/settings",
+    "/AppointmentPlanner"
+  ];
+
+  // Hide sidebar on auth pages OR non-existent 404 routes
+  const is404 = !validPaths.includes(location.pathname);
   const hideSidebar =
     location.pathname === "/login" ||
-    location.pathname === "/signup";
+    location.pathname === "/signup" ||
+    is404;
 
   return (
     <>
@@ -58,9 +77,11 @@ function AppShell() {
 
         <div className="app-content">
           <Routes>
+            {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
 
+            {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
@@ -102,6 +123,9 @@ function AppShell() {
                 element={<AppointmentPlanner />}
               />
             </Route>
+
+            {/* Wildcard 404 Route (Must stay at the bottom) */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>

@@ -16218,5 +16218,78 @@ html[data-reduced-motion="true"] *::after {
   gap: 10px;
 }
 
+/* 404 page */
+/* Container layout to center the content on screen */
+.not-found-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem 1rem;
+}
 
+/* Central card container */
+.not-found-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
 
+/* Icon layout */
+.not-found-icon {
+  font-size: 3rem;
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+/* 404 text styling */
+.not-found-code {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary, #111827);
+  margin: 0 0 0.5rem 0;
+}
+
+.not-found-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: 0.75rem;
+}
+
+.not-found-message {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #6b7280);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+/* Home button link styling */
+.not-found-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color, #006d73);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.not-found-home-btn:hover {
+  background-color: var(--primary-hover, #1d4ed8);
+  transform: translateY(-1px);
+}
+
+.not-found-home-btn:active {
+  transform: translateY(0);
+}
